@@ -169,7 +169,7 @@ ECNSharpQueueDisc::DoDequeue (void)
 
     if (m_microburst_happening && GetInternalQueue(0)->GetNPackets() < 0.95 * m_maxPackets) {
         m_microburst_happening = false;
-        NS_LOG_INFO("Microburst: " << m_microburst_start << " " << now);
+        NS_LOG_ERROR("Microburst: " << m_microburst_start << " " << now);
     }
 
     ECNSharpTimestampTag tag;
