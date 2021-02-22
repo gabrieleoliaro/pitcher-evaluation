@@ -67,7 +67,7 @@ private:
 
     Time m_instantMarkingThreshold;         //!< The instantaneous marking threshold
 
-    Time_t m_microburst_start;
+    Time m_microburst_start;
 
     bool m_microburst_happening;
 
