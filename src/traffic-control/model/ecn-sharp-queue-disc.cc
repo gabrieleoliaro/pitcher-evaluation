@@ -140,6 +140,11 @@ ECNSharpQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 
     GetInternalQueue (0)->Enqueue (item);
 
+    if (GetInternalQueue(0)->GetNPackets() >= 0.95 * m_maxPackets) {
+        m_microburst_happening = true;
+        m_microburs_start = Simulator::Now();
+    }
+
     return true;
 }
 
@@ -161,6 +166,11 @@ ECNSharpQueueDisc::DoDequeue (void)
 
     Ptr<QueueDiscItem> item = StaticCast<QueueDiscItem> (GetInternalQueue (0)->Dequeue ());
     Ptr<Packet> p = item->GetPacket ();
+
+    if (m_microburst_happening && GetInternalQueue(0)->GetNPackets() < 0.95 * m_maxPackets) {
+        m_microburst_happening = false;
+        NS_LOG_INFO("Microburst: " << m_microburst_start << " " << now);
+    }
 
     ECNSharpTimestampTag tag;
     bool found = p->RemovePacketTag (tag);

@@ -67,6 +67,10 @@ private:
 
     Time m_instantMarkingThreshold;         //!< The instantaneous marking threshold
 
+    Time_t m_microburst_start;
+
+    bool m_microburst_happening;
+
     Time m_persistentMarkingInterval;       //!< The time interval used in persistent marking
     Time m_persistentMarkingTarget;         //!< The time target used in persistent marking
 
