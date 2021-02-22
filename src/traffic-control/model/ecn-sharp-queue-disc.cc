@@ -142,7 +142,7 @@ ECNSharpQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 
     if (GetInternalQueue(0)->GetNPackets() >= 0.95 * m_maxPackets) {
         m_microburst_happening = true;
-        m_microburs_start = Simulator::Now();
+        m_microburst_start = Simulator::Now();
     }
 
     return true;
