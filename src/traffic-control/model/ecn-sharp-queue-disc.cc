@@ -149,7 +149,7 @@ ECNSharpQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 
     GetInternalQueue (0)->Enqueue (item);
 
-    if (GetInternalQueue(0)->GetNPackets() >= 0.9 * m_maxPackets) {
+    if (GetInternalQueue(0)->GetNPackets() >= 0.6 * m_maxPackets) {
         m_microburst_happening = true;
         m_microburst_start = Simulator::Now();
     }
@@ -176,7 +176,7 @@ ECNSharpQueueDisc::DoDequeue (void)
     Ptr<QueueDiscItem> item = StaticCast<QueueDiscItem> (GetInternalQueue (0)->Dequeue ());
     Ptr<Packet> p = item->GetPacket ();
 
-    if (m_microburst_happening && GetInternalQueue(0)->GetNPackets() < 0.9 * m_maxPackets) {
+    if (m_microburst_happening && GetInternalQueue(0)->GetNPackets() < 0.6 * m_maxPackets) {
         m_microburst_happening = false;
         std::string interface_name = string_patch::to_string(GetInternalQueue(0));
         NS_LOG_ERROR("Microburst on interface " << interface_name << " " << m_microburst_start << " " << now);
