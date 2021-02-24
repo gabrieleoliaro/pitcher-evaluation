@@ -116,6 +116,15 @@ ECNSharpQueueDisc::~ECNSharpQueueDisc ()
     NS_LOG_FUNCTION (this);
 }
 
+// Thanks to Sivaram for this snippet
+namespace string_patch {
+    template <typename T> std::string to_string( const T& n ) {
+        std::ostringstream stm;
+        stm << n ;
+        return stm.str();
+    }
+}
+
 bool
 ECNSharpQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 {
@@ -169,7 +178,8 @@ ECNSharpQueueDisc::DoDequeue (void)
 
     if (m_microburst_happening && GetInternalQueue(0)->GetNPackets() < 0.95 * m_maxPackets) {
         m_microburst_happening = false;
-        NS_LOG_ERROR("Microburst: " << m_microburst_start << " " << now);
+        std::string interface_name = string_patch::to_string(GetInternalQueue(0));
+        NS_LOG_ERROR("Microburst on interface " << interface_name << " " << m_microburst_start << " " << now);
     }
 
     ECNSharpTimestampTag tag;
