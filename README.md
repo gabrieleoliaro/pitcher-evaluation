@@ -155,6 +155,10 @@ Run ```large-scale``` program for this experiment:
 ./waf --run "large-scale --help"
 ```
 
+If you get any error related to `UChar` or `char16_t` when compiling file 1450, you can fix those by editing the file `/usr/include/unicode/umachine.h`, line 331.
+
+If you get errors related to the absence of `sys/inttypes.h`, you can fix those by doing the following copy: `sudo cp /usr/include/inttypes.h /usr/include/x86_64-linux-gnu/sys/inttypes.h`
+
 Please note, the default simulation time is very short, you should tune the simulation time by setting the ```--EndTime``` and ```--FlowLaunchEndTime``` to obtain a similar results in our paper.
 
 In this program, TCN is identical to RED because here we only use one queue.
@@ -315,3 +319,4 @@ We have implemented the following transportation protocols, tc modules and load 
 ### Routing 
 
 1. [XPath](http://www.cse.ust.hk/~kaichen/papers/xpath-nsdi15.pdf)
+
