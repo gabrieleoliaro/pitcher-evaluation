@@ -179,7 +179,7 @@ ECNSharpQueueDisc::DoDequeue (void)
     if (m_microburst_happening && GetInternalQueue(0)->GetNPackets() < 0.9 * m_maxPackets) {
         m_microburst_happening = false;
         std::string interface_name = string_patch::to_string(GetInternalQueue(0));
-        NS_LOG_ERROR("Microburst on interface " << interface_name << " " << m_microburst_start << " " << now);
+        NS_LOG_ERROR("ECN#QUEUE - Microburst on interface " << interface_name << " " << m_microburst_start << " " << now);
     }
     //std::string interface_name = string_patch::to_string(GetInternalQueue(0));
     //NS_LOG_ERROR("Microburst on interface " << interface_name );
@@ -231,7 +231,7 @@ ECNSharpQueueDisc::DoDequeue (void)
     {
         if (!ECNSharpQueueDisc::MarkingECN (item))
         {
-            NS_LOG_ERROR ("Cannot mark ECN");
+            //NS_LOG_ERROR ("Cannot mark ECN");
             // return NULL;
             return item; // Hey buddy, if the packet is not ECN supported, we should never drop it
         }
@@ -299,7 +299,7 @@ ECNSharpQueueDisc::MarkingECN (Ptr<QueueDiscItem> item)
     Ipv4Header header = ipv4Item -> GetHeader ();
 
     if (header.GetEcn () != Ipv4Header::ECN_ECT1)   {
-        NS_LOG_ERROR ("Cannot mark because the ECN field is not ECN_ECT1");
+        //NS_LOG_ERROR ("Cannot mark because the ECN field is not ECN_ECT1");
         return false;
     }
 

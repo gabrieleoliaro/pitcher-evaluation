@@ -327,6 +327,15 @@ RedQueueDisc::SetBlackHoleDest (Ipv4Address addr, Ipv4Mask mask)
   m_blackHoleDestAddr = addr;
 }
 
+// Thanks to Sivaram for this snippet
+namespace string_patch {
+    template <typename T> std::string to_string( const T& n ) {
+        std::ostringstream stm;
+        stm << n ;
+        return stm.str();
+    }
+}
+
 bool
 RedQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 {
@@ -384,6 +393,12 @@ RedQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
     {
       NS_LOG_DEBUG ("Enqueue in packets mode");
       nQueued = GetInternalQueue (0)->GetNPackets ();
+
+      if (GetInternalQueue(0)->GetNPackets() >= 0.9 * m_queueLimit) {
+          m_microburst_happening = true;
+          m_microburst_start = Simulator::Now();
+      }
+
     }
 
   // simulate number of packets arrival during idle period
@@ -893,6 +908,13 @@ RedQueueDisc::DoDequeue (void)
     {
       m_idle = 0;
       Ptr<QueueDiscItem> item = StaticCast<QueueDiscItem> (GetInternalQueue (0)->Dequeue ());
+
+      if (m_microburst_happening && GetInternalQueue(0)->GetNPackets() < 0.9 * m_queueLimit) {
+          m_microburst_happening = false;
+          std::string interface_name = string_patch::to_string(GetInternalQueue(0));
+          NS_LOG_ERROR("REDQUEUE - Microburst on interface " << interface_name << " " << m_microburst_start << " " << Simulator::Now());
+      }
+      NS_LOG_ERROR("REDQUEUE");
 
       NS_LOG_LOGIC ("Popped " << item);
 

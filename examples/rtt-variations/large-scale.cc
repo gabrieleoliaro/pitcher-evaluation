@@ -51,53 +51,7 @@ T rand_range (T min, T max)
   return min + ((double)max - min) * rand () / RAND_MAX;
 }
 
-void install_incast_applications (NodeContainer servers, long &flowCount, int SERVER_COUNT, int LEAF_COUNT, double START_TIME, double END_TIME, double FLOW_LAUNCH_END_TIME)
-{
-  NS_LOG_INFO ("Install incast applications:");
-  for (int i = 0; i < SERVER_COUNT; i++)
-    {
-      Ptr<Node> destServer = servers.Get (i);
-      Ptr<Ipv4> ipv4 = destServer->GetObject<Ipv4> ();
-      Ipv4InterfaceAddress destInterface = ipv4->GetAddress (1,0);
-      Ipv4Address destAddress = destInterface.GetLocal ();
 
-      uint32_t fanout = rand () % 50 + 100;
-      for (uint32_t j = 0; j < fanout; j++)
-        {
-          double startTime = START_TIME + static_cast<double> (rand () % 100) / 1000000;
-          while (startTime < FLOW_LAUNCH_END_TIME)
-            {
-              flowCount ++;
-              uint32_t fromServerIndex = rand () % SERVER_COUNT;
-              uint16_t port = PORT++;
-
-              BulkSendHelper source ("ns3::TcpSocketFactory", InetSocketAddress (destAddress, port));
-              uint32_t flowSize = rand () % 10000;
-              uint32_t tos = rand() % 5;
-
-              source.SetAttribute ("SendSize", UintegerValue (PACKET_SIZE));
-              source.SetAttribute ("MaxBytes", UintegerValue(flowSize));
-              source.SetAttribute ("SimpleTOS", UintegerValue (tos));
-
-              // Install apps
-              ApplicationContainer sourceApp = source.Install (servers.Get (fromServerIndex));
-              sourceApp.Start (Seconds (startTime));
-              sourceApp.Stop (Seconds (END_TIME));
-
-              // Install packet sinks
-              PacketSinkHelper sink ("ns3::TcpSocketFactory",
-                                     InetSocketAddress (Ipv4Address::GetAny (), port));
-              ApplicationContainer sinkApp = sink.Install (servers. Get (i));
-              sinkApp.Start (Seconds (START_TIME));
-              sinkApp.Stop (Seconds (END_TIME));
-
-              startTime += static_cast<double> (rand () % 1000) / 1000000;
-            }
-
-        }
-
-    }
-}
 
 void install_applications (int fromLeafId, NodeContainer servers, double requestRate, struct cdf_table *cdfTable,
                            long &flowCount, long &totalFlowSize, int SERVER_COUNT, int LEAF_COUNT, double START_TIME, double END_TIME, double FLOW_LAUNCH_END_TIME)
@@ -105,7 +59,7 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
   NS_LOG_INFO ("Install applications:");
   for (int i = 0; i < SERVER_COUNT; i++)
     {
-      int fromServerIndex = fromLeafId * SERVER_COUNT + i;
+      int fromServerIndex = fromLeafId * SERVER_COUNT + i; // first server in next leaf?
 
       double startTime = START_TIME + poission_gen_interval (requestRate);
       while (startTime < FLOW_LAUNCH_END_TIME)
@@ -155,6 +109,8 @@ int main (int argc, char *argv[])
 {
 #if 1
   LogComponentEnable ("LargeScale", LOG_LEVEL_INFO);
+  LogComponentEnable ("BulkSendApplication", LOG_LEVEL_INFO);
+  LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
 #endif
 
   // Command line parameters parsing

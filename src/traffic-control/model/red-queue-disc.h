@@ -313,6 +313,10 @@ private:
   Ipv4Mask m_blackHoleDestMask;
   Ipv4Address m_blackHoleDestAddr;
 
+  Time m_microburst_start;
+  bool m_microburst_happening;
+
+
   // ** Variables maintained by RED
   double m_vProb1;          //!< Prob. of packet drop before "count"
   double m_vA;              //!< 1.0 / (m_maxTh - m_minTh)

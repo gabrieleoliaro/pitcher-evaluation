@@ -11,7 +11,9 @@ class TCNQueueDisc : public QueueDisc
 public:
     static TypeId GetTypeId (void);
 
-    TCNQueueDisc ();
+    TCNQueueDisc ();// {
+        //printed_info_ = false;
+    //}
 
     virtual ~TCNQueueDisc ();
 
@@ -27,7 +29,11 @@ private:
 
     uint32_t m_maxPackets;                  //!< Max # of packets accepted by the queue
     uint32_t m_maxBytes;                    //!< Max # of bytes accepted by the queue
+    Time m_microburst_start;
+    bool m_microburst_happening;
     Queue::QueueMode     m_mode;            //!< The operating mode (Bytes or packets)
+
+    //bool printed_info_;
 
     Time m_threshold;
 };

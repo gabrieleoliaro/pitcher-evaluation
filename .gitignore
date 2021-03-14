@@ -15,6 +15,9 @@
 *.plt
 *.routes
 *.tr
+
+*.xml
+
 [D|U]l[A-Z][a-z]*Stats.txt
 seventh-packet-byte-count.png
 

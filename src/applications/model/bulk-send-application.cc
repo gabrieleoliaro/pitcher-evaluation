@@ -30,6 +30,11 @@
 #include "ns3/trace-source-accessor.h"
 #include "ns3/tcp-socket-factory.h"
 #include "bulk-send-application.h"
+#include "ns3/internet-module.h"
+#include <fstream>
+
+#define INT_MODE 784591620
+#define PITCHER_MODE 234569283
 
 namespace ns3 {
 
@@ -131,6 +136,8 @@ void BulkSendApplication::StartApplication (void) // Called at time specified by
 {
   NS_LOG_FUNCTION (this);
 
+  NS_LOG_INFO ("Starting BulkSendApplication at " << Simulator::Now());
+
   // Create the socket if not already
   if (!m_socket)
     {
@@ -190,6 +197,8 @@ void BulkSendApplication::SendData (void)
 {
   NS_LOG_FUNCTION (this);
 
+  NS_LOG_INFO ("Entering BulkSendApplication::SendData" << Simulator::Now());
+
   while (m_maxBytes == 0 || m_totBytes < m_maxBytes)
     {
       if (m_isDelay)
@@ -206,6 +215,26 @@ void BulkSendApplication::SendData (void)
         }
       NS_LOG_LOGIC ("sending packet at " << Simulator::Now ());
       Ptr<Packet> packet = Create<Packet> (toSend);
+
+      IntHeader intHeader;
+      intHeader.SetNEntries(0);
+
+      // Fill out udpHeader fields appropriately
+      packet->AddHeader (intHeader);
+      intHeader.SetMode(PITCHER_MODE);
+      assert(intHeader.GetMode() == PITCHER_MODE);
+      assert(intHeader.GetNEntries() == 0);
+
+      uint32_t uid = packet->GetUid ();
+
+      NS_LOG_INFO("added pitcher stuff to packet with uid " << uid);
+
+      //std::ofstream ofs;
+      //ofs.open ("test.txt", std::ofstream::out | std::ofstream::app);
+      
+      //packet->Print (ofs);
+      //ofs.close();
+
       SocketIpTosTag tosTag;
       tosTag.SetTos (m_tos << 2);
       packet->AddPacketTag (tosTag);
