@@ -163,6 +163,14 @@ TCNQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 
 }
 
+namespace string_patch {
+    template <typename T> std::string to_string( const T& n ) {
+        std::ostringstream stm;
+        stm << n ;
+        return stm.str();
+    }
+}
+
 Ptr<QueueDiscItem>
 TCNQueueDisc::DoDequeue (void)
 {
@@ -187,6 +195,16 @@ TCNQueueDisc::DoDequeue (void)
     }
 
     Time sojournTime = now - tag.GetTxTime ();
+
+    uint32_t sojournTimeNS = (uint32_t) sojournTime.GetNanoSeconds();
+    std::string interface_name = string_patch::to_string(GetInternalQueue(0));
+
+    if (sojournTimeNS > 50000) {
+        
+        NS_LOG_INFO("Microburst " << interface_name << " sojournTime=" << sojournTimeNS);
+    } else {
+        NS_LOG_INFO("NOMicroburst " << interface_name << " sojournTime=" << sojournTimeNS);
+    }
 
     if (sojournTime > m_threshold)
     {
