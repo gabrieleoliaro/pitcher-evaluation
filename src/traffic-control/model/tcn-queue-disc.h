@@ -17,6 +17,10 @@ public:
 
     bool MarkingECN (Ptr<QueueDiscItem> item);
 
+    //std::string GetInterfaceName();
+
+    //void PrintInterfaceToIPMapping();
+
 private:
     // Operations offered by multi queue disc should be the same as queue disc
     virtual bool DoEnqueue (Ptr<QueueDiscItem> item);
@@ -28,7 +32,7 @@ private:
     uint32_t m_maxPackets;                  //!< Max # of packets accepted by the queue
     uint32_t m_maxBytes;                    //!< Max # of bytes accepted by the queue
     Queue::QueueMode     m_mode;            //!< The operating mode (Bytes or packets)
-
+    bool printed_once;
     Time m_threshold;
 };
 

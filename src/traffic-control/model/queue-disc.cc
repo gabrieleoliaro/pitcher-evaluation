@@ -25,6 +25,7 @@
 #include "ns3/packet.h"
 #include "ns3/unused.h"
 #include "queue-disc.h"
+#include <assert.h>
 
 namespace ns3 {
 
@@ -405,6 +406,18 @@ QueueDisc::Drop (Ptr<QueueDiscItem> item)
 
   NS_LOG_LOGIC ("m_traceDrop (p)");
   m_traceDrop (item);
+}
+
+std::string QueueDisc::GetInterfaceName(void) const {
+    return string_patch::to_string(GetInternalQueue(0));
+}
+
+void QueueDisc::PrintInterfaceToIPMapping(void) const {
+    Ptr<NetDevice> this_dev = GetNetDevice();
+
+    assert(this_dev);
+
+    NS_LOG_INFO("IF2IP " << GetInterfaceName() << " " << this_dev->GetAddress());
 }
 
 bool

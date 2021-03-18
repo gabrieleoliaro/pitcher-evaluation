@@ -126,8 +126,8 @@ TCNQueueDisc::GetTypeId (void)
 
 TCNQueueDisc::TCNQueueDisc ()
     : QueueDisc (),
-      m_threshold (0)
-{
+      printed_once(false),
+      m_threshold (0) {
     NS_LOG_FUNCTION (this);
 }
 
@@ -140,6 +140,11 @@ bool
 TCNQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 {
     NS_LOG_FUNCTION (this << item);
+
+    if (!printed_once) {
+        PrintInterfaceToIPMapping();
+        printed_once = true;
+    }
 
     Ptr<Packet> p = item->GetPacket ();
     if (m_mode == Queue::QUEUE_MODE_PACKETS && (GetInternalQueue (0)->GetNPackets () + 1 > m_maxPackets))

@@ -202,6 +202,17 @@ private:
  * The design and implementation of this class is heavily inspired by Linux.
  * For more details, see the traffic-control model page.
  */
+
+
+// Thanks to Sivaram for this snippet
+namespace string_patch {
+    template <typename T> std::string to_string( const T& n ) {
+        std::ostringstream stm;
+        stm << n ;
+        return stm.str();
+    }
+}
+
 class QueueDisc : public Object {
 public:
   /**
@@ -279,6 +290,10 @@ public:
    * \param device the NetDevice on which this queue discipline is installed.
    */
   void SetNetDevice (Ptr<NetDevice> device);
+
+  std::string GetInterfaceName(void) const;
+
+  void PrintInterfaceToIPMapping(void) const; 
 
   /**
    * \brief Get the NetDevice on which this queue discipline is installed

@@ -37,124 +37,70 @@ enum AQM {
 };
 
 // Acknowledged to https://github.com/HKUST-SING/TrafficGenerator/blob/master/src/common/common.c
-double poission_gen_interval(double avg_rate)
-{
+double poission_gen_interval(double avg_rate) {
   if (avg_rate > 0)
     return -logf(1.0 - (double)rand() / RAND_MAX) / avg_rate;
   else
     return 0;
 }
 
-template<typename T>
-T rand_range (T min, T max)
-{
+template<typename T> T rand_range (T min, T max) {
   return min + ((double)max - min) * rand () / RAND_MAX;
 }
 
-void install_incast_applications (NodeContainer servers, long &flowCount, int SERVER_COUNT, int LEAF_COUNT, double START_TIME, double END_TIME, double FLOW_LAUNCH_END_TIME)
-{
-  NS_LOG_INFO ("Install incast applications:");
-  for (int i = 0; i < SERVER_COUNT; i++)
-    {
-      Ptr<Node> destServer = servers.Get (i);
+void install_applications (int fromLeafId, NodeContainer servers, double requestRate, struct cdf_table *cdfTable,
+                           long &flowCount, long &totalFlowSize, int SERVER_COUNT, int LEAF_COUNT, double START_TIME, double END_TIME, double FLOW_LAUNCH_END_TIME) {
+  NS_LOG_INFO ("Install applications:");
+  for (int i = 0; i < SERVER_COUNT; i++) {
+    int fromServerIndex = fromLeafId * SERVER_COUNT + i;
+
+    double startTime = START_TIME + poission_gen_interval (requestRate);
+    while (startTime < FLOW_LAUNCH_END_TIME) {
+      flowCount ++;
+      uint16_t port = PORT++;
+
+      int destServerIndex = fromServerIndex;
+      while (destServerIndex >= fromLeafId * SERVER_COUNT && destServerIndex < fromLeafId * SERVER_COUNT + SERVER_COUNT) {
+        destServerIndex = rand_range (0, SERVER_COUNT * LEAF_COUNT);
+      }
+
+      Ptr<Node> destServer = servers.Get (destServerIndex);
       Ptr<Ipv4> ipv4 = destServer->GetObject<Ipv4> ();
       Ipv4InterfaceAddress destInterface = ipv4->GetAddress (1,0);
       Ipv4Address destAddress = destInterface.GetLocal ();
 
-      uint32_t fanout = rand () % 50 + 100;
-      for (uint32_t j = 0; j < fanout; j++)
-        {
-          double startTime = START_TIME + static_cast<double> (rand () % 100) / 1000000;
-          while (startTime < FLOW_LAUNCH_END_TIME)
-            {
-              flowCount ++;
-              uint32_t fromServerIndex = rand () % SERVER_COUNT;
-              uint16_t port = PORT++;
+      BulkSendHelper source ("ns3::TcpSocketFactory", InetSocketAddress (destAddress, port));
+      uint32_t flowSize = gen_random_cdf (cdfTable);
+      uint32_t tos = rand() % 5;
 
-              BulkSendHelper source ("ns3::TcpSocketFactory", InetSocketAddress (destAddress, port));
-              uint32_t flowSize = rand () % 10000;
-              uint32_t tos = rand() % 5;
+      totalFlowSize += flowSize;
 
-              source.SetAttribute ("SendSize", UintegerValue (PACKET_SIZE));
-              source.SetAttribute ("MaxBytes", UintegerValue(flowSize));
-              source.SetAttribute ("SimpleTOS", UintegerValue (tos));
+      source.SetAttribute ("SendSize", UintegerValue (PACKET_SIZE));
+      source.SetAttribute ("MaxBytes", UintegerValue(flowSize));
+      source.SetAttribute ("SimpleTOS", UintegerValue (tos));
 
-              // Install apps
-              ApplicationContainer sourceApp = source.Install (servers.Get (fromServerIndex));
-              sourceApp.Start (Seconds (startTime));
-              sourceApp.Stop (Seconds (END_TIME));
+      // Install apps
+      ApplicationContainer sourceApp = source.Install (servers.Get (fromServerIndex));
+      sourceApp.Start (Seconds (startTime));
+      sourceApp.Stop (Seconds (END_TIME));
 
-              // Install packet sinks
-              PacketSinkHelper sink ("ns3::TcpSocketFactory",
-                                     InetSocketAddress (Ipv4Address::GetAny (), port));
-              ApplicationContainer sinkApp = sink.Install (servers. Get (i));
-              sinkApp.Start (Seconds (START_TIME));
-              sinkApp.Stop (Seconds (END_TIME));
+      // Install packet sinks
+      PacketSinkHelper sink ("ns3::TcpSocketFactory",
+                             InetSocketAddress (Ipv4Address::GetAny (), port));
+      ApplicationContainer sinkApp = sink.Install (servers. Get (destServerIndex));
+      sinkApp.Start (Seconds (START_TIME));
+      sinkApp.Stop (Seconds (END_TIME));
 
-              startTime += static_cast<double> (rand () % 1000) / 1000000;
-            }
-
-        }
-
+      startTime += poission_gen_interval (requestRate);
     }
+  }
 }
 
-void install_applications (int fromLeafId, NodeContainer servers, double requestRate, struct cdf_table *cdfTable,
-                           long &flowCount, long &totalFlowSize, int SERVER_COUNT, int LEAF_COUNT, double START_TIME, double END_TIME, double FLOW_LAUNCH_END_TIME)
-{
-  NS_LOG_INFO ("Install applications:");
-  for (int i = 0; i < SERVER_COUNT; i++)
-    {
-      int fromServerIndex = fromLeafId * SERVER_COUNT + i;
-
-      double startTime = START_TIME + poission_gen_interval (requestRate);
-      while (startTime < FLOW_LAUNCH_END_TIME)
-        {
-          flowCount ++;
-          uint16_t port = PORT++;
-
-          int destServerIndex = fromServerIndex;
-          while (destServerIndex >= fromLeafId * SERVER_COUNT && destServerIndex < fromLeafId * SERVER_COUNT + SERVER_COUNT)
-            {
-              destServerIndex = rand_range (0, SERVER_COUNT * LEAF_COUNT);
-            }
-
-          Ptr<Node> destServer = servers.Get (destServerIndex);
-          Ptr<Ipv4> ipv4 = destServer->GetObject<Ipv4> ();
-          Ipv4InterfaceAddress destInterface = ipv4->GetAddress (1,0);
-          Ipv4Address destAddress = destInterface.GetLocal ();
-
-          BulkSendHelper source ("ns3::TcpSocketFactory", InetSocketAddress (destAddress, port));
-          uint32_t flowSize = gen_random_cdf (cdfTable);
-          uint32_t tos = rand() % 5;
-
-          totalFlowSize += flowSize;
-
-          source.SetAttribute ("SendSize", UintegerValue (PACKET_SIZE));
-          source.SetAttribute ("MaxBytes", UintegerValue(flowSize));
-          source.SetAttribute ("SimpleTOS", UintegerValue (tos));
-
-          // Install apps
-          ApplicationContainer sourceApp = source.Install (servers.Get (fromServerIndex));
-          sourceApp.Start (Seconds (startTime));
-          sourceApp.Stop (Seconds (END_TIME));
-
-          // Install packet sinks
-          PacketSinkHelper sink ("ns3::TcpSocketFactory",
-                                 InetSocketAddress (Ipv4Address::GetAny (), port));
-          ApplicationContainer sinkApp = sink.Install (servers. Get (destServerIndex));
-          sinkApp.Start (Seconds (START_TIME));
-          sinkApp.Stop (Seconds (END_TIME));
-
-          startTime += poission_gen_interval (requestRate);
-        }
-    }
-}
-
-int main (int argc, char *argv[])
-{
+int main (int argc, char *argv[]) {
 #if 1
   LogComponentEnable ("LargeScale", LOG_LEVEL_INFO);
+  LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
+  LogComponentEnable ("QueueDisc", LOG_LEVEL_INFO);
 #endif
 
   // Command line parameters parsing
@@ -222,43 +168,36 @@ int main (int argc, char *argv[])
   uint64_t LEAF_SERVER_CAPACITY = leafServerCapacity * LINK_CAPACITY_BASE;
   Time LINK_LATENCY = MicroSeconds (linkLatency);
 
-  if (load <= 0.0 || load >= 1.0)
-    {
-      NS_LOG_ERROR ("The network load should within 0.0 and 1.0");
-      return 0;
-    }
+  if (load <= 0.0 || load >= 1.0) {
+    NS_LOG_ERROR ("The network load should within 0.0 and 1.0");
+    return 0;
+  }
 
   AQM aqm;
-  if (aqmStr.compare ("TCN") == 0)
-    {
-      aqm = TCN;
-    }
-  else if (aqmStr.compare ("ECNSharp") == 0)
-    {
-      aqm = ECNSharp;
-    }
-  else
-    {
-      return 0;
-    }
+  if (aqmStr.compare ("TCN") == 0){
+    aqm = TCN;
+  } else if (aqmStr.compare ("ECNSharp") == 0) {
+    aqm = ECNSharp;
+  } else {
+    return 0;
+  }
 
-  if (transportProt.compare ("DcTcp") == 0)
-    {
-      NS_LOG_INFO ("Enabling DcTcp");
-      Config::SetDefault ("ns3::TcpL4Protocol::SocketType", TypeIdValue (TcpDCTCP::GetTypeId ()));
+  if (transportProt.compare ("DcTcp") == 0) {
+    NS_LOG_INFO ("Enabling DcTcp");
+    Config::SetDefault ("ns3::TcpL4Protocol::SocketType", TypeIdValue (TcpDCTCP::GetTypeId ()));
 
-      // TCN Configuration
-      Config::SetDefault ("ns3::TCNQueueDisc::Mode", StringValue ("QUEUE_MODE_PACKETS"));
-      Config::SetDefault ("ns3::TCNQueueDisc::MaxPackets", UintegerValue (BUFFER_SIZE));
-      Config::SetDefault ("ns3::TCNQueueDisc::Threshold", TimeValue (MicroSeconds (TCNThreshold)));
+    // TCN Configuration
+    Config::SetDefault ("ns3::TCNQueueDisc::Mode", StringValue ("QUEUE_MODE_PACKETS"));
+    Config::SetDefault ("ns3::TCNQueueDisc::MaxPackets", UintegerValue (BUFFER_SIZE));
+    Config::SetDefault ("ns3::TCNQueueDisc::Threshold", TimeValue (MicroSeconds (TCNThreshold)));
 
-      // ECN Sharp Configuration
-      Config::SetDefault ("ns3::ECNSharpQueueDisc::Mode", StringValue ("QUEUE_MODE_PACKETS"));
-      Config::SetDefault ("ns3::ECNSharpQueueDisc::MaxPackets", UintegerValue (BUFFER_SIZE));
-      Config::SetDefault ("ns3::ECNSharpQueueDisc::InstantaneousMarkingThreshold", TimeValue (MicroSeconds (ECNSharpMarkingThreshold)));
-      Config::SetDefault ("ns3::ECNSharpQueueDisc::PersistentMarkingTarget", TimeValue (MicroSeconds (ECNSharpTarget)));
-      Config::SetDefault ("ns3::ECNSharpQueueDisc::PersistentMarkingInterval", TimeValue (MicroSeconds (ECNSharpInterval)));
-    }
+    // ECN Sharp Configuration
+    Config::SetDefault ("ns3::ECNSharpQueueDisc::Mode", StringValue ("QUEUE_MODE_PACKETS"));
+    Config::SetDefault ("ns3::ECNSharpQueueDisc::MaxPackets", UintegerValue (BUFFER_SIZE));
+    Config::SetDefault ("ns3::ECNSharpQueueDisc::InstantaneousMarkingThreshold", TimeValue (MicroSeconds (ECNSharpMarkingThreshold)));
+    Config::SetDefault ("ns3::ECNSharpQueueDisc::PersistentMarkingTarget", TimeValue (MicroSeconds (ECNSharpTarget)));
+    Config::SetDefault ("ns3::ECNSharpQueueDisc::PersistentMarkingInterval", TimeValue (MicroSeconds (ECNSharpInterval)));
+  }
 
   NS_LOG_INFO ("Config parameters");
   Config::SetDefault ("ns3::TcpSocket::SegmentSize", UintegerValue(PACKET_SIZE));
@@ -287,7 +226,6 @@ int main (int argc, char *argv[])
 
   internet.SetRoutingHelper (globalRoutingHelper);
 
-
   internet.Install (servers);
   internet.Install (spines);
   internet.Install (leaves);
@@ -305,110 +243,100 @@ int main (int argc, char *argv[])
 
   ipv4.SetBase ("10.1.0.0", "255.255.255.0");
 
-  for (int i = 0; i < LEAF_COUNT; i++)
-    {
-      ipv4.NewNetwork ();
+  for (int i = 0; i < LEAF_COUNT; i++) {
+    ipv4.NewNetwork ();
 
-      for (int j = 0; j < SERVER_COUNT; j++)
-        {
-          int serverIndex = i * SERVER_COUNT + j;
-          NodeContainer nodeContainer = NodeContainer (leaves.Get (i), servers.Get (serverIndex));
-          NetDeviceContainer netDeviceContainer = p2p.Install (nodeContainer);
+    for (int j = 0; j < SERVER_COUNT; j++) {
+      int serverIndex = i * SERVER_COUNT + j;
+      NodeContainer nodeContainer = NodeContainer (leaves.Get (i), servers.Get (serverIndex));
+      NetDeviceContainer netDeviceContainer = p2p.Install (nodeContainer);
 
-          //TODO We should change this, at endhost we are not going to mark ECN but add delay using delay queue disc
+      //TODO We should change this, at endhost we are not going to mark ECN but add delay using delay queue disc
 
-          Ptr<DelayQueueDisc> delayQueueDisc = CreateObject<DelayQueueDisc> ();
-          Ptr<Ipv4SimplePacketFilter> filter = CreateObject<Ipv4SimplePacketFilter> ();
+      Ptr<DelayQueueDisc> delayQueueDisc = CreateObject<DelayQueueDisc> ();
+      Ptr<Ipv4SimplePacketFilter> filter = CreateObject<Ipv4SimplePacketFilter> ();
 
-          delayQueueDisc->AddPacketFilter (filter);
+      delayQueueDisc->AddPacketFilter (filter);
 
-          delayQueueDisc->AddDelayClass (0, MicroSeconds (1));
-          delayQueueDisc->AddDelayClass (1, MicroSeconds (20));
-          delayQueueDisc->AddDelayClass (2, MicroSeconds (50));
-          delayQueueDisc->AddDelayClass (3, MicroSeconds (80));
-          delayQueueDisc->AddDelayClass (4, MicroSeconds (160));
+      delayQueueDisc->AddDelayClass (0, MicroSeconds (1));
+      delayQueueDisc->AddDelayClass (1, MicroSeconds (20));
+      delayQueueDisc->AddDelayClass (2, MicroSeconds (50));
+      delayQueueDisc->AddDelayClass (3, MicroSeconds (80));
+      delayQueueDisc->AddDelayClass (4, MicroSeconds (160));
 
-          ObjectFactory switchSideQueueFactory;
+      ObjectFactory switchSideQueueFactory;
 
-          if (aqm == TCN)
-            {
-              switchSideQueueFactory.SetTypeId ("ns3::TCNQueueDisc");
-            }
-          else
-            {
-              switchSideQueueFactory.SetTypeId ("ns3::ECNSharpQueueDisc");
-            }
-          Ptr<QueueDisc> switchSideQueueDisc = switchSideQueueFactory.Create<QueueDisc> ();
+      if (aqm == TCN){ 
+        switchSideQueueFactory.SetTypeId ("ns3::TCNQueueDisc"); 
+      } else {
+        switchSideQueueFactory.SetTypeId ("ns3::ECNSharpQueueDisc");
+      }
+      Ptr<QueueDisc> switchSideQueueDisc = switchSideQueueFactory.Create<QueueDisc> ();
 
-          Ptr<NetDevice> netDevice0 = netDeviceContainer.Get (0);
-          Ptr<TrafficControlLayer> tcl0 = netDevice0->GetNode ()->GetObject<TrafficControlLayer> ();
+      Ptr<NetDevice> netDevice0 = netDeviceContainer.Get (0);
+      Ptr<TrafficControlLayer> tcl0 = netDevice0->GetNode ()->GetObject<TrafficControlLayer> ();
 
-          delayQueueDisc->SetNetDevice (netDevice0);
-          tcl0->SetRootQueueDiscOnDevice (netDevice0, delayQueueDisc);
+      delayQueueDisc->SetNetDevice (netDevice0);
+      tcl0->SetRootQueueDiscOnDevice (netDevice0, delayQueueDisc);
 
-          Ptr<NetDevice> netDevice1 = netDeviceContainer.Get (1);
-          Ptr<TrafficControlLayer> tcl1 = netDevice1->GetNode ()->GetObject<TrafficControlLayer> ();
-          switchSideQueueDisc->SetNetDevice (netDevice1);
-          tcl1->SetRootQueueDiscOnDevice (netDevice1, switchSideQueueDisc);
+      Ptr<NetDevice> netDevice1 = netDeviceContainer.Get (1);
+      Ptr<TrafficControlLayer> tcl1 = netDevice1->GetNode ()->GetObject<TrafficControlLayer> ();
+      switchSideQueueDisc->SetNetDevice (netDevice1);
+      tcl1->SetRootQueueDiscOnDevice (netDevice1, switchSideQueueDisc);
 
-          Ipv4InterfaceContainer interfaceContainer = ipv4.Assign (netDeviceContainer);
+      Ipv4InterfaceContainer interfaceContainer = ipv4.Assign (netDeviceContainer);
 
-          NS_LOG_INFO ("Leaf - " << i << " is connected to Server - " << j << " with address "
-                       << interfaceContainer.GetAddress(0) << " <-> " << interfaceContainer.GetAddress (1)
-                       << " with port " << netDeviceContainer.Get (0)->GetIfIndex () << " <-> " << netDeviceContainer.Get (1)->GetIfIndex ());
-        }
+      //delayQueueDisc->PrintInterfaceToIPMapping();
+
+      NS_LOG_INFO ("Leaf - " << i << " is connected to Server - " << j << " with address "
+                   << interfaceContainer.GetAddress(0) << " <-> " << interfaceContainer.GetAddress (1)
+                   << " with port " << netDeviceContainer.Get (0)->GetIfIndex () << " <-> " << netDeviceContainer.Get (1)->GetIfIndex ());
     }
+  }
 
   NS_LOG_INFO ("Configuring switches");
   // Setting up switches
   p2p.SetDeviceAttribute ("DataRate", DataRateValue (DataRate (SPINE_LEAF_CAPACITY)));
 
-  for (int i = 0; i < LEAF_COUNT; i++)
-    {
-      for (int j = 0; j < SPINE_COUNT; j++)
-        {
+  for (int i = 0; i < LEAF_COUNT; i++) {
+    for (int j = 0; j < SPINE_COUNT; j++) {
+      for (int l = 0; l < LINK_COUNT; l++) {
+        ipv4.NewNetwork ();
 
-          for (int l = 0; l < LINK_COUNT; l++)
-            {
-              ipv4.NewNetwork ();
+        NodeContainer nodeContainer = NodeContainer (leaves.Get (i), spines.Get (j));
+        NetDeviceContainer netDeviceContainer = p2p.Install (nodeContainer);
+        ObjectFactory switchSideQueueFactory;
 
-              NodeContainer nodeContainer = NodeContainer (leaves.Get (i), spines.Get (j));
-              NetDeviceContainer netDeviceContainer = p2p.Install (nodeContainer);
-              ObjectFactory switchSideQueueFactory;
-
-              if (aqm == TCN)
-                {
-                  switchSideQueueFactory.SetTypeId ("ns3::TCNQueueDisc");
-                }
-              else
-                {
-                  switchSideQueueFactory.SetTypeId ("ns3::ECNSharpQueueDisc");
-                }
-
-              Ptr<QueueDisc> leafQueueDisc = switchSideQueueFactory.Create<QueueDisc> ();
-
-              Ptr<NetDevice> netDevice0 = netDeviceContainer.Get (0);
-              Ptr<TrafficControlLayer> tcl0 = netDevice0->GetNode ()->GetObject<TrafficControlLayer> ();
-              leafQueueDisc->SetNetDevice (netDevice0);
-              tcl0->SetRootQueueDiscOnDevice (netDevice0, leafQueueDisc);
-
-              Ptr<QueueDisc> spineQueueDisc = switchSideQueueFactory.Create<QueueDisc> ();
-
-              Ptr<NetDevice> netDevice1 = netDeviceContainer.Get (1);
-              Ptr<TrafficControlLayer> tcl1 = netDevice1->GetNode ()->GetObject<TrafficControlLayer> ();
-              spineQueueDisc->SetNetDevice (netDevice1);
-              tcl1->SetRootQueueDiscOnDevice (netDevice1, spineQueueDisc);
-
-
-              Ipv4InterfaceContainer ipv4InterfaceContainer = ipv4.Assign (netDeviceContainer);
-              NS_LOG_INFO ("Leaf - " << i << " is connected to Spine - " << j << " with address "
-                           << ipv4InterfaceContainer.GetAddress(0) << " <-> " << ipv4InterfaceContainer.GetAddress (1)
-                           << " with port " << netDeviceContainer.Get (0)->GetIfIndex () << " <-> " << netDeviceContainer.Get (1)->GetIfIndex ()
-                           << " with data rate " << spineLeafCapacity);
-
-            }
+        if (aqm == TCN) {
+          switchSideQueueFactory.SetTypeId ("ns3::TCNQueueDisc");
+        } else {
+          switchSideQueueFactory.SetTypeId ("ns3::ECNSharpQueueDisc");
         }
+
+        Ptr<QueueDisc> leafQueueDisc = switchSideQueueFactory.Create<QueueDisc> ();
+
+        Ptr<NetDevice> netDevice0 = netDeviceContainer.Get (0);
+        Ptr<TrafficControlLayer> tcl0 = netDevice0->GetNode ()->GetObject<TrafficControlLayer> ();
+        leafQueueDisc->SetNetDevice (netDevice0);
+        tcl0->SetRootQueueDiscOnDevice (netDevice0, leafQueueDisc);
+
+        Ptr<QueueDisc> spineQueueDisc = switchSideQueueFactory.Create<QueueDisc> ();
+
+        Ptr<NetDevice> netDevice1 = netDeviceContainer.Get (1);
+        Ptr<TrafficControlLayer> tcl1 = netDevice1->GetNode ()->GetObject<TrafficControlLayer> ();
+        spineQueueDisc->SetNetDevice (netDevice1);
+        tcl1->SetRootQueueDiscOnDevice (netDevice1, spineQueueDisc);
+
+
+        Ipv4InterfaceContainer ipv4InterfaceContainer = ipv4.Assign (netDeviceContainer);
+        NS_LOG_INFO ("Leaf - " << i << " is connected to Spine - " << j << " with address "
+         << ipv4InterfaceContainer.GetAddress(0) << " <-> " << ipv4InterfaceContainer.GetAddress (1)
+         << " with port " << netDeviceContainer.Get (0)->GetIfIndex () << " <-> " << netDeviceContainer.Get (1)->GetIfIndex ()
+         << " with data rate " << spineLeafCapacity);
+
+      }
     }
+  }
 
   NS_LOG_INFO ("Populate global routing tables");
   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
@@ -426,14 +354,11 @@ int main (int argc, char *argv[])
   NS_LOG_INFO ("Average request rate: " << requestRate << " per second");
 
   NS_LOG_INFO ("Initialize random seed: " << randomSeed);
-  if (randomSeed == 0)
-    {
-      srand ((unsigned)time (NULL));
-    }
-  else
-    {
-      srand (randomSeed);
-    }
+  if (randomSeed == 0) {
+    srand ((unsigned)time (NULL));
+  } else {
+    srand (randomSeed);
+  }
 
   NS_LOG_INFO ("Create applications");
 
@@ -467,7 +392,7 @@ int main (int argc, char *argv[])
   Simulator::Stop (Seconds (END_TIME));
   Simulator::Run ();
 
-  flowMonitor->SerializeToXmlFile(flowMonitorFilename.str (), true, true);
+  //flowMonitor->SerializeToXmlFile(flowMonitorFilename.str (), true, true);
 
   Simulator::Destroy ();
   free_cdf (cdfTable);
