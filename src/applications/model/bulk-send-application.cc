@@ -216,7 +216,7 @@ void BulkSendApplication::SendData (void)
       Ptr<Node> this_node = GetNode();
       assert(this_node);
 
-      NS_LOG_INFO("BulkSendApplication sending packet with "<< uid << " and size " << psize << "from ");
+      NS_LOG_INFO("BulkSendApplication sending packet with "<< uid << " and size " << psize << " from ... ");
       NS_LOG_INFO("found " << this_node->GetNDevices() << " devices associated with the node attached to this BulkSendApplication");
 
       
