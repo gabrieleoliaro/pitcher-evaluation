@@ -59,6 +59,7 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
       flowCount ++;
       uint16_t port = PORT++;
 
+      // determine a destination for the flow that we will start at the current server, and grab the destination's address/interface stuff
       int destServerIndex = fromServerIndex;
       while (destServerIndex >= fromLeafId * SERVER_COUNT && destServerIndex < fromLeafId * SERVER_COUNT + SERVER_COUNT) {
         destServerIndex = rand_range (0, SERVER_COUNT * LEAF_COUNT);
@@ -69,8 +70,14 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
       Ipv4InterfaceAddress destInterface = ipv4->GetAddress (1,0);
       Ipv4Address destAddress = destInterface.GetLocal ();
 
+
+      // Create the flow starting at the server, using the BulkSendApplication
       BulkSendHelper source ("ns3::TcpSocketFactory", InetSocketAddress (destAddress, port));
       uint32_t flowSize = gen_random_cdf (cdfTable);
+
+      // forcing the flowsize to PACKET_SIZE so that each flow only sends one packet (i.e. easier to track)
+      flowSize = PACKET_SIZE;
+
       uint32_t tos = rand() % 5;
 
       totalFlowSize += flowSize;
@@ -79,7 +86,7 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
       source.SetAttribute ("MaxBytes", UintegerValue(flowSize));
       source.SetAttribute ("SimpleTOS", UintegerValue (tos));
 
-      // Install apps
+      // Install the BulkSendApp responsible for creating a new flow from this server to the chosen receiver.
       ApplicationContainer sourceApp = source.Install (servers.Get (fromServerIndex));
       sourceApp.Start (Seconds (startTime));
       sourceApp.Stop (Seconds (END_TIME));
@@ -101,6 +108,8 @@ int main (int argc, char *argv[]) {
   LogComponentEnable ("LargeScale", LOG_LEVEL_INFO);
   LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
   LogComponentEnable ("QueueDisc", LOG_LEVEL_INFO);
+  LogComponentEnable ("BulkSendApplication", LOG_LEVEL_INFO);
+  
 #endif
 
   // Command line parameters parsing

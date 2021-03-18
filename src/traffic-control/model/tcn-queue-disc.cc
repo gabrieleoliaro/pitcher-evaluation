@@ -141,20 +141,26 @@ TCNQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
 {
     NS_LOG_FUNCTION (this << item);
 
-    if (!printed_once) {
+    /*if (!printed_once) {
         PrintInterfaceToIPMapping();
         printed_once = true;
-    }
+    }*/
 
     Ptr<Packet> p = item->GetPacket ();
+    
+    uint32_t uid = p->GetUid ();
+    uint32_t psize = p->GetSize();
+
     if (m_mode == Queue::QUEUE_MODE_PACKETS && (GetInternalQueue (0)->GetNPackets () + 1 > m_maxPackets))
     {
+        NS_LOG_INFO("Packet with "<< uid << " and size " << psize << " dropped at " << GetInterfaceName());
         Drop (item);
         return false;
     }
 
     if (m_mode == Queue::QUEUE_MODE_BYTES && (GetInternalQueue (0)->GetNBytes () + item->GetPacketSize () > m_maxBytes))
     {
+        NS_LOG_INFO("Packet with "<< uid << " and size " << psize << " dropped at " << GetInterfaceName());
         Drop (item);
         return false;
     }
@@ -162,6 +168,7 @@ TCNQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item)
     TCNTimestampTag tag;
     p->AddPacketTag (tag);
 
+    NS_LOG_INFO("Packet with "<< uid << " and size " << psize << " enqueued at " << GetInterfaceName());
     GetInternalQueue (0)->Enqueue (item);
 
     return true;
@@ -183,6 +190,9 @@ TCNQueueDisc::DoDequeue (void)
     Ptr<QueueDiscItem> item = StaticCast<QueueDiscItem> (GetInternalQueue (0)->Dequeue ());
     Ptr<Packet> p = item->GetPacket ();
 
+    uint32_t uid = p->GetUid ();
+    uint32_t psize = p->GetSize();
+
     TCNTimestampTag tag;
     bool found = p->RemovePacketTag (tag);
     if (!found)
@@ -197,6 +207,8 @@ TCNQueueDisc::DoDequeue (void)
     {
         TCNQueueDisc::MarkingECN (item);
     }
+
+    NS_LOG_INFO("Packet with "<< uid << " and size " << psize << " dequeued at " << GetInterfaceName());
 
     return item;
 

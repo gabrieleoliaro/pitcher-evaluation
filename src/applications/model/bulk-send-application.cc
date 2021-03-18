@@ -30,6 +30,7 @@
 #include "ns3/trace-source-accessor.h"
 #include "ns3/tcp-socket-factory.h"
 #include "bulk-send-application.h"
+#include <assert.h>
 
 namespace ns3 {
 
@@ -163,9 +164,9 @@ void BulkSendApplication::StartApplication (void) // Called at time specified by
         MakeCallback (&BulkSendApplication::DataSend, this));
     }
   if (m_connected)
-    {
-      SendData ();
-    }
+  {
+    SendData ();
+  }
 }
 
 void BulkSendApplication::StopApplication (void) // Called at time specified by Stop
@@ -205,7 +206,20 @@ void BulkSendApplication::SendData (void)
           toSend = std::min (m_sendSize, m_maxBytes - m_totBytes);
         }
       NS_LOG_LOGIC ("sending packet at " << Simulator::Now ());
+      
       Ptr<Packet> packet = Create<Packet> (toSend);
+
+      uint32_t uid = packet->GetUid ();
+      uint32_t psize = packet->GetSize();
+
+      // Node on which the BulkSendApplication is being run
+      Ptr<Node> this_node = GetNode();
+      assert(this_node);
+
+      NS_LOG_INFO("BulkSendApplication sending packet with "<< uid << " and size " << psize << "from ");
+      NS_LOG_INFO("found " << this_node->GetNDevices() << " devices associated with the node attached to this BulkSendApplication");
+
+      
       SocketIpTosTag tosTag;
       tosTag.SetTos (m_tos << 2);
       packet->AddPacketTag (tosTag);
