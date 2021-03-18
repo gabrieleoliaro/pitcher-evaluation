@@ -8,6 +8,7 @@
 #include "ns3/drop-tail-queue.h"
 #include "ns3/internet-module.h"
 #include <assert.h>
+#include "../../IntTag.h"
 
 #define DEFAULT_TCN_LIMIT 100
 
@@ -131,19 +132,33 @@ TCNQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item) {
     uint32_t uid = p->GetUid ();
     uint32_t psize = p->GetSize();
 
-    IntHeader maybeIntHeader;
-    assert(maybeIntHeader.GetMode() == 0 && maybeIntHeader.GetNEntries() == 0);
-    uint32_t header_size = p->PeekHeader(maybeIntHeader);
-    bool header_found = (maybeIntHeader.GetMode() == 49721 && maybeIntHeader.GetNEntries() == 36085);
+    IntTag maybeIntTag;
+    assert(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0);
+    uint32_t tag_size = p->PeekPacketTag(maybeIntTag);
+    bool tag_found = (maybeIntTag.GetMode() == 49721 && maybeIntTag.GetNEntries() == 36085);
 
-    if (header_found) {
-        NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " had IntHeader of size " << header_size 
-            << " and contents: ( " << maybeIntHeader.GetMode() << ", " <<  maybeIntHeader.GetNEntries() << ") at interface " <<  GetInterfaceName());
+    if (tag_found) {
+        NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
+            << " and contents: ( " << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() << ") at interface " <<  GetInterfaceName());
     } else {
-        NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " did NOT have IntHeader of size " << header_size 
-            << " and contents: ( " << maybeIntHeader.GetMode() << ", " <<  maybeIntHeader.GetNEntries() << ") at interface " <<  GetInterfaceName());
+        NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " did NOT have IntTag of size " << tag_size 
+            << " and contents: ( " << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() << ") at interface " <<  GetInterfaceName());
     }
-    psize = p->GetSize();
+    //psize = p->GetSize();
+
+    // IntHeader maybeIntHeader;
+    // assert(maybeIntHeader.GetMode() == 0 && maybeIntHeader.GetNEntries() == 0);
+    // uint32_t header_size = p->PeekHeader(maybeIntHeader);
+    // bool header_found = (maybeIntHeader.GetMode() == 49721 && maybeIntHeader.GetNEntries() == 36085);
+
+    // if (header_found) {
+    //     NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " had IntHeader of size " << header_size 
+    //         << " and contents: ( " << maybeIntHeader.GetMode() << ", " <<  maybeIntHeader.GetNEntries() << ") at interface " <<  GetInterfaceName());
+    // } else {
+    //     NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " did NOT have IntHeader of size " << header_size 
+    //         << " and contents: ( " << maybeIntHeader.GetMode() << ", " <<  maybeIntHeader.GetNEntries() << ") at interface " <<  GetInterfaceName());
+    // }
+    // psize = p->GetSize();
 
     if (m_mode == Queue::QUEUE_MODE_PACKETS && (GetInternalQueue (0)->GetNPackets () + 1 > m_maxPackets)) {
         NS_LOG_INFO("\tPacket with uid "<< uid << " and size " << psize << " dropped at " << GetInterfaceName());

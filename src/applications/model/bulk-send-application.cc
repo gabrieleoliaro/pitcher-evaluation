@@ -31,6 +31,7 @@
 #include "ns3/tcp-socket-factory.h"
 #include "bulk-send-application.h"
 #include "ns3/internet-module.h"
+#include "../../IntTag.h"
 #include <assert.h>
 
 namespace ns3 {
@@ -220,22 +221,42 @@ void BulkSendApplication::SendData (void)
       NS_LOG_INFO("BulkSendApplication sending packet with uid "<< uid << " and size " << psize << " from ... ");
       NS_LOG_INFO("found " << this_node->GetNDevices() << " devices associated with the node attached to this BulkSendApplication");
       
-      // Add the IntHeader, see what happens
-      IntHeader inthead;
-      assert(inthead.GetMode() == 0 && inthead.GetNEntries() == 0);
-      inthead.SetMode(49721);
-      inthead.SetNEntries(36085);
-      assert(inthead.GetMode() == 49721 && inthead.GetNEntries() == 36085);
+      // Add the IntTag
+      IntTag tag;
+      assert(tag.GetMode() == 0 && tag.GetNEntries() == 0);
+      tag.SetMode(49721);
+      tag.SetNEntries(36085);
+      assert(tag.GetMode() == 49721 && tag.GetNEntries() == 36085);
 
-      packet->AddHeader(inthead);
-      psize = packet->GetSize();
-      NS_LOG_INFO("BulkSendApplication added IntHeader to packet with uid "<< uid << " and new size is " << psize << " from ... ");
+      packet->AddPacketTag (tag);
+      
+      // verification of the tag
+      uint32_t psize1 = packet->GetSize();
+      assert(psize1 == psize);
+      IntTag tag_check;
+      assert(tag_check.GetMode() == 0 && tag_check.GetNEntries() == 0);
+      packet->PeekPacketTag(tag_check);
+      assert(tag_check.GetMode() == 49721 && tag_check.GetNEntries() == 36085);
 
-      // verification of the header
-      IntHeader inthead_check;
-      assert(inthead_check.GetMode() == 0 && inthead_check.GetNEntries() == 0);
-      packet->PeekHeader(inthead_check);
-      assert(inthead_check.GetMode() == 49721 && inthead_check.GetNEntries() == 36085);
+
+
+
+      // // Add the IntHeader, see what happens
+      // IntHeader inthead;
+      // assert(inthead.GetMode() == 0 && inthead.GetNEntries() == 0);
+      // inthead.SetMode(49721);
+      // inthead.SetNEntries(36085);
+      // assert(inthead.GetMode() == 49721 && inthead.GetNEntries() == 36085);
+
+      // packet->AddHeader(inthead);
+      // psize = packet->GetSize();
+      // NS_LOG_INFO("BulkSendApplication added IntHeader to packet with uid "<< uid << " and new size is " << psize << " from ... ");
+
+      // // verification of the header
+      // IntHeader inthead_check;
+      // assert(inthead_check.GetMode() == 0 && inthead_check.GetNEntries() == 0);
+      // packet->PeekHeader(inthead_check);
+      // assert(inthead_check.GetMode() == 49721 && inthead_check.GetNEntries() == 36085);
 
       
       SocketIpTosTag tosTag;
