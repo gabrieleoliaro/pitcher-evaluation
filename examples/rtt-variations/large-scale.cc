@@ -25,7 +25,7 @@ extern "C"
 
 static uint16_t PORT = 1000;
 
-#define PACKET_SIZE 1400
+#define PACKET_SIZE 1300
 
 using namespace ns3;
 

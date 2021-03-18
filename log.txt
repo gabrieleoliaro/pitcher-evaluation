@@ -1,9 +1,893 @@
 Waf: Entering directory `/home/cs141/Desktop/ns3-ecn-sharp/build'
-[ 267/2301] Compiling install-ns3-header: ns3/int-header.h
-[ 865/2301] Processing gen-module-header: ns3/internet-module.h
-[ 896/2301] Compiling examples/rtt-variations/large-scale.cc
-[ 898/2301] Compiling examples/rtt-variations/queue-track.cc
-[ 900/2301] Compiling examples/error-model/simple-error-model.cc
-[ 901/2301] Compiling examples/traffic-control/traffic-control.cc
+[ 965/2301] Compiling examples/rtt-variations/large-scale.cc
+[1083/2301] Compiling src/traffic-control/model/tcn-queue-disc.cc
+[2069/2301] Linking build/libns3-dev-traffic-control-debug.so
+[2077/2301] Linking build/libns3-dev-internet-debug.so
+[2088/2301] Linking build/examples/wireless/ns3-dev-wifi-simple-infra-debug
+[2089/2301] Linking build/libns3-dev-aodv-debug.so
+[2091/2301] Linking build/libns3-dev-sixlowpan-debug.so
+[2092/2301] Linking build/libns3-dev-letflow-routing-debug.so
+[2097/2301] Linking build/libns3-dev-conga-routing-debug.so
+[2098/2301] Linking build/examples/wireless/ns3-dev-wifi-simple-adhoc-debug
+[2099/2301] Linking build/libns3-dev-point-to-point-layout-debug.so
+[2100/2301] Linking build/examples/wireless/ns3-dev-wifi-simple-interference-debug
+[2101/2301] Linking build/libns3-dev-mesh-debug.so
+[2102/2301] Linking build/libns3-dev-drb-routing-debug.so
+[2103/2301] Linking build/libns3-dev-drill-routing-debug.so
+[2104/2301] Linking build/libns3-dev-link-monitor-debug.so
+[2105/2301] Linking build/libns3-dev-dsr-debug.so
+[2106/2301] Linking build/libns3-dev-csma-layout-debug.so
+[2107/2301] Linking build/libns3-dev-xpath-routing-debug.so
+[2108/2301] Linking build/examples/stats/ns3-dev-wifi-example-sim-debug
+[2109/2301] Linking build/libns3-dev-dsdv-debug.so
+[2110/2301] Linking build/libns3-dev-flow-monitor-debug.so
+[2111/2301] Linking build/libns3-dev-wave-debug.so
+[2112/2301] Linking build/libns3-dev-wimax-debug.so
+[2113/2301] Linking build/examples/wireless/ns3-dev-wifi-clear-channel-cmu-debug
+[2114/2301] Linking build/libns3-dev-tap-bridge-debug.so
+[2115/2301] Linking build/libns3-dev-applications-debug.so
+[2116/2301] Linking build/examples/ipv6/ns3-dev-test-ipv6-debug
+[2118/2301] Linking build/examples/socket/ns3-dev-socket-bound-static-routing-debug
+[2118/2301] Linking build/examples/socket/ns3-dev-socket-options-ipv6-debug
+[2119/2301] Linking build/libns3-dev-internet-apps-debug.so
+[2120/2301] Linking build/libns3-dev-olsr-debug.so
+[2121/2301] Linking build/examples/energy/ns3-dev-energy-model-example-debug
+[2122/2301] Linking build/libns3-dev-nix-vector-routing-debug.so
+[2123/2301] Linking build/examples/energy/ns3-dev-energy-model-with-harvesting-example-debug
+[2124/2301] Linking build/examples/socket/ns3-dev-socket-options-ipv4-debug
+[2125/2301] Linking build/src/letflow-routing/examples/ns3-dev-letflow-routing-example-debug
+[2126/2301] Linking build/src/conga-routing/examples/ns3-dev-ipv4-conga-routing-example-debug
+[2127/2301] Linking build/src/link-monitor/examples/ns3-dev-link-monitor-example-debug
+[2128/2301] Linking build/src/drb-routing/examples/ns3-dev-drb-routing-example-debug
+[2129/2301] Linking build/src/drill-routing/examples/ns3-dev-drill-routing-example-debug
+[2130/2301] Linking build/libns3-dev-tlb-probing-debug.so
+[2131/2301] Linking build/src/xpath-routing/examples/ns3-dev-xpath-routing-example-debug
+[2132/2301] Linking build/libns3-dev-congestion-probing-debug.so
+[2133/2301] Linking build/src/tap-bridge/examples/ns3-dev-tap-csma-debug
+[2134/2301] Linking build/src/tap-bridge/examples/ns3-dev-tap-wifi-virtual-machine-debug
+[2135/2301] Linking build/src/tap-bridge/examples/ns3-dev-tap-csma-virtual-machine-debug
+[2136/2301] Linking build/examples/tutorial/ns3-dev-sixth-debug
+[2137/2301] Linking build/src/traffic-control/examples/ns3-dev-adaptive-red-tests-debug
+[2138/2301] Linking build/examples/wireless/ns3-dev-ht-wifi-network-debug
+[2139/2301] Linking build/src/wave/examples/ns3-dev-wave-simple-device-debug
+[2140/2301] Linking build/src/bridge/examples/ns3-dev-csma-bridge-one-hop-debug
+[2141/2301] Linking build/examples/tutorial/ns3-dev-fifth-debug
+[2142/2301] Linking build/src/traffic-control/examples/ns3-dev-red-tests-debug
+[2143/2301] Linking build/examples/tcp/ns3-dev-tcp-nsc-comparison-debug
+[2144/2301] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-debug
+[2145/2301] Linking build/examples/realtime/ns3-dev-realtime-udp-echo-debug
+[2146/2301] Linking build/examples/routing/ns3-dev-simple-global-routing-debug
+[2147/2301] Linking build/examples/rtt-variations/ns3-dev-mq-debug
+[2149/2301] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-matrix-propagation-loss-model-debug
+[2149/2301] Linking build/src/traffic-control/examples/ns3-dev-pfifo-vs-red-debug
+[2150/2301] Linking build/examples/routing/ns3-dev-mixed-global-routing-debug
+[2151/2301] Linking build/examples/tcp/ns3-dev-tcp-nsc-zoo-debug
+[2152/2301] Linking build/src/traffic-control/examples/ns3-dev-red-vs-ared-debug
+[2153/2301] Linking build/examples/wireless/ns3-dev-power-adaptation-interference-debug
+[2154/2301] Linking build/examples/udp-client-server/ns3-dev-udp-trace-client-server-debug
+[2155/2301] Linking build/src/fd-net-device/examples/ns3-dev-realtime-fd2fd-onoff-debug
+[2156/2301] Linking build/examples/wireless/ns3-dev-wifi-wired-bridging-debug
+[2157/2301] Linking build/examples/rtt-variations/ns3-dev-large-scale-debug
+[2158/2301] Linking build/src/uan/examples/ns3-dev-uan-rc-example-debug
+[2159/2301] Linking build/examples/routing/ns3-dev-static-routing-slash32-debug
+[2160/2301] Linking build/examples/tutorial/ns3-dev-seventh-debug
+[2161/2301] Linking build/libns3-dev-lte-debug.so
+[2162/2301] Linking build/examples/routing/ns3-dev-global-injection-slash32-debug
+[2163/2301] Linking build/src/mpi/examples/ns3-dev-third-distributed-debug
+[2164/2301] Linking build/examples/tutorial/ns3-dev-first-debug
+[2165/2301] Linking build/examples/rtt-variations/ns3-dev-queue-track-debug
+[2166/2301] Linking build/examples/wireless/ns3-dev-power-adaptation-distance-debug
+[2167/2301] Linking build/src/aodv/examples/ns3-dev-aodv-debug
+[2168/2301] Linking build/src/csma/examples/ns3-dev-csma-raw-ip-socket-debug
+[2169/2301] Linking build/src/traffic-control/examples/ns3-dev-codel-vs-pfifo-basic-test-debug
+[2170/2301] Linking build/examples/routing/ns3-dev-dynamic-global-routing-debug
+[2171/2301] Linking build/examples/wireless/ns3-dev-mixed-bg-network-debug
+[2172/2301] Linking build/src/mpi/examples/ns3-dev-simple-distributed-debug
+[2173/2301] Linking build/src/mpi/examples/ns3-dev-nms-p2p-nix-distributed-debug
+[2174/2301] Linking build/examples/wireless/ns3-dev-wifi-aggregation-debug
+[2175/2301] Linking build/examples/ipv6/ns3-dev-ping6-debug
+[2176/2301] Linking build/examples/naming/ns3-dev-object-names-debug
+[2177/2301] Linking build/examples/wireless/ns3-dev-wifi-timing-attributes-debug
+[2178/2301] Linking build/src/csma/examples/ns3-dev-csma-packet-socket-debug
+[2179/2301] Linking build/src/wimax/examples/ns3-dev-wimax-simple-debug
+[2180/2301] Linking build/examples/tcp/ns3-dev-tcp-variants-comparison-debug
+[2181/2301] Linking build/examples/wireless/ns3-dev-wifi-adhoc-debug
+[2182/2301] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-with-microwave-oven-debug
+[2183/2301] Linking build/examples/routing/ns3-dev-ripng-simple-network-debug
+[2184/2301] Linking build/examples/tcp/ns3-dev-tcp-large-transfer-debug
+[2185/2301] Linking build/src/olsr/examples/ns3-dev-simple-point-to-point-olsr-debug
+[2186/2301] Linking build/examples/ipv6/ns3-dev-radvd-two-prefix-debug
+[2187/2301] Linking build/examples/ipv6/ns3-dev-radvd-debug
+[2188/2301] Linking build/examples/wireless/ns3-dev-wifi-blockack-debug
+[2189/2301] Linking build/examples/wireless/ns3-dev-multirate-debug
+[2190/2301] Linking build/examples/wireless/ns3-dev-wifi-ap-debug
+[2191/2301] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-ping-debug
+[2192/2301] Linking build/examples/routing/ns3-dev-global-routing-slash32-debug
+[2193/2301] Linking build/src/mesh/examples/ns3-dev-mesh-debug
+[2194/2301] Linking build/src/mpi/examples/ns3-dev-simple-distributed-empty-node-debug
+[2195/2301] Linking build/src/fd-net-device/examples/ns3-dev-dummy-network-debug
+[2196/2301] Linking build/examples/udp-client-server/ns3-dev-udp-client-server-debug
+[2197/2301] Linking build/examples/wireless/ns3-dev-wifi-sleep-debug
+[2198/2301] Linking build/examples/tcp/ns3-dev-tcp-pcap-nanosec-example-debug
+[2199/2301] Linking build/examples/wireless/ns3-dev-wifi-tcp-debug
+[2200/2301] Linking build/examples/ipv6/ns3-dev-loose-routing-ipv6-debug
+[2201/2301] Linking build/examples/routing/ns3-dev-simple-routing-ping6-debug
+[2202/2301] Linking build/examples/traffic-control/ns3-dev-traffic-control-debug
+[2203/2301] Linking build/src/wimax/examples/ns3-dev-wimax-ipv4-debug
+[2204/2301] Linking build/src/bridge/examples/ns3-dev-csma-bridge-debug
+[2205/2301] Linking build/src/traffic-control/examples/ns3-dev-codel-vs-pfifo-asymmetric-debug
+[2206/2301] Linking build/src/wave/examples/ns3-dev-wave-simple-80211p-debug
+[2207/2301] Linking build/src/dsr/examples/ns3-dev-dsr-debug
+[2208/2301] Linking build/src/topology-read/examples/ns3-dev-topology-example-sim-debug
+[2209/2301] Linking build/src/csma/examples/ns3-dev-csma-ping-debug
+[2210/2301] Linking build/src/csma/examples/ns3-dev-csma-one-subnet-debug
+[2211/2301] Linking build/src/olsr/examples/ns3-dev-olsr-hna-debug
+[2212/2301] Linking build/examples/routing/ns3-dev-per-flow-ecmp-routing-debug
+[2213/2301] Linking build/examples/wireless/ns3-dev-wifi-hidden-terminal-debug
+[2214/2301] Linking build/examples/tcp/ns3-dev-tcp-nsc-lfn-debug
+[2215/2301] Linking build/examples/routing/ns3-dev-rip-simple-network-debug
+[2216/2301] Linking build/examples/tcp/ns3-dev-tcp-star-server-debug
+[2217/2301] Linking build/examples/ipv6/ns3-dev-icmpv6-redirect-debug
+[2218/2301] Linking build/examples/ipv6/ns3-dev-wsn-ping6-debug
+[2219/2301] Linking build/src/nix-vector-routing/examples/ns3-dev-nms-p2p-nix-debug
+[2220/2301] Linking build/examples/wireless/ns3-dev-80211n-mimo-debug
+[2221/2301] Linking build/examples/ipv6/ns3-dev-fragmentation-ipv6-two-MTU-debug
+[2222/2301] Linking build/examples/routing/ns3-dev-simple-alternate-routing-debug
+[2223/2301] Linking build/src/tap-bridge/examples/ns3-dev-tap-wifi-dumbbell-debug
+[2224/2301] Linking build/src/fd-net-device/examples/ns3-dev-realtime-dummy-network-debug
+[2225/2301] Linking build/src/fd-net-device/examples/ns3-dev-fd2fd-onoff-debug
+[2226/2301] Linking build/examples/wireless/ns3-dev-vht-wifi-network-debug
+[2227/2301] Linking build/src/csma/examples/ns3-dev-csma-broadcast-debug
+[2228/2301] Linking build/examples/routing/ns3-dev-global-routing-multi-switch-plus-router-debug
+[2229/2301] Linking build/src/virtual-net-device/examples/ns3-dev-virtual-net-device-debug
+[2230/2301] Linking build/src/uan/examples/ns3-dev-uan-cw-example-debug
+[2231/2301] Linking build/src/internet/examples/ns3-dev-main-simple-debug
+[2232/2301] Linking build/examples/wireless/ns3-dev-rate-adaptation-distance-debug
+[2233/2301] Linking build/src/wimax/examples/ns3-dev-wimax-multicast-debug
+[2234/2301] Linking build/examples/socket/ns3-dev-socket-bound-tcp-static-routing-debug
+[2235/2301] Linking build/src/csma/examples/ns3-dev-csma-multicast-debug
+[2236/2301] Linking build/src/dsdv/examples/ns3-dev-dsdv-manet-debug
+[2237/2301] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-udp-echo-debug
+[2238/2301] Linking build/src/tlb-probing/examples/ns3-dev-tlb-probing-example-debug
+[2239/2301] Linking build/examples/tcp/ns3-dev-tcp-bulk-send-debug
+[2240/2301] Linking build/src/csma-layout/examples/ns3-dev-csma-star-debug
+[2241/2301] Linking build/examples/tutorial/ns3-dev-third-debug
+[2242/2301] Linking build/examples/wireless/ns3-dev-simple-ht-hidden-stations-debug
+[2243/2301] Linking build/examples/error-model/ns3-dev-simple-error-model-debug
+[2244/2301] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-onoff-debug
+[2245/2301] Linking build/src/sixlowpan/examples/ns3-dev-example-sixlowpan-debug
+[2246/2301] Linking build/examples/udp/ns3-dev-udp-echo-debug
+[2247/2301] Linking build/src/wave/examples/ns3-dev-vanet-routing-compare-debug
+[2248/2301] Linking build/examples/tutorial/ns3-dev-second-debug
+[2249/2301] Linking build/examples/routing/ns3-dev-drb-routing-debug
+[2250/2301] Linking build/src/lte/examples/ns3-dev-lena-fading-debug
+[2251/2301] Linking build/src/lte/examples/ns3-dev-lena-frequency-reuse-debug
+[2252/2301] Linking build/src/lte/examples/ns3-dev-lena-pathloss-traces-debug
+[2253/2301] Linking build/src/lte/examples/ns3-dev-lena-rem-sector-antenna-debug
+[2254/2301] Linking build/src/lte/examples/ns3-dev-lena-simple-epc-debug
+[2255/2301] Linking build/src/lte/examples/ns3-dev-lena-rem-debug
+[2256/2301] Linking build/src/lte/examples/ns3-dev-lena-x2-handover-debug
+[2257/2301] Linking build/src/nix-vector-routing/examples/ns3-dev-nix-simple-debug
+[2258/2301] Linking build/src/lte/examples/ns3-dev-lena-cqi-threshold-debug
+[2259/2301] Linking build/src/fd-net-device/examples/ns3-dev-fd-tap-ping-debug
+[2260/2301] Linking build/examples/ipv6/ns3-dev-fragmentation-ipv6-debug
+[2261/2301] Linking build/libns3-dev-netanim-debug.so
+[2262/2301] Linking build/src/sixlowpan/examples/ns3-dev-example-ping-lr-wpan-debug
+[2263/2301] Linking build/src/lte/examples/ns3-dev-lena-deactivate-bearer-debug
+[2264/2301] Linking build/src/fd-net-device/examples/ns3-dev-fd-tap-ping6-debug
+[2265/2301] Linking build/src/lte/examples/ns3-dev-lena-uplink-power-control-debug
+[2266/2301] Linking build/src/lte/examples/ns3-dev-lena-distributed-ffr-debug
+[2267/2301] Linking build/examples/wireless/ns3-dev-wifi-simple-adhoc-grid-debug
+[2268/2301] Linking build/examples/routing/ns3-dev-manet-routing-compare-debug
+[2269/2301] Linking build/src/congestion-probing/examples/ns3-dev-congestion-probing-example-debug
+[2270/2301] Linking build/src/lte/examples/ns3-dev-lena-x2-handover-measures-debug
+[2271/2301] Linking build/src/lte/examples/ns3-dev-lena-rlc-traces-debug
+[2272/2301] Linking build/libns3-dev-test-debug.so
+[2273/2301] Linking build/src/lte/examples/ns3-dev-lena-dual-stripe-debug
+[2275/2301] Linking build/src/lte/examples/ns3-dev-lena-profiling-debug
+[2275/2301] Linking build/src/lte/examples/ns3-dev-lena-intercell-interference-debug
+[2276/2301] Linking build/src/lte/examples/ns3-dev-lena-simple-debug
+[2277/2301] Linking build/examples/wireless/ns3-dev-mixed-wireless-debug
+[2278/2301] Linking build/examples/matrix-topology/ns3-dev-matrix-topology-debug
+[2279/2301] Linking build/examples/tcp/ns3-dev-star-debug
+[2280/2301] Linking build/src/netanim/examples/ns3-dev-resources-counters-debug
+[2281/2301] Linking build/src/netanim/examples/ns3-dev-colors-link-description-debug
+[2282/2301] Linking build/src/netanim/examples/ns3-dev-wireless-animation-debug
+[2283/2301] Linking build/src/netanim/examples/ns3-dev-star-animation-debug
+[2284/2301] Linking build/src/netanim/examples/ns3-dev-grid-animation-debug
+[2285/2301] Linking build/src/netanim/examples/ns3-dev-dumbbell-animation-debug
+[2286/2301] Linking build/src/netanim/examples/ns3-dev-uan-animation-debug
+[2287/2301] Linking build/utils/ns3-dev-test-runner-debug
+[2288/2301] Linking build/utils/ns3-dev-print-introspected-doxygen-debug
+[2289/2301] Linking build/scratch/subdir/subdir
+[2290/2301] Linking build/scratch/scratch-simulator
 Waf: Leaving directory `/home/cs141/Desktop/ns3-ecn-sharp/build'
-Interrupted 
+Build commands will be stored in build/compile_commands.json
+'build' finished successfully (38.873s)
+Enabling DcTcp
+Config parameters
+Install Internet stacks
+Install channels and assign addresses
+Configuring servers
+Leaf - 0 is connected to Server - 0 with address 10.1.1.1 <-> 10.1.1.2 with port 1 <-> 1
+Leaf - 0 is connected to Server - 1 with address 10.1.1.3 <-> 10.1.1.4 with port 2 <-> 1
+Leaf - 0 is connected to Server - 2 with address 10.1.1.5 <-> 10.1.1.6 with port 3 <-> 1
+Leaf - 0 is connected to Server - 3 with address 10.1.1.7 <-> 10.1.1.8 with port 4 <-> 1
+Leaf - 1 is connected to Server - 0 with address 10.1.2.1 <-> 10.1.2.2 with port 1 <-> 1
+Leaf - 1 is connected to Server - 1 with address 10.1.2.3 <-> 10.1.2.4 with port 2 <-> 1
+Leaf - 1 is connected to Server - 2 with address 10.1.2.5 <-> 10.1.2.6 with port 3 <-> 1
+Leaf - 1 is connected to Server - 3 with address 10.1.2.7 <-> 10.1.2.8 with port 4 <-> 1
+Leaf - 2 is connected to Server - 0 with address 10.1.3.1 <-> 10.1.3.2 with port 1 <-> 1
+Leaf - 2 is connected to Server - 1 with address 10.1.3.3 <-> 10.1.3.4 with port 2 <-> 1
+Leaf - 2 is connected to Server - 2 with address 10.1.3.5 <-> 10.1.3.6 with port 3 <-> 1
+Leaf - 2 is connected to Server - 3 with address 10.1.3.7 <-> 10.1.3.8 with port 4 <-> 1
+Leaf - 3 is connected to Server - 0 with address 10.1.4.1 <-> 10.1.4.2 with port 1 <-> 1
+Leaf - 3 is connected to Server - 1 with address 10.1.4.3 <-> 10.1.4.4 with port 2 <-> 1
+Leaf - 3 is connected to Server - 2 with address 10.1.4.5 <-> 10.1.4.6 with port 3 <-> 1
+Leaf - 3 is connected to Server - 3 with address 10.1.4.7 <-> 10.1.4.8 with port 4 <-> 1
+Leaf - 4 is connected to Server - 0 with address 10.1.5.1 <-> 10.1.5.2 with port 1 <-> 1
+Leaf - 4 is connected to Server - 1 with address 10.1.5.3 <-> 10.1.5.4 with port 2 <-> 1
+Leaf - 4 is connected to Server - 2 with address 10.1.5.5 <-> 10.1.5.6 with port 3 <-> 1
+Leaf - 4 is connected to Server - 3 with address 10.1.5.7 <-> 10.1.5.8 with port 4 <-> 1
+Configuring switches
+Leaf - 0 is connected to Spine - 0 with address 10.1.6.1 <-> 10.1.6.2 with port 5 <-> 1 with data rate 40
+Leaf - 0 is connected to Spine - 1 with address 10.1.7.1 <-> 10.1.7.2 with port 6 <-> 1 with data rate 40
+Leaf - 0 is connected to Spine - 2 with address 10.1.8.1 <-> 10.1.8.2 with port 7 <-> 1 with data rate 40
+Leaf - 0 is connected to Spine - 3 with address 10.1.9.1 <-> 10.1.9.2 with port 8 <-> 1 with data rate 40
+Leaf - 1 is connected to Spine - 0 with address 10.1.10.1 <-> 10.1.10.2 with port 5 <-> 2 with data rate 40
+Leaf - 1 is connected to Spine - 1 with address 10.1.11.1 <-> 10.1.11.2 with port 6 <-> 2 with data rate 40
+Leaf - 1 is connected to Spine - 2 with address 10.1.12.1 <-> 10.1.12.2 with port 7 <-> 2 with data rate 40
+Leaf - 1 is connected to Spine - 3 with address 10.1.13.1 <-> 10.1.13.2 with port 8 <-> 2 with data rate 40
+Leaf - 2 is connected to Spine - 0 with address 10.1.14.1 <-> 10.1.14.2 with port 5 <-> 3 with data rate 40
+Leaf - 2 is connected to Spine - 1 with address 10.1.15.1 <-> 10.1.15.2 with port 6 <-> 3 with data rate 40
+Leaf - 2 is connected to Spine - 2 with address 10.1.16.1 <-> 10.1.16.2 with port 7 <-> 3 with data rate 40
+Leaf - 2 is connected to Spine - 3 with address 10.1.17.1 <-> 10.1.17.2 with port 8 <-> 3 with data rate 40
+Leaf - 3 is connected to Spine - 0 with address 10.1.18.1 <-> 10.1.18.2 with port 5 <-> 4 with data rate 40
+Leaf - 3 is connected to Spine - 1 with address 10.1.19.1 <-> 10.1.19.2 with port 6 <-> 4 with data rate 40
+Leaf - 3 is connected to Spine - 2 with address 10.1.20.1 <-> 10.1.20.2 with port 7 <-> 4 with data rate 40
+Leaf - 3 is connected to Spine - 3 with address 10.1.21.1 <-> 10.1.21.2 with port 8 <-> 4 with data rate 40
+Leaf - 4 is connected to Spine - 0 with address 10.1.22.1 <-> 10.1.22.2 with port 5 <-> 5 with data rate 40
+Leaf - 4 is connected to Spine - 1 with address 10.1.23.1 <-> 10.1.23.2 with port 6 <-> 5 with data rate 40
+Leaf - 4 is connected to Spine - 2 with address 10.1.24.1 <-> 10.1.24.2 with port 7 <-> 5 with data rate 40
+Leaf - 4 is connected to Spine - 3 with address 10.1.25.1 <-> 10.1.25.2 with port 8 <-> 5 with data rate 40
+Populate global routing tables
+Over-subscription ratio: 0.25
+Initialize CDF table
+Calculating request rate
+Average request rate: 730.46 per second
+Initialize random seed: 233
+Create applications
+Install applications:
+Install applications:
+Install applications:
+Install applications:
+Install applications:
+Total flow: 2940
+Actual average flow size: 1300
+Enabling flow monitor
+Start simulation
+Packet with uid 0 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdd8fc0
+	Packet with uid 0 and size 36 enqueued at 0xdd8fc0
+	Packet with 0 and size 36 dequeued at 0xdd8fc0
+Packet with uid 1 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2484) at interface 0xde68e0
+	Packet with uid 1 and size 36 enqueued at 0xde68e0
+	Packet with 1 and size 36 dequeued at 0xde68e0
+Packet with uid 0 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbedc0
+	Packet with uid 0 and size 36 enqueued at 0xdbedc0
+	Packet with 0 and size 36 dequeued at 0xdbedc0
+Packet with uid 1 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2484) at interface 0xdc1440
+	Packet with uid 1 and size 36 enqueued at 0xdc1440
+	Packet with 1 and size 36 dequeued at 0xdc1440
+Packet with uid 0 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbb110
+	Packet with uid 0 and size 36 enqueued at 0xdbb110
+	Packet with 0 and size 36 dequeued at 0xdbb110
+Packet with uid 1 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2484) at interface 0xdbcb80
+	Packet with uid 1 and size 36 enqueued at 0xdbcb80
+	Packet with 1 and size 36 dequeued at 0xdbcb80
+Packet with uid 2 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdf77c0
+	Packet with uid 2 and size 36 enqueued at 0xdf77c0
+	Packet with 2 and size 36 dequeued at 0xdf77c0
+Packet with uid 2 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdc1080
+	Packet with uid 2 and size 36 enqueued at 0xdc1080
+	Packet with 2 and size 36 dequeued at 0xdc1080
+Packet with uid 2 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdbc450
+	Packet with uid 2 and size 36 enqueued at 0xdbc450
+	Packet with 2 and size 36 dequeued at 0xdbc450
+Packet with uid 3 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdd98f0
+	Packet with uid 3 and size 36 enqueued at 0xdd98f0
+	Packet with 3 and size 36 dequeued at 0xdd98f0
+Packet with uid 3 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdc04c0
+	Packet with uid 3 and size 36 enqueued at 0xdc04c0
+	Packet with 3 and size 36 dequeued at 0xdc04c0
+Packet with uid 4 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdf77c0
+	Packet with uid 4 and size 36 enqueued at 0xdf77c0
+	Packet with 4 and size 36 dequeued at 0xdf77c0
+Packet with uid 5 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 3659) at interface 0xe67280
+	Packet with uid 5 and size 36 enqueued at 0xe67280
+	Packet with 5 and size 36 dequeued at 0xe67280
+Packet with uid 3 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdbc7c0
+	Packet with uid 3 and size 36 enqueued at 0xdbc7c0
+	Packet with 3 and size 36 dequeued at 0xdbc7c0
+Packet with uid 4 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdc1800
+	Packet with uid 4 and size 36 enqueued at 0xdc1800
+	Packet with 4 and size 36 dequeued at 0xdc1800
+Packet with uid 5 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 3659) at interface 0xdc3340
+	Packet with uid 5 and size 36 enqueued at 0xdc3340
+	Packet with 5 and size 36 dequeued at 0xdc3340
+Packet with uid 4 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdbe5c0
+	Packet with uid 4 and size 36 enqueued at 0xdbe5c0
+	Packet with 4 and size 36 dequeued at 0xdbe5c0
+Packet with uid 5 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 3659) at interface 0xdbcb80
+	Packet with uid 5 and size 36 enqueued at 0xdbcb80
+	Packet with 5 and size 36 dequeued at 0xdbcb80
+Packet with uid 6 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdd98f0
+	Packet with uid 6 and size 36 enqueued at 0xdd98f0
+	Packet with 6 and size 36 dequeued at 0xdd98f0
+Packet with uid 6 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbfd40
+	Packet with uid 6 and size 36 enqueued at 0xdbfd40
+	Packet with 6 and size 36 dequeued at 0xdbfd40
+Packet with uid 6 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbb270
+	Packet with uid 6 and size 36 enqueued at 0xdbb270
+	Packet with 6 and size 36 dequeued at 0xdbb270
+Packet with uid 7 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 3800) at interface 0xe76e20
+	Packet with uid 7 and size 36 enqueued at 0xe76e20
+	Packet with 7 and size 36 dequeued at 0xe76e20
+Packet with uid 7 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 3800) at interface 0xdc2bc0
+	Packet with uid 7 and size 36 enqueued at 0xdc2bc0
+	Packet with 7 and size 36 dequeued at 0xdc2bc0
+Packet with uid 7 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 3800) at interface 0xdbb3d0
+	Packet with uid 7 and size 36 enqueued at 0xdbb3d0
+	Packet with 7 and size 36 dequeued at 0xdbb3d0
+Packet with uid 8 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdd98f0
+	Packet with uid 8 and size 36 enqueued at 0xdd98f0
+	Packet with 8 and size 36 dequeued at 0xdd98f0
+Packet with uid 8 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdc04c0
+	Packet with uid 8 and size 36 enqueued at 0xdc04c0
+	Packet with 8 and size 36 dequeued at 0xdc04c0
+Packet with uid 8 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdbcf40
+	Packet with uid 8 and size 36 enqueued at 0xdbcf40
+	Packet with 8 and size 36 dequeued at 0xdbcf40
+Packet with uid 9 and size 36 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xde68e0
+	Packet with uid 9 and size 36 enqueued at 0xde68e0
+	Packet with 9 and size 36 dequeued at 0xde68e0
+Packet with uid 9 and size 36 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xdc1800
+	Packet with uid 9 and size 36 enqueued at 0xdc1800
+	Packet with 9 and size 36 dequeued at 0xdc1800
+Packet with uid 9 and size 36 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xdbde40
+	Packet with uid 9 and size 36 enqueued at 0xdbde40
+	Packet with 9 and size 36 dequeued at 0xdbde40
+Packet with uid 10 and size 36 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdd98f0
+	Packet with uid 10 and size 36 enqueued at 0xdd98f0
+	Packet with 10 and size 36 dequeued at 0xdd98f0
+Packet with uid 11 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 3660) at interface 0xe67280
+	Packet with uid 11 and size 36 enqueued at 0xe67280
+	Packet with 11 and size 36 dequeued at 0xe67280
+Packet with uid 10 and size 36 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdc0100
+	Packet with uid 10 and size 36 enqueued at 0xdc0100
+	Packet with 10 and size 36 dequeued at 0xdc0100
+Packet with uid 11 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 3660) at interface 0xdc3340
+	Packet with uid 11 and size 36 enqueued at 0xdc3340
+	Packet with 11 and size 36 dequeued at 0xdc3340
+Packet with uid 10 and size 36 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdbb690
+	Packet with uid 10 and size 36 enqueued at 0xdbb690
+	Packet with 10 and size 36 dequeued at 0xdbb690
+Packet with uid 11 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 3660) at interface 0xdbcf40
+	Packet with uid 11 and size 36 enqueued at 0xdbcf40
+	Packet with 11 and size 36 dequeued at 0xdbcf40
+Packet with uid 12 and size 36 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdd8fc0
+	Packet with uid 12 and size 36 enqueued at 0xdd8fc0
+	Packet with 12 and size 36 dequeued at 0xdd8fc0
+Packet with uid 12 and size 36 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdbf900
+	Packet with uid 12 and size 36 enqueued at 0xdbf900
+	Packet with 12 and size 36 dequeued at 0xdbf900
+Packet with uid 12 and size 36 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdbde40
+	Packet with uid 12 and size 36 enqueued at 0xdbde40
+	Packet with 12 and size 36 dequeued at 0xdbde40
+Packet with uid 13 and size 32 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdd98f0
+	Packet with uid 13 and size 32 enqueued at 0xdd98f0
+	Packet with 13 and size 32 dequeued at 0xdd98f0
+BulkSendApplication sending packet with uid 14 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 14 and new size is 1304 from ... 
+Packet with uid 14 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdd98f0
+	Packet with uid 14 and size 1332 enqueued at 0xdd98f0
+	Packet with 14 and size 1332 dequeued at 0xdd98f0
+Packet with uid 14 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdd98f0
+	Packet with uid 14 and size 36 enqueued at 0xdd98f0
+	Packet with 14 and size 36 dequeued at 0xdd98f0
+Packet with uid 13 and size 32 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbfd40
+	Packet with uid 13 and size 32 enqueued at 0xdbfd40
+	Packet with 13 and size 32 dequeued at 0xdbfd40
+Packet with uid 14 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbfd40
+	Packet with uid 14 and size 1332 enqueued at 0xdbfd40
+	Packet with 14 and size 1332 dequeued at 0xdbfd40
+Packet with uid 14 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbfd40
+	Packet with uid 14 and size 36 enqueued at 0xdbfd40
+	Packet with 14 and size 36 dequeued at 0xdbfd40
+Packet with uid 13 and size 32 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbb270
+	Packet with uid 13 and size 32 enqueued at 0xdbb270
+	Packet with 13 and size 32 dequeued at 0xdbb270
+Packet with uid 14 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbb270
+	Packet with uid 14 and size 1332 enqueued at 0xdbb270
+	Packet with 14 and size 1332 dequeued at 0xdbb270
+Packet with uid 14 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 1727) at interface 0xdbb270
+	Packet with uid 14 and size 36 enqueued at 0xdbb270
+	Packet with 14 and size 36 dequeued at 0xdbb270
+Packet with uid 15 and size 36 did NOT have IntHeader of size 4 and contents: ( 1728, 49155) at interface 0xde68e0
+	Packet with uid 15 and size 36 enqueued at 0xde68e0
+	Packet with 15 and size 36 dequeued at 0xde68e0
+Packet with uid 15 and size 36 did NOT have IntHeader of size 4 and contents: ( 1728, 49155) at interface 0xdc1080
+	Packet with uid 15 and size 36 enqueued at 0xdc1080
+	Packet with 15 and size 36 dequeued at 0xdc1080
+Packet with uid 15 and size 36 did NOT have IntHeader of size 4 and contents: ( 1728, 49155) at interface 0xdbba00
+	Packet with uid 15 and size 36 enqueued at 0xdbba00
+	Packet with 15 and size 36 dequeued at 0xdbba00
+Packet with uid 16 and size 36 did NOT have IntHeader of size 4 and contents: ( 49156, 1729) at interface 0xdd98f0
+	Packet with uid 16 and size 36 enqueued at 0xdd98f0
+	Packet with 16 and size 36 dequeued at 0xdd98f0
+Packet with uid 17 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 3661) at interface 0xe67280
+	Packet with uid 17 and size 36 enqueued at 0xe67280
+	Packet with 17 and size 36 dequeued at 0xe67280
+Packet with uid 16 and size 36 did NOT have IntHeader of size 4 and contents: ( 49156, 1729) at interface 0xdbfd40
+	Packet with uid 16 and size 36 enqueued at 0xdbfd40
+	Packet with 16 and size 36 dequeued at 0xdbfd40
+Packet with uid 18 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdd98f0
+	Packet with uid 18 and size 32 enqueued at 0xdd98f0
+	Packet with 18 and size 32 dequeued at 0xdd98f0
+BulkSendApplication sending packet with uid 19 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 19 and new size is 1304 from ... 
+Packet with uid 19 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdd98f0
+	Packet with uid 19 and size 1332 enqueued at 0xdd98f0
+	Packet with 19 and size 1332 dequeued at 0xdd98f0
+Packet with uid 19 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdd98f0
+	Packet with uid 19 and size 36 enqueued at 0xdd98f0
+	Packet with 19 and size 36 dequeued at 0xdd98f0
+Packet with uid 16 and size 36 did NOT have IntHeader of size 4 and contents: ( 49156, 1729) at interface 0xdbb3d0
+	Packet with uid 16 and size 36 enqueued at 0xdbb3d0
+	Packet with 16 and size 36 dequeued at 0xdbb3d0
+Packet with uid 17 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 3661) at interface 0xdc2f80
+	Packet with uid 17 and size 36 enqueued at 0xdc2f80
+	Packet with 17 and size 36 dequeued at 0xdc2f80
+Packet with uid 18 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdc04c0
+	Packet with uid 18 and size 32 enqueued at 0xdc04c0
+	Packet with 18 and size 32 dequeued at 0xdc04c0
+Packet with uid 19 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdc04c0
+	Packet with uid 19 and size 1332 enqueued at 0xdc04c0
+	Packet with 19 and size 1332 dequeued at 0xdc04c0
+Packet with uid 19 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdc04c0
+	Packet with uid 19 and size 36 enqueued at 0xdc04c0
+	Packet with 19 and size 36 dequeued at 0xdc04c0
+Packet with uid 17 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 3661) at interface 0xdbb690
+	Packet with uid 17 and size 36 enqueued at 0xdbb690
+	Packet with 17 and size 36 dequeued at 0xdbb690
+Packet with uid 18 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdbc7c0
+	Packet with uid 18 and size 32 enqueued at 0xdbc7c0
+	Packet with 18 and size 32 dequeued at 0xdbc7c0
+Packet with uid 19 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdbc7c0
+	Packet with uid 19 and size 1332 enqueued at 0xdbc7c0
+	Packet with 19 and size 1332 dequeued at 0xdbc7c0
+Packet with uid 19 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1726) at interface 0xdbc7c0
+	Packet with uid 19 and size 36 enqueued at 0xdbc7c0
+	Packet with 19 and size 36 dequeued at 0xdbc7c0
+Packet with uid 20 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdd8fc0
+	Packet with uid 20 and size 32 enqueued at 0xdd8fc0
+	Packet with 20 and size 32 dequeued at 0xdd8fc0
+BulkSendApplication sending packet with uid 21 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 21 and new size is 1304 from ... 
+Packet with uid 21 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdd8fc0
+	Packet with uid 21 and size 1332 enqueued at 0xdd8fc0
+	Packet with 21 and size 1332 dequeued at 0xdd8fc0
+Packet with uid 21 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdd8fc0
+	Packet with uid 21 and size 36 enqueued at 0xdd8fc0
+	Packet with 21 and size 36 dequeued at 0xdd8fc0
+Packet with uid 20 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbedc0
+	Packet with uid 20 and size 32 enqueued at 0xdbedc0
+	Packet with 20 and size 32 dequeued at 0xdbedc0
+Packet with uid 21 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbedc0
+	Packet with uid 21 and size 1332 enqueued at 0xdbedc0
+	Packet with 21 and size 1332 dequeued at 0xdbedc0
+Packet with uid 21 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbedc0
+	Packet with uid 21 and size 36 enqueued at 0xdbedc0
+	Packet with 21 and size 36 dequeued at 0xdbedc0
+Packet with uid 20 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbb110
+	Packet with uid 20 and size 32 enqueued at 0xdbb110
+	Packet with 20 and size 32 dequeued at 0xdbb110
+Packet with uid 21 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbb110
+	Packet with uid 21 and size 1332 enqueued at 0xdbb110
+	Packet with 21 and size 1332 dequeued at 0xdbb110
+Packet with uid 21 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1277) at interface 0xdbb110
+	Packet with uid 21 and size 36 enqueued at 0xdbb110
+	Packet with 21 and size 36 dequeued at 0xdbb110
+Packet with uid 22 and size 36 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdd98f0
+	Packet with uid 22 and size 36 enqueued at 0xdd98f0
+	Packet with 22 and size 36 dequeued at 0xdd98f0
+Packet with uid 22 and size 36 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdc0100
+	Packet with uid 22 and size 36 enqueued at 0xdc0100
+	Packet with 22 and size 36 dequeued at 0xdc0100
+Packet with uid 23 and size 32 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdd98f0
+	Packet with uid 23 and size 32 enqueued at 0xdd98f0
+	Packet with 23 and size 32 dequeued at 0xdd98f0
+BulkSendApplication sending packet with uid 24 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 24 and new size is 1304 from ... 
+Packet with uid 24 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdd98f0
+	Packet with uid 24 and size 1332 enqueued at 0xdd98f0
+	Packet with 24 and size 1332 dequeued at 0xdd98f0
+Packet with uid 24 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdd98f0
+	Packet with uid 24 and size 36 enqueued at 0xdd98f0
+	Packet with 24 and size 36 dequeued at 0xdd98f0
+Packet with uid 22 and size 36 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdbb690
+	Packet with uid 22 and size 36 enqueued at 0xdbb690
+	Packet with 22 and size 36 dequeued at 0xdbb690
+Packet with uid 23 and size 32 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdc04c0
+	Packet with uid 23 and size 32 enqueued at 0xdc04c0
+	Packet with 23 and size 32 dequeued at 0xdc04c0
+Packet with uid 24 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdc04c0
+	Packet with uid 24 and size 1332 enqueued at 0xdc04c0
+	Packet with 24 and size 1332 dequeued at 0xdc04c0
+Packet with uid 24 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdc04c0
+	Packet with uid 24 and size 36 enqueued at 0xdc04c0
+	Packet with 24 and size 36 dequeued at 0xdc04c0
+Packet with uid 23 and size 32 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdbcf40
+	Packet with uid 23 and size 32 enqueued at 0xdbcf40
+	Packet with 23 and size 32 dequeued at 0xdbcf40
+Packet with uid 24 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdbcf40
+	Packet with uid 24 and size 1332 enqueued at 0xdbcf40
+	Packet with 24 and size 1332 dequeued at 0xdbcf40
+Packet with uid 24 and size 36 did NOT have IntHeader of size 4 and contents: ( 49155, 1728) at interface 0xdbcf40
+	Packet with uid 24 and size 36 enqueued at 0xdbcf40
+	Packet with 24 and size 36 dequeued at 0xdbcf40
+Packet with uid 25 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1142) at interface 0xdd5700
+	Packet with uid 25 and size 36 enqueued at 0xdd5700
+	Packet with 25 and size 36 dequeued at 0xdd5700
+Packet with uid 25 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1142) at interface 0xdbedc0
+	Packet with uid 25 and size 36 enqueued at 0xdbedc0
+	Packet with 25 and size 36 dequeued at 0xdbedc0
+Packet with uid 26 and size 32 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xde68e0
+	Packet with uid 26 and size 32 enqueued at 0xde68e0
+	Packet with 26 and size 32 dequeued at 0xde68e0
+Packet with uid 28 and size 32 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xde68e0
+	Packet with uid 28 and size 32 enqueued at 0xde68e0
+	Packet with 28 and size 32 dequeued at 0xde68e0
+Packet with uid 25 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1142) at interface 0xdbb3d0
+	Packet with uid 25 and size 36 enqueued at 0xdbb3d0
+	Packet with 25 and size 36 dequeued at 0xdbb3d0
+Packet with uid 26 and size 32 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xdc1800
+	Packet with uid 26 and size 32 enqueued at 0xdc1800
+	Packet with 26 and size 32 dequeued at 0xdc1800
+Packet with uid 28 and size 32 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xdc1800
+	Packet with uid 28 and size 32 enqueued at 0xdc1800
+	Packet with 28 and size 32 dequeued at 0xdc1800
+Packet with uid 26 and size 32 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xdbde40
+	Packet with uid 26 and size 32 enqueued at 0xdbde40
+	Packet with 26 and size 32 dequeued at 0xdbde40
+Packet with uid 28 and size 32 did NOT have IntHeader of size 4 and contents: ( 1727, 49154) at interface 0xdbde40
+	Packet with uid 28 and size 32 enqueued at 0xdbde40
+	Packet with 28 and size 32 dequeued at 0xdbde40
+Packet with uid 30 and size 36 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xe26aa0
+	Packet with uid 30 and size 36 enqueued at 0xe26aa0
+	Packet with 30 and size 36 dequeued at 0xe26aa0
+Packet with uid 30 and size 36 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xdc23c0
+	Packet with uid 30 and size 36 enqueued at 0xdc23c0
+	Packet with 30 and size 36 dequeued at 0xdc23c0
+Packet with uid 31 and size 32 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdd98f0
+	Packet with uid 31 and size 32 enqueued at 0xdd98f0
+	Packet with 31 and size 32 dequeued at 0xdd98f0
+Packet with uid 33 and size 32 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdd98f0
+	Packet with uid 33 and size 32 enqueued at 0xdd98f0
+	Packet with 33 and size 32 dequeued at 0xdd98f0
+Packet with uid 30 and size 36 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xdbcf40
+	Packet with uid 30 and size 36 enqueued at 0xdbcf40
+	Packet with 30 and size 36 dequeued at 0xdbcf40
+Packet with uid 31 and size 32 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdc0100
+	Packet with uid 31 and size 32 enqueued at 0xdc0100
+	Packet with 31 and size 32 dequeued at 0xdc0100
+Packet with uid 33 and size 32 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdc0100
+	Packet with uid 33 and size 32 enqueued at 0xdc0100
+	Packet with 33 and size 32 dequeued at 0xdc0100
+Packet with uid 31 and size 32 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdbb690
+	Packet with uid 31 and size 32 enqueued at 0xdbb690
+	Packet with 31 and size 32 dequeued at 0xdbb690
+Packet with uid 33 and size 32 did NOT have IntHeader of size 4 and contents: ( 1277, 49153) at interface 0xdbb690
+	Packet with uid 33 and size 32 enqueued at 0xdbb690
+	Packet with 33 and size 32 dequeued at 0xdbb690
+Packet with uid 35 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdda530
+	Packet with uid 35 and size 36 enqueued at 0xdda530
+	Packet with 35 and size 36 dequeued at 0xdda530
+Packet with uid 36 and size 36 did NOT have IntHeader of size 4 and contents: ( 1730, 49157) at interface 0xdd8fc0
+	Packet with uid 36 and size 36 enqueued at 0xdd8fc0
+	Packet with 36 and size 36 dequeued at 0xdd8fc0
+Packet with uid 37 and size 32 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdd8fc0
+	Packet with uid 37 and size 32 enqueued at 0xdd8fc0
+	Packet with 37 and size 32 dequeued at 0xdd8fc0
+Packet with uid 39 and size 32 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdd8fc0
+	Packet with uid 39 and size 32 enqueued at 0xdd8fc0
+	Packet with 39 and size 32 dequeued at 0xdd8fc0
+Packet with uid 35 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdc1800
+	Packet with uid 35 and size 36 enqueued at 0xdc1800
+	Packet with 35 and size 36 dequeued at 0xdc1800
+Packet with uid 36 and size 36 did NOT have IntHeader of size 4 and contents: ( 1730, 49157) at interface 0xdbf180
+	Packet with uid 36 and size 36 enqueued at 0xdbf180
+	Packet with 36 and size 36 dequeued at 0xdbf180
+Packet with uid 37 and size 32 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdbf900
+	Packet with uid 37 and size 32 enqueued at 0xdbf900
+	Packet with 37 and size 32 dequeued at 0xdbf900
+Packet with uid 39 and size 32 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdbf900
+	Packet with uid 39 and size 32 enqueued at 0xdbf900
+	Packet with 39 and size 32 dequeued at 0xdbf900
+Packet with uid 35 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdbde40
+	Packet with uid 35 and size 36 enqueued at 0xdbde40
+	Packet with 35 and size 36 dequeued at 0xdbde40
+Packet with uid 36 and size 36 did NOT have IntHeader of size 4 and contents: ( 1730, 49157) at interface 0xdbba00
+	Packet with uid 36 and size 36 enqueued at 0xdbba00
+	Packet with 36 and size 36 dequeued at 0xdbba00
+Packet with uid 37 and size 32 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdbde40
+	Packet with uid 37 and size 32 enqueued at 0xdbde40
+	Packet with 37 and size 32 dequeued at 0xdbde40
+Packet with uid 39 and size 32 did NOT have IntHeader of size 4 and contents: ( 1726, 49153) at interface 0xdbde40
+	Packet with uid 39 and size 32 enqueued at 0xdbde40
+	Packet with 39 and size 32 dequeued at 0xdbde40
+Packet with uid 41 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2952) at interface 0xe15840
+	Packet with uid 41 and size 36 enqueued at 0xe15840
+	Packet with 41 and size 36 dequeued at 0xe15840
+Packet with uid 41 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2952) at interface 0xdc23c0
+	Packet with uid 41 and size 36 enqueued at 0xdc23c0
+	Packet with 41 and size 36 dequeued at 0xdc23c0
+Packet with uid 42 and size 36 did NOT have IntHeader of size 4 and contents: ( 2327, 49153) at interface 0xdd98f0
+	Packet with uid 42 and size 36 enqueued at 0xdd98f0
+	Packet with 42 and size 36 dequeued at 0xdd98f0
+Packet with uid 43 and size 32 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdd98f0
+	Packet with uid 43 and size 32 enqueued at 0xdd98f0
+	Packet with 43 and size 32 dequeued at 0xdd98f0
+BulkSendApplication sending packet with uid 44 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 44 and new size is 1304 from ... 
+Packet with uid 44 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdd98f0
+	Packet with uid 44 and size 1332 enqueued at 0xdd98f0
+	Packet with 44 and size 1332 dequeued at 0xdd98f0
+Packet with uid 44 and size 36 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdd98f0
+	Packet with uid 44 and size 36 enqueued at 0xdd98f0
+	Packet with 44 and size 36 dequeued at 0xdd98f0
+Packet with uid 41 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2952) at interface 0xdbd6c0
+	Packet with uid 41 and size 36 enqueued at 0xdbd6c0
+	Packet with 41 and size 36 dequeued at 0xdbd6c0
+Packet with uid 42 and size 36 did NOT have IntHeader of size 4 and contents: ( 2327, 49153) at interface 0xdc0880
+	Packet with uid 42 and size 36 enqueued at 0xdc0880
+	Packet with 42 and size 36 dequeued at 0xdc0880
+Packet with uid 43 and size 32 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdc0100
+	Packet with uid 43 and size 32 enqueued at 0xdc0100
+	Packet with 43 and size 32 dequeued at 0xdc0100
+Packet with uid 44 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdc0100
+	Packet with uid 44 and size 1332 enqueued at 0xdc0100
+	Packet with 44 and size 1332 dequeued at 0xdc0100
+Packet with uid 44 and size 36 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdc0100
+	Packet with uid 44 and size 36 enqueued at 0xdc0100
+	Packet with 44 and size 36 dequeued at 0xdc0100
+Packet with uid 42 and size 36 did NOT have IntHeader of size 4 and contents: ( 2327, 49153) at interface 0xdbe200
+	Packet with uid 42 and size 36 enqueued at 0xdbe200
+	Packet with 42 and size 36 dequeued at 0xdbe200
+Packet with uid 43 and size 32 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdbb690
+	Packet with uid 43 and size 32 enqueued at 0xdbb690
+	Packet with 43 and size 32 dequeued at 0xdbb690
+Packet with uid 44 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdbb690
+	Packet with uid 44 and size 1332 enqueued at 0xdbb690
+	Packet with 44 and size 1332 dequeued at 0xdbb690
+Packet with uid 44 and size 36 did NOT have IntHeader of size 4 and contents: ( 49157, 1730) at interface 0xdbb690
+	Packet with uid 44 and size 36 enqueued at 0xdbb690
+	Packet with 44 and size 36 dequeued at 0xdbb690
+Packet with uid 45 and size 36 did NOT have IntHeader of size 4 and contents: ( 2641, 49153) at interface 0xe57360
+	Packet with uid 45 and size 36 enqueued at 0xe57360
+	Packet with 45 and size 36 dequeued at 0xe57360
+Packet with uid 45 and size 36 did NOT have IntHeader of size 4 and contents: ( 2641, 49153) at interface 0xdc2f80
+	Packet with uid 45 and size 36 enqueued at 0xdc2f80
+	Packet with 45 and size 36 dequeued at 0xdc2f80
+Packet with uid 45 and size 36 did NOT have IntHeader of size 4 and contents: ( 2641, 49153) at interface 0xdbbd70
+	Packet with uid 45 and size 36 enqueued at 0xdbbd70
+	Packet with 45 and size 36 dequeued at 0xdbbd70
+Packet with uid 46 and size 32 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdf77c0
+	Packet with uid 46 and size 32 enqueued at 0xdf77c0
+	Packet with 46 and size 32 dequeued at 0xdf77c0
+BulkSendApplication sending packet with uid 47 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 47 and new size is 1304 from ... 
+Packet with uid 47 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdf77c0
+	Packet with uid 47 and size 1332 enqueued at 0xdf77c0
+	Packet with 47 and size 1332 dequeued at 0xdf77c0
+Packet with uid 47 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdf77c0
+	Packet with uid 47 and size 36 enqueued at 0xdf77c0
+	Packet with 47 and size 36 dequeued at 0xdf77c0
+Packet with uid 46 and size 32 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdc1800
+	Packet with uid 46 and size 32 enqueued at 0xdc1800
+	Packet with 46 and size 32 dequeued at 0xdc1800
+Packet with uid 47 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdc1800
+	Packet with uid 47 and size 1332 enqueued at 0xdc1800
+	Packet with 47 and size 1332 dequeued at 0xdc1800
+Packet with uid 47 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdc1800
+	Packet with uid 47 and size 36 enqueued at 0xdc1800
+	Packet with 47 and size 36 dequeued at 0xdc1800
+Packet with uid 46 and size 32 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdbe5c0
+	Packet with uid 46 and size 32 enqueued at 0xdbe5c0
+	Packet with 46 and size 32 dequeued at 0xdbe5c0
+Packet with uid 48 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1881) at interface 0xdd9c00
+	Packet with uid 48 and size 36 enqueued at 0xdd9c00
+	Packet with 48 and size 36 dequeued at 0xdd9c00
+Packet with uid 47 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdbe5c0
+	Packet with uid 47 and size 1332 enqueued at 0xdbe5c0
+	Packet with 47 and size 1332 dequeued at 0xdbe5c0
+Packet with uid 47 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 2642) at interface 0xdbe5c0
+	Packet with uid 47 and size 36 enqueued at 0xdbe5c0
+	Packet with 47 and size 36 dequeued at 0xdbe5c0
+Packet with uid 48 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1881) at interface 0xdc0880
+	Packet with uid 48 and size 36 enqueued at 0xdc0880
+	Packet with 48 and size 36 dequeued at 0xdc0880
+Packet with uid 49 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2176) at interface 0xdda220
+	Packet with uid 49 and size 36 enqueued at 0xdda220
+	Packet with 49 and size 36 dequeued at 0xdda220
+Packet with uid 50 and size 36 did NOT have IntHeader of size 4 and contents: ( 1142, 49153) at interface 0xe26aa0
+	Packet with uid 50 and size 36 enqueued at 0xe26aa0
+	Packet with 50 and size 36 dequeued at 0xe26aa0
+Packet with uid 51 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 3801) at interface 0xe76e20
+	Packet with uid 51 and size 36 enqueued at 0xe76e20
+	Packet with 51 and size 36 dequeued at 0xe76e20
+Packet with uid 48 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1881) at interface 0xdbe200
+	Packet with uid 48 and size 36 enqueued at 0xdbe200
+	Packet with 48 and size 36 dequeued at 0xdbe200
+Packet with uid 49 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2176) at interface 0xdc0cc0
+	Packet with uid 49 and size 36 enqueued at 0xdc0cc0
+	Packet with 49 and size 36 dequeued at 0xdc0cc0
+Packet with uid 50 and size 36 did NOT have IntHeader of size 4 and contents: ( 1142, 49153) at interface 0xdc2000
+	Packet with uid 50 and size 36 enqueued at 0xdc2000
+	Packet with 50 and size 36 dequeued at 0xdc2000
+Packet with uid 52 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1581) at interface 0xdd95e0
+	Packet with uid 52 and size 36 enqueued at 0xdd95e0
+	Packet with 52 and size 36 dequeued at 0xdd95e0
+Packet with uid 51 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 3801) at interface 0xdc3340
+	Packet with uid 51 and size 36 enqueued at 0xdc3340
+	Packet with 51 and size 36 dequeued at 0xdc3340
+Packet with uid 49 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2176) at interface 0xdbb530
+	Packet with uid 49 and size 36 enqueued at 0xdbb530
+	Packet with 49 and size 36 dequeued at 0xdbb530
+Packet with uid 50 and size 36 did NOT have IntHeader of size 4 and contents: ( 1142, 49153) at interface 0xdbb690
+	Packet with uid 50 and size 36 enqueued at 0xdbb690
+	Packet with 50 and size 36 dequeued at 0xdbb690
+Packet with uid 52 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1581) at interface 0xdc0880
+	Packet with uid 52 and size 36 enqueued at 0xdc0880
+	Packet with 52 and size 36 dequeued at 0xdc0880
+Packet with uid 51 and size 36 did NOT have IntHeader of size 4 and contents: ( 49154, 3801) at interface 0xdbd300
+	Packet with uid 51 and size 36 enqueued at 0xdbd300
+	Packet with 51 and size 36 dequeued at 0xdbd300
+Packet with uid 53 and size 36 did NOT have IntHeader of size 4 and contents: ( 3660, 49154) at interface 0xdda220
+	Packet with uid 53 and size 36 enqueued at 0xdda220
+	Packet with 53 and size 36 dequeued at 0xdda220
+Packet with uid 52 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 1581) at interface 0xdbe200
+	Packet with uid 52 and size 36 enqueued at 0xdbe200
+	Packet with 52 and size 36 dequeued at 0xdbe200
+Packet with uid 53 and size 36 did NOT have IntHeader of size 4 and contents: ( 3660, 49154) at interface 0xdc1800
+	Packet with uid 53 and size 36 enqueued at 0xdc1800
+	Packet with 53 and size 36 dequeued at 0xdc1800
+Packet with uid 53 and size 36 did NOT have IntHeader of size 4 and contents: ( 3660, 49154) at interface 0xdbe980
+	Packet with uid 53 and size 36 enqueued at 0xdbe980
+	Packet with 53 and size 36 dequeued at 0xdbe980
+Packet with uid 54 and size 32 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xe26aa0
+	Packet with uid 54 and size 32 enqueued at 0xe26aa0
+	Packet with 54 and size 32 dequeued at 0xe26aa0
+Packet with uid 56 and size 32 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xe26aa0
+	Packet with uid 56 and size 32 enqueued at 0xe26aa0
+	Packet with 56 and size 32 dequeued at 0xe26aa0
+Packet with uid 58 and size 36 did NOT have IntHeader of size 4 and contents: ( 3801, 49154) at interface 0xe26aa0
+	Packet with uid 58 and size 36 enqueued at 0xe26aa0
+	Packet with 58 and size 36 dequeued at 0xe26aa0
+Packet with uid 59 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdda530
+	Packet with uid 59 and size 32 enqueued at 0xdda530
+	Packet with 59 and size 32 dequeued at 0xdda530
+BulkSendApplication sending packet with uid 60 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 60 and new size is 1304 from ... 
+Packet with uid 60 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdda530
+	Packet with uid 60 and size 1332 enqueued at 0xdda530
+	Packet with 60 and size 1332 dequeued at 0xdda530
+Packet with uid 60 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdda530
+	Packet with uid 60 and size 36 enqueued at 0xdda530
+	Packet with 60 and size 36 dequeued at 0xdda530
+Packet with uid 54 and size 32 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xdc23c0
+	Packet with uid 54 and size 32 enqueued at 0xdc23c0
+	Packet with 54 and size 32 dequeued at 0xdc23c0
+Packet with uid 56 and size 32 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xdc23c0
+	Packet with uid 56 and size 32 enqueued at 0xdc23c0
+	Packet with 56 and size 32 dequeued at 0xdc23c0
+Packet with uid 58 and size 36 did NOT have IntHeader of size 4 and contents: ( 3801, 49154) at interface 0xdc1c40
+	Packet with uid 58 and size 36 enqueued at 0xdc1c40
+	Packet with 58 and size 36 dequeued at 0xdc1c40
+Packet with uid 59 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdc1800
+	Packet with uid 59 and size 32 enqueued at 0xdc1800
+	Packet with 59 and size 32 dequeued at 0xdc1800
+Packet with uid 60 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdc1800
+	Packet with uid 60 and size 1332 enqueued at 0xdc1800
+	Packet with 60 and size 1332 dequeued at 0xdc1800
+Packet with uid 60 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdc1800
+	Packet with uid 60 and size 36 enqueued at 0xdc1800
+	Packet with 60 and size 36 dequeued at 0xdc1800
+Packet with uid 54 and size 32 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xdbcf40
+	Packet with uid 54 and size 32 enqueued at 0xdbcf40
+	Packet with 54 and size 32 dequeued at 0xdbcf40
+Packet with uid 56 and size 32 did NOT have IntHeader of size 4 and contents: ( 2642, 49154) at interface 0xdbcf40
+	Packet with uid 56 and size 32 enqueued at 0xdbcf40
+	Packet with 56 and size 32 dequeued at 0xdbcf40
+Packet with uid 58 and size 36 did NOT have IntHeader of size 4 and contents: ( 3801, 49154) at interface 0xdbb530
+	Packet with uid 58 and size 36 enqueued at 0xdbb530
+	Packet with 58 and size 36 dequeued at 0xdbb530
+Packet with uid 59 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdbde40
+	Packet with uid 59 and size 32 enqueued at 0xdbde40
+	Packet with 59 and size 32 dequeued at 0xdbde40
+Packet with uid 60 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdbde40
+	Packet with uid 60 and size 1332 enqueued at 0xdbde40
+	Packet with 60 and size 1332 dequeued at 0xdbde40
+Packet with uid 60 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2327) at interface 0xdbde40
+	Packet with uid 60 and size 36 enqueued at 0xdbde40
+	Packet with 60 and size 36 dequeued at 0xdbde40
+Packet with uid 61 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdf77c0
+	Packet with uid 61 and size 32 enqueued at 0xdf77c0
+	Packet with 61 and size 32 dequeued at 0xdf77c0
+BulkSendApplication sending packet with uid 62 and size 1300 from ... 
+found 2 devices associated with the node attached to this BulkSendApplication
+BulkSendApplication added IntHeader to packet with uid 62 and new size is 1304 from ... 
+Packet with uid 62 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdf77c0
+	Packet with uid 62 and size 1332 enqueued at 0xdf77c0
+	Packet with 62 and size 1332 dequeued at 0xdf77c0
+Packet with uid 62 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdf77c0
+	Packet with uid 62 and size 36 enqueued at 0xdf77c0
+	Packet with 62 and size 36 dequeued at 0xdf77c0
+Packet with uid 63 and size 36 did NOT have IntHeader of size 4 and contents: ( 2176, 49153) at interface 0xe76e20
+	Packet with uid 63 and size 36 enqueued at 0xe76e20
+	Packet with 63 and size 36 dequeued at 0xe76e20
+Packet with uid 61 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdc1080
+	Packet with uid 61 and size 32 enqueued at 0xdc1080
+	Packet with 61 and size 32 dequeued at 0xdc1080
+Packet with uid 63 and size 36 did NOT have IntHeader of size 4 and contents: ( 2176, 49153) at interface 0xdc2bc0
+	Packet with uid 63 and size 36 enqueued at 0xdc2bc0
+	Packet with 63 and size 36 dequeued at 0xdc2bc0
+Packet with uid 62 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdc1080
+	Packet with uid 62 and size 1332 enqueued at 0xdc1080
+	Packet with 62 and size 1332 dequeued at 0xdc1080
+Packet with uid 62 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdc1080
+	Packet with uid 62 and size 36 enqueued at 0xdc1080
+	Packet with 62 and size 36 dequeued at 0xdc1080
+Packet with uid 61 and size 32 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdbc450
+	Packet with uid 61 and size 32 enqueued at 0xdbc450
+	Packet with 61 and size 32 dequeued at 0xdbc450
+Packet with uid 63 and size 36 did NOT have IntHeader of size 4 and contents: ( 2176, 49153) at interface 0xdbb270
+	Packet with uid 63 and size 36 enqueued at 0xdbb270
+	Packet with 63 and size 36 dequeued at 0xdbb270
+Packet with uid 62 and size 1332 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdbc450
+	Packet with uid 62 and size 1332 enqueued at 0xdbc450
+	Packet with 62 and size 1332 dequeued at 0xdbc450
+Packet with uid 62 and size 36 did NOT have IntHeader of size 4 and contents: ( 49153, 2641) at interface 0xdbc450
+	Packet with uid 62 and size 36 enqueued at 0xdbc450
+	Packet with 62 and size 36 dequeued at 0xdbc450
+Packet with uid 64 and size 36 did NOT have IntHeader of size 4 and contents: ( 2952, 49153) at interface 0xe57360
+	Packet with uid 64 and size 36 enqueued at 0xe57360
+	Packet with 64 and size 36 dequeued at 0xe57360
+Packet with uid 65 and size 36 did NOT have IntHeader of size 4 and contents: ( 1881, 49153) at interface 0xdda220
+	Packet with uid 65 and size 36 enqueued at 0xdda220
+	Packet with 65 and size 36 dequeued at 0xdda220
+Packet with uid 64 and size 36 did NOT have IntHeader of size 4 and contents: ( 2952, 49153) at interface 0xdc2bc0
+	Packet with uid 64 and size 36 enqueued at 0xdc2bc0
+	Packet with 64 and size 36 dequeued at 0xdc2bc0
+Packet with uid 65 and size 36 did NOT have IntHeader of size 4 and contents: ( 1881, 49153) at interface 0xdc1440
+	Packet with uid 65 and size 36 enqueued at 0xdc1440
+	Packet with 65 and size 36 dequeued at 0xdc1440
+Packet with uid 64 and size 36 did NOT have IntHeader of size 4 and contents: ( 2952, 49153) at interface 0xdbb3d0
+	Packet with uid 64 and size 36 enqueued at 0xdbb3d0
+	Packet with 64 and size 36 dequeued at 0xdbb3d0
+Packet with uid 65 and size 36 did NOT have IntHeader of size 4 and contents: ( 1881, 49153) at interface 0xdbcb80
+	Packet with uid 65 and size 36 enqueued at 0xdbcb80
+	Packet with 65 and size 36 dequeued at 0xdbcb80
+Packet with uid 66 and size 36 did NOT have IntHeader of size 4 and contents: ( 3800, 49153) at interface 0xe15840
+	Packet with uid 66 and size 36 enqueued at 0xe15840
+	Packet with 66 and size 36 dequeued at 0xe15840
+Packet with uid 66 and size 36 did NOT have IntHeader of size 4 and contents: ( 3800, 49153) at interface 0xdc2780
+	Packet with uid 66 and size 36 enqueued at 0xdc2780
+	Packet with 66 and size 36 dequeued at 0xdc2780
+Stop simulation

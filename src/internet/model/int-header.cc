@@ -20,7 +20,7 @@ IntHeader::~IntHeader () {
   
 }
 
-void  IntHeader::SetMode (uint16_t mode) {
+void IntHeader::SetMode (uint16_t mode) {
   mode_ = mode;
 }
 
@@ -101,6 +101,7 @@ void IntHeader::Serialize (Buffer::Iterator start) const {
 uint32_t IntHeader::Deserialize (Buffer::Iterator start) {
   Buffer::Iterator i = start;
   mode_ = i.ReadNtohU16 ();
+  n_entries_ = i.ReadNtohU16 ();
   return GetSerializedSize ();
 }
 

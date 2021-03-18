@@ -30,6 +30,7 @@
 #include "ns3/trace-source-accessor.h"
 #include "ns3/tcp-socket-factory.h"
 #include "bulk-send-application.h"
+#include "ns3/internet-module.h"
 #include <assert.h>
 
 namespace ns3 {
@@ -216,8 +217,25 @@ void BulkSendApplication::SendData (void)
       Ptr<Node> this_node = GetNode();
       assert(this_node);
 
-      NS_LOG_INFO("BulkSendApplication sending packet with "<< uid << " and size " << psize << " from ... ");
+      NS_LOG_INFO("BulkSendApplication sending packet with uid "<< uid << " and size " << psize << " from ... ");
       NS_LOG_INFO("found " << this_node->GetNDevices() << " devices associated with the node attached to this BulkSendApplication");
+      
+      // Add the IntHeader, see what happens
+      IntHeader inthead;
+      assert(inthead.GetMode() == 0 && inthead.GetNEntries() == 0);
+      inthead.SetMode(49721);
+      inthead.SetNEntries(36085);
+      assert(inthead.GetMode() == 49721 && inthead.GetNEntries() == 36085);
+
+      packet->AddHeader(inthead);
+      psize = packet->GetSize();
+      NS_LOG_INFO("BulkSendApplication added IntHeader to packet with uid "<< uid << " and new size is " << psize << " from ... ");
+
+      // verification of the header
+      IntHeader inthead_check;
+      assert(inthead_check.GetMode() == 0 && inthead_check.GetNEntries() == 0);
+      packet->PeekHeader(inthead_check);
+      assert(inthead_check.GetMode() == 49721 && inthead_check.GetNEntries() == 36085);
 
       
       SocketIpTosTag tosTag;
