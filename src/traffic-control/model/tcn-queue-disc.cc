@@ -7,8 +7,6 @@
 #include "ns3/ipv4-queue-disc-item.h"
 #include "ns3/drop-tail-queue.h"
 #include "ns3/internet-module.h"
-#include <assert.h>
-#include "../../IntTag.h"
 
 #define DEFAULT_TCN_LIMIT 100
 
@@ -110,7 +108,8 @@ TypeId TCNQueueDisc::GetTypeId (void) {
 TCNQueueDisc::TCNQueueDisc ()
     : QueueDisc (),
       printed_once(false),
-      m_threshold (0) {
+      m_threshold (0),
+      microburst_happening(false) {
     NS_LOG_FUNCTION (this);
 }
 
@@ -128,46 +127,15 @@ TCNQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item) {
     }*/
 
     Ptr<Packet> p = item->GetPacket ();
-    
-    uint32_t uid = p->GetUid ();
-    uint32_t psize = p->GetSize();
-
-    IntTag maybeIntTag;
-    assert(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0);
-    uint32_t tag_size = p->PeekPacketTag(maybeIntTag);
-    bool tag_found = (maybeIntTag.GetMode() == 49721 && maybeIntTag.GetNEntries() == 36085);
-
-    if (tag_found) {
-        NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
-            << " and contents: ( " << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() << ") at interface " <<  GetInterfaceName());
-    } else {
-        NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " did NOT have IntTag of size " << tag_size 
-            << " and contents: ( " << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() << ") at interface " <<  GetInterfaceName());
-    }
-    //psize = p->GetSize();
-
-    // IntHeader maybeIntHeader;
-    // assert(maybeIntHeader.GetMode() == 0 && maybeIntHeader.GetNEntries() == 0);
-    // uint32_t header_size = p->PeekHeader(maybeIntHeader);
-    // bool header_found = (maybeIntHeader.GetMode() == 49721 && maybeIntHeader.GetNEntries() == 36085);
-
-    // if (header_found) {
-    //     NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " had IntHeader of size " << header_size 
-    //         << " and contents: ( " << maybeIntHeader.GetMode() << ", " <<  maybeIntHeader.GetNEntries() << ") at interface " <<  GetInterfaceName());
-    // } else {
-    //     NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " did NOT have IntHeader of size " << header_size 
-    //         << " and contents: ( " << maybeIntHeader.GetMode() << ", " <<  maybeIntHeader.GetNEntries() << ") at interface " <<  GetInterfaceName());
-    // }
-    // psize = p->GetSize();
 
     if (m_mode == Queue::QUEUE_MODE_PACKETS && (GetInternalQueue (0)->GetNPackets () + 1 > m_maxPackets)) {
-        NS_LOG_INFO("\tPacket with uid "<< uid << " and size " << psize << " dropped at " << GetInterfaceName());
+        //NS_LOG_INFO("\tPacket with uid "<< uid << " and size " << psize << " dropped at " << GetInterfaceName());
         Drop (item);
         return false;
     }
 
     if (m_mode == Queue::QUEUE_MODE_BYTES && (GetInternalQueue (0)->GetNBytes () + item->GetPacketSize () > m_maxBytes)) {
-        NS_LOG_INFO("\tPacket with uid "<< uid << " and size " << psize << " dropped at " << GetInterfaceName());
+        //NS_LOG_INFO("\tPacket with uid "<< uid << " and size " << psize << " dropped at " << GetInterfaceName());
         Drop (item);
         return false;
     }
@@ -175,7 +143,7 @@ TCNQueueDisc::DoEnqueue (Ptr<QueueDiscItem> item) {
     TCNTimestampTag tag;
     p->AddPacketTag (tag);
 
-    NS_LOG_INFO("\tPacket with uid "<< uid << " and size " << psize << " enqueued at " << GetInterfaceName());
+    //NS_LOG_INFO("\tPacket with uid "<< uid << " and size " << psize << " enqueued at " << GetInterfaceName());
     GetInternalQueue (0)->Enqueue (item);
 
     return true;
@@ -195,9 +163,6 @@ TCNQueueDisc::DoDequeue (void) {
     Ptr<QueueDiscItem> item = StaticCast<QueueDiscItem> (GetInternalQueue (0)->Dequeue ());
     Ptr<Packet> p = item->GetPacket ();
 
-    uint32_t uid = p->GetUid ();
-    uint32_t psize = p->GetSize();
-
     TCNTimestampTag tag;
     bool found = p->RemovePacketTag (tag);
     if (!found) {
@@ -211,7 +176,56 @@ TCNQueueDisc::DoDequeue (void) {
         TCNQueueDisc::MarkingECN (item);
     }
 
-    NS_LOG_INFO("\tPacket with "<< uid << " and size " << psize << " dequeued at " << GetInterfaceName());
+    uint64_t hop_latency = sojournTime.GetNanoSeconds();
+    uint64_t microburst_threshold = 50000; // 50 microseconds = 50,000 ns
+    if (hop_latency > microburst_threshold && !microburst_happening) {
+        microburst_happening = true;
+        microburst_start_time = now.GetNanoSeconds();
+    } else if (microburst_happening && hop_latency < microburst_threshold) {
+        microburst_happening = false;
+        NS_LOG_INFO("CONTROL " << GetInterfaceName() << " " << microburst_start_time << " " << now.GetNanoSeconds());
+    }
+
+    uint32_t uid = p->GetUid ();
+    uint32_t psize = p->GetSize();
+
+    MainIntTag maybeIntTag;
+    NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
+            maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
+
+    uint32_t tag_size = p->RemovePacketTag(maybeIntTag);
+    bool tag_found = (maybeIntTag.GetMode() == 49721 && maybeIntTag.GetNEntries() >= 36085);
+
+    ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
+
+
+    if (tag_found) {
+        NS_LOG_INFO("\tPacket with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
+            << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
+            << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
+            << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
+            << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
+            << ")) at interface " <<  GetInterfaceName());
+
+
+        // Increment nentries
+        maybeIntTag.SetNEntries(maybeIntTag.GetNEntries()+1);
+        // MainIntTag newTag;
+        // newTag.SetMode(maybeIntTag.GetMode());
+        // newTag.SetNEntries(maybeIntTag.GetNEntries()+1);
+        // newTag.SetCrc1(maybeIntTag.GetCrc1());
+        // newTag.SetCrc2(maybeIntTag.GetCrc2());
+        // newTag.SetFiveTuple(maybe_five_tuple.source_ip, maybe_five_tuple.dest_ip, maybe_five_tuple.source_port, maybe_five_tuple.dest_port, maybe_five_tuple. protocol);
+        p->AddPacketTag(maybeIntTag);
+        
+
+    } else {
+        //NS_LOG_INFO("Packet with uid " << uid << " and size " << psize << " did NOT have IntTag of size " << tag_size 
+        //    << " and contents: ( " << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() << ") at interface " <<  GetInterfaceName());
+    }
+
+
+    //NS_LOG_INFO("\tPacket with "<< uid << " and size " << psize << " dequeued at " << GetInterfaceName());
 
     return item;
 

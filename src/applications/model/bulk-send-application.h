@@ -99,6 +99,11 @@ public:
    */
   Ptr<Socket> GetSocket (void) const;
 
+  uint32_t GetIpSource (void) const;
+  uint32_t GetIpDest (void) const;
+  uint32_t GetFivetupleProt (void) const;
+
+
 protected:
   virtual void DoDispose (void);
 private:
@@ -125,6 +130,10 @@ private:
   uint32_t        m_delayThresh;
 
   uint32_t        m_tos;
+
+  uint32_t        ip_source;
+  uint32_t        ip_dest;
+  uint8_t         fivetupleprot;
 
   /// Traced Callback: sent packets
   TracedCallback<Ptr<const Packet> > m_txTrace;

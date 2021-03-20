@@ -31,8 +31,7 @@
 #include "ns3/tcp-socket-factory.h"
 #include "bulk-send-application.h"
 #include "ns3/internet-module.h"
-#include "../../IntTag.h"
-#include <assert.h>
+//#include "../../IntTag.h"
 
 namespace ns3 {
 
@@ -82,6 +81,21 @@ BulkSendApplication::GetTypeId (void)
                    TypeIdValue (TcpSocketFactory::GetTypeId ()),
                    MakeTypeIdAccessor (&BulkSendApplication::m_tid),
                    MakeTypeIdChecker ())
+    .AddAttribute ("IpSource",
+                   "The IP address (as an unsigned 32 bit value) of the sender.",
+                   UintegerValue (0),
+                   MakeUintegerAccessor (&BulkSendApplication::ip_source),
+                   MakeUintegerChecker<uint32_t> ())
+    .AddAttribute ("IpDest",
+                   "The IP address (as an unsigned 32 bit value) of the destination.",
+                   UintegerValue (0),
+                   MakeUintegerAccessor (&BulkSendApplication::ip_dest),
+                   MakeUintegerChecker<uint32_t> ())
+    .AddAttribute ("FiveTupleProt",
+                   "The protocol (as an unsigned 5 bit value) as used in the 5-tuple.",
+                   UintegerValue (0),
+                   MakeUintegerAccessor (&BulkSendApplication::fivetupleprot),
+                   MakeUintegerChecker<uint8_t> ())
     .AddTraceSource ("Tx", "A new packet is created and is sent",
                      MakeTraceSourceAccessor (&BulkSendApplication::m_txTrace),
                      "ns3::Packet::TracedCallback")
@@ -95,7 +109,10 @@ BulkSendApplication::BulkSendApplication ()
     m_connected (false),
     m_totBytes (0),
     m_isDelay (false),
-    m_accumPackets (0)
+    m_accumPackets (0),
+    ip_source(0),
+    ip_dest(0),
+    fivetupleprot(0)
 {
   NS_LOG_FUNCTION (this);
 }
@@ -117,6 +134,27 @@ BulkSendApplication::GetSocket (void) const
 {
   NS_LOG_FUNCTION (this);
   return m_socket;
+}
+
+uint32_t
+BulkSendApplication::GetIpSource (void) const
+{
+  NS_LOG_FUNCTION (this);
+  return ip_source;
+}
+
+uint32_t
+BulkSendApplication::GetIpDest (void) const
+{
+  NS_LOG_FUNCTION (this);
+  return ip_dest;
+}
+
+uint32_t
+BulkSendApplication::GetFivetupleProt (void) const
+{
+  NS_LOG_FUNCTION (this);
+  return fivetupleprot;
 }
 
 void
@@ -216,37 +254,48 @@ void BulkSendApplication::SendData (void)
 
       // Node on which the BulkSendApplication is being run
       Ptr<Node> this_node = GetNode();
-      assert(this_node);
+      NS_ASSERT(this_node);
 
-      NS_LOG_INFO("BulkSendApplication sending packet with uid "<< uid << " and size " << psize << " from ... ");
-      NS_LOG_INFO("found " << this_node->GetNDevices() << " devices associated with the node attached to this BulkSendApplication");
+      NS_LOG_INFO("BulkSendApplication sending packet with uid "<< uid << " and size " << psize 
+                  << " from " << Ipv4Address(GetIpSource()) << " to " << Ipv4Address(GetIpDest()) 
+                  << " with protocol " << GetFivetupleProt());
+      //NS_LOG_INFO("found " << this_node->GetNDevices() << " devices associated with the node attached to this BulkSendApplication");
       
       // Add the IntTag
-      IntTag tag;
-      assert(tag.GetMode() == 0 && tag.GetNEntries() == 0);
+      MainIntTag tag;
+      //NS_LOG_INFO("size: " << tag.GetSerializedSize());
+      NS_ASSERT(tag.GetMode() == 0 && tag.GetNEntries() == 0 && tag.FiveTupleUnInitialized() && tag.GetCrc1() == 0 && tag.GetCrc2() == 0);
       tag.SetMode(49721);
       tag.SetNEntries(36085);
-      assert(tag.GetMode() == 49721 && tag.GetNEntries() == 36085);
+      tag.SetFiveTuple(GetIpSource(), GetIpDest(), /*(source port)*/ 1, /*(destination port)*/1, GetFivetupleProt());
+
+      ns3::five_tuple_t five_tuple = tag.GetFiveTuple();
+      NS_ASSERT(tag.GetMode() == 49721 && tag.GetNEntries() == 36085 && five_tuple.source_ip == GetIpSource() && 
+        five_tuple.dest_ip == GetIpDest() && five_tuple.source_port == 1 && five_tuple.dest_port == 1 && five_tuple.protocol == GetFivetupleProt());
 
       packet->AddPacketTag (tag);
       
       // verification of the tag
       uint32_t psize1 = packet->GetSize();
-      assert(psize1 == psize);
-      IntTag tag_check;
-      assert(tag_check.GetMode() == 0 && tag_check.GetNEntries() == 0);
+      NS_ASSERT(psize1 == psize);
+      MainIntTag tag_check;
+      NS_ASSERT(tag_check.GetMode() == 0 && tag_check.GetNEntries() == 0 && tag_check.FiveTupleUnInitialized() && 
+                tag_check.GetCrc1() == 0 && tag_check.GetCrc2() == 0);
       packet->PeekPacketTag(tag_check);
-      assert(tag_check.GetMode() == 49721 && tag_check.GetNEntries() == 36085);
+      ns3::five_tuple_t five_tuple_check = tag_check.GetFiveTuple();
+      NS_ASSERT(tag_check.GetMode() == 49721 && tag_check.GetNEntries() == 36085 && tag_check.GetCrc1() == 0 && tag_check.GetCrc2() == 0 && 
+        five_tuple_check.source_ip == GetIpSource() && five_tuple_check.dest_ip == GetIpDest() && five_tuple_check.source_port == 1 && 
+        five_tuple_check.dest_port == 1 && five_tuple_check.protocol == GetFivetupleProt());
 
 
 
 
       // // Add the IntHeader, see what happens
       // IntHeader inthead;
-      // assert(inthead.GetMode() == 0 && inthead.GetNEntries() == 0);
+      // NS_ASSERT(inthead.GetMode() == 0 && inthead.GetNEntries() == 0);
       // inthead.SetMode(49721);
       // inthead.SetNEntries(36085);
-      // assert(inthead.GetMode() == 49721 && inthead.GetNEntries() == 36085);
+      // NS_ASSERT(inthead.GetMode() == 49721 && inthead.GetNEntries() == 36085);
 
       // packet->AddHeader(inthead);
       // psize = packet->GetSize();
@@ -254,9 +303,9 @@ void BulkSendApplication::SendData (void)
 
       // // verification of the header
       // IntHeader inthead_check;
-      // assert(inthead_check.GetMode() == 0 && inthead_check.GetNEntries() == 0);
+      // NS_ASSERT(inthead_check.GetMode() == 0 && inthead_check.GetNEntries() == 0);
       // packet->PeekHeader(inthead_check);
-      // assert(inthead_check.GetMode() == 49721 && inthead_check.GetNEntries() == 36085);
+      // NS_ASSERT(inthead_check.GetMode() == 49721 && inthead_check.GetNEntries() == 36085);
 
       
       SocketIpTosTag tosTag;

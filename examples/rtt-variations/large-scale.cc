@@ -49,7 +49,7 @@ template<typename T> T rand_range (T min, T max) {
 }
 
 void install_applications (int fromLeafId, NodeContainer servers, double requestRate, struct cdf_table *cdfTable,
-                           long &flowCount, long &totalFlowSize, int SERVER_COUNT, int LEAF_COUNT, double START_TIME, double END_TIME, double FLOW_LAUNCH_END_TIME) {
+                           long &flowCount, long &totalFlowSize, Ipv4Address server_ips[], int SERVER_COUNT, int LEAF_COUNT, double START_TIME, double END_TIME, double FLOW_LAUNCH_END_TIME) {
   NS_LOG_INFO ("Install applications:");
   for (int i = 0; i < SERVER_COUNT; i++) {
     int fromServerIndex = fromLeafId * SERVER_COUNT + i;
@@ -86,6 +86,10 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
       source.SetAttribute ("MaxBytes", UintegerValue(flowSize));
       source.SetAttribute ("SimpleTOS", UintegerValue (tos));
 
+      source.SetAttribute ("IpSource", UintegerValue(server_ips[fromServerIndex].Get()));
+      source.SetAttribute ("IpDest", UintegerValue(server_ips[destServerIndex].Get()));
+      source.SetAttribute ("FiveTupleProt", UintegerValue(6)); // not sure what value is used for DcTcp, so just using 6 for TCP.
+
       // Install the BulkSendApp responsible for creating a new flow from this server to the chosen receiver.
       ApplicationContainer sourceApp = source.Install (servers.Get (fromServerIndex));
       sourceApp.Start (Seconds (startTime));
@@ -109,7 +113,7 @@ int main (int argc, char *argv[]) {
   LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
   LogComponentEnable ("QueueDisc", LOG_LEVEL_INFO);
   LogComponentEnable ("BulkSendApplication", LOG_LEVEL_INFO);
-  
+  LogComponentEnable ("PacketSink", LOG_LEVEL_INFO);
 #endif
 
   // Command line parameters parsing
@@ -252,6 +256,10 @@ int main (int argc, char *argv[]) {
 
   ipv4.SetBase ("10.1.0.0", "255.255.255.0");
 
+
+  // Contains the ip of the servers (each has only one interface to communicate to a leaf)
+  Ipv4Address server_ips[LEAF_COUNT * SERVER_COUNT];
+
   for (int i = 0; i < LEAF_COUNT; i++) {
     ipv4.NewNetwork ();
 
@@ -295,7 +303,7 @@ int main (int argc, char *argv[]) {
 
       Ipv4InterfaceContainer interfaceContainer = ipv4.Assign (netDeviceContainer);
 
-      //delayQueueDisc->PrintInterfaceToIPMapping();
+      server_ips[i * SERVER_COUNT + j] = interfaceContainer.GetAddress (1);
 
       NS_LOG_INFO ("Leaf - " << i << " is connected to Server - " << j << " with address "
                    << interfaceContainer.GetAddress(0) << " <-> " << interfaceContainer.GetAddress (1)
@@ -347,21 +355,20 @@ int main (int argc, char *argv[]) {
     }
   }
 
+  
   NS_LOG_INFO ("Populate global routing tables");
   Ipv4GlobalRoutingHelper::PopulateRoutingTables ();
 
+  
   double oversubRatio = static_cast<double>(SERVER_COUNT * LEAF_SERVER_CAPACITY) / (SPINE_LEAF_CAPACITY * SPINE_COUNT * LINK_COUNT);
   NS_LOG_INFO ("Over-subscription ratio: " << oversubRatio);
-
   NS_LOG_INFO ("Initialize CDF table");
   struct cdf_table* cdfTable = new cdf_table ();
   init_cdf (cdfTable);
   load_cdf (cdfTable, cdfFileName.c_str ());
-
   NS_LOG_INFO ("Calculating request rate");
   double requestRate = load * LEAF_SERVER_CAPACITY * SERVER_COUNT / oversubRatio / (8 * avg_cdf (cdfTable)) / SERVER_COUNT;
   NS_LOG_INFO ("Average request rate: " << requestRate << " per second");
-
   NS_LOG_INFO ("Initialize random seed: " << randomSeed);
   if (randomSeed == 0) {
     srand ((unsigned)time (NULL));
@@ -369,31 +376,25 @@ int main (int argc, char *argv[]) {
     srand (randomSeed);
   }
 
-  NS_LOG_INFO ("Create applications");
 
+
+  NS_LOG_INFO ("Create applications");
   long flowCount = 0;
   long totalFlowSize = 0;
+  for (int fromLeafId = 0; fromLeafId < LEAF_COUNT; fromLeafId ++) {
+    install_applications(fromLeafId, servers, requestRate, cdfTable, flowCount, totalFlowSize, server_ips, SERVER_COUNT, LEAF_COUNT, START_TIME, END_TIME, FLOW_LAUNCH_END_TIME);
+  }
 
-  for (int fromLeafId = 0; fromLeafId < LEAF_COUNT; fromLeafId ++)
-    {
-      install_applications(fromLeafId, servers, requestRate, cdfTable, flowCount, totalFlowSize, SERVER_COUNT, LEAF_COUNT, START_TIME, END_TIME, FLOW_LAUNCH_END_TIME);
-    }
+
 
   NS_LOG_INFO ("Total flow: " << flowCount);
-
   NS_LOG_INFO ("Actual average flow size: " << static_cast<double> (totalFlowSize) / flowCount);
-
   NS_LOG_INFO ("Enabling flow monitor");
-
   Ptr<FlowMonitor> flowMonitor;
   FlowMonitorHelper flowHelper;
   flowMonitor = flowHelper.InstallAll();
-
-
   flowMonitor->CheckForLostPackets ();
-
   std::stringstream flowMonitorFilename;
-
   flowMonitorFilename << "Large_Scale_" <<id << "_" << LEAF_COUNT << "X" << SPINE_COUNT << "_" << aqmStr << "_"  << transportProt << "_" << load << ".xml";
 
 

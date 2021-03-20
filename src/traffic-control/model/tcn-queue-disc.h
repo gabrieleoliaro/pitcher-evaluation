@@ -34,6 +34,9 @@ private:
     Queue::QueueMode     m_mode;            //!< The operating mode (Bytes or packets)
     bool printed_once;
     Time m_threshold;
+
+    bool microburst_happening;              // Set to true if a microburst is currently happening
+    uint64_t microburst_start_time;         // Save the time here when a microburst begins.
 };
 
 }
