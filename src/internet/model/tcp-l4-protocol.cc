@@ -43,8 +43,6 @@
 #include "tcp-socket-base.h"
 #include "rtt-estimator.h"
 
-#include "IntTag.h"
-
 #include <vector>
 #include <sstream>
 #include <iomanip>
@@ -471,27 +469,6 @@ TcpL4Protocol::Receive (Ptr<Packet> packet,
   NS_LOG_LOGIC ("TcpL4Protocol " << this << " received a packet and"
                 " now forwarding it up to endpoint/socket");
 
-
-  uint32_t uid = packet->GetUid ();
-  uint32_t psize = packet->GetSize();
-  
-  if (psize > 1000) {
-
-    MainIntTag maybeIntTag;
-    NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
-            maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
-    uint32_t tag_size = packet->PeekPacketTag(maybeIntTag);
-    ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
-    //if (tag_found) {
-        NS_LOG_INFO("About to forward up packet with uid " << uid << " and size " << psize << " which had IntTag of size " << tag_size 
-            << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
-            << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
-            << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
-            << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
-            << ")).");
-  }
-
-  
   (*endPoints.begin ())->ForwardUp (packet, incomingIpHeader,
                                     incomingTcpHeader.GetSourcePort (),
                                     incomingInterface);
@@ -768,4 +745,3 @@ TcpL4Protocol::GetDownTarget6 (void) const
 }
 
 } // namespace ns3
-

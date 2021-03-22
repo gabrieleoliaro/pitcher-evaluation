@@ -41,7 +41,6 @@
 #include "ipv4-interface.h"
 #include "ipv4-raw-socket-impl.h"
 #include "ipv4-ecn-tag.h"
-#include "IntTag.h"
 
 namespace ns3 {
 
@@ -909,7 +908,7 @@ Ipv4L3Protocol::SendRealOut (Ptr<Ipv4Route> route,
                              Ipv4Header const &ipHeader)
 {
   NS_LOG_FUNCTION (this << route << packet << &ipHeader);
-  //NS_LOG_DEBUG ("Sending Ip header: " << ipHeader);
+  NS_LOG_DEBUG ("Sending Ip header: " << ipHeader);
   if (route == 0)
     {
       NS_LOG_WARN ("No route to host.  Drop.");
@@ -1048,27 +1047,6 @@ Ipv4L3Protocol::LocalDeliver (Ptr<const Packet> packet, Ipv4Header const&ip, uin
 {
   NS_LOG_FUNCTION (this << packet << &ip << iif);
   Ptr<Packet> p = packet->Copy (); // need to pass a non-const packet up
-
-  uint32_t uid = p->GetUid ();
-  uint32_t psize = p->GetSize();
-  if (psize > 1000) {
-    NS_LOG_INFO("Calling LocalDeliver on packet with uid " << uid << " and size " << psize);
-
-
-    MainIntTag maybeIntTag;
-    NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
-            maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
-    uint32_t tag_size = p->PeekPacketTag(maybeIntTag);
-    ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
-    //if (tag_found) {
-        NS_LOG_INFO("\tPacket with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
-            << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
-            << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
-            << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
-            << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
-            << ")).");
-  }
-  
   Ipv4Header ipHeader = ip;
 
   if ( !ipHeader.IsLastFragment () || ipHeader.GetFragmentOffset () != 0 )
@@ -1088,9 +1066,6 @@ Ipv4L3Protocol::LocalDeliver (Ptr<const Packet> packet, Ipv4Header const&ip, uin
   m_localDeliverTrace (ipHeader, p, iif);
 
   Ptr<IpL4Protocol> protocol = GetProtocol (ipHeader.GetProtocol (), iif);
-  if(psize > 1000) {
-    NS_LOG_INFO("##### " << protocol << " " << ipHeader.GetProtocol ());
-  }
   if (protocol != 0)
     {
       // we need to make a copy in the unlikely event we hit the
