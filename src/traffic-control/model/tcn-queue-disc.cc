@@ -193,7 +193,8 @@ TCNQueueDisc::DoDequeue (void) {
     NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
             maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
 
-    uint32_t tag_size = p->RemovePacketTag(maybeIntTag);
+    //uint32_t tag_size = p->RemovePacketTag(maybeIntTag);
+    uint32_t tag_size = p->PeekPacketTag(maybeIntTag);
     bool tag_found = (maybeIntTag.GetMode() == 49721 && maybeIntTag.GetNEntries() >= 36085);
 
     ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
@@ -209,14 +210,8 @@ TCNQueueDisc::DoDequeue (void) {
 
 
         // Increment nentries
-        maybeIntTag.SetNEntries(maybeIntTag.GetNEntries()+1);
-        // MainIntTag newTag;
-        // newTag.SetMode(maybeIntTag.GetMode());
-        // newTag.SetNEntries(maybeIntTag.GetNEntries()+1);
-        // newTag.SetCrc1(maybeIntTag.GetCrc1());
-        // newTag.SetCrc2(maybeIntTag.GetCrc2());
-        // newTag.SetFiveTuple(maybe_five_tuple.source_ip, maybe_five_tuple.dest_ip, maybe_five_tuple.source_port, maybe_five_tuple.dest_port, maybe_five_tuple. protocol);
-        p->AddPacketTag(maybeIntTag);
+        //maybeIntTag.SetNEntries(maybeIntTag.GetNEntries()+1);
+        //p->AddPacketTag(maybeIntTag);
         
 
     } else {

@@ -1,142 +1,207 @@
 Waf: Entering directory `/home/cs141/Desktop/ns3-ecn-sharp/build'
-[1446/2303] Compiling src/applications/model/packet-sink.cc
-[2074/2303] Linking build/libns3-dev-applications-debug.so
-[2112/2303] Linking build/examples/tcp/ns3-dev-tcp-variants-comparison-debug
-[2113/2303] Linking build/src/traffic-control/examples/ns3-dev-adaptive-red-tests-debug
-[2114/2303] Linking build/src/nix-vector-routing/examples/ns3-dev-nms-p2p-nix-debug
-[2115/2303] Linking build/src/csma/examples/ns3-dev-csma-packet-socket-debug
-[2135/2303] Linking build/src/dsdv/examples/ns3-dev-dsdv-manet-debug
-[2136/2303] Linking build/src/traffic-control/examples/ns3-dev-codel-vs-pfifo-asymmetric-debug
-[2137/2303] Linking build/examples/wireless/ns3-dev-mixed-bg-network-debug
-[2141/2303] Linking build/examples/tcp/ns3-dev-tcp-pcap-nanosec-example-debug
-[2142/2303] Linking build/src/virtual-net-device/examples/ns3-dev-virtual-net-device-debug
-[2143/2303] Linking build/src/mpi/examples/ns3-dev-third-distributed-debug
-[2144/2303] Linking build/src/traffic-control/examples/ns3-dev-pfifo-vs-red-debug
-[2145/2303] Linking build/examples/traffic-control/ns3-dev-traffic-control-debug
-[2147/2303] Linking build/examples/routing/ns3-dev-drb-routing-debug
-[2148/2303] Linking build/examples/routing/ns3-dev-per-flow-ecmp-routing-debug
-[2149/2303] Linking build/examples/routing/ns3-dev-global-routing-multi-switch-plus-router-debug
-[2151/2303] Linking build/examples/rtt-variations/ns3-dev-queue-track-debug
-[2152/2303] Linking build/examples/wireless/ns3-dev-wifi-hidden-terminal-debug
-[2154/2303] Linking build/examples/wireless/ns3-dev-wifi-ap-debug
-[2156/2303] Linking build/examples/wireless/ns3-dev-wifi-timing-attributes-debug
-[2159/2303] Linking build/examples/error-model/ns3-dev-simple-error-model-debug
-[2160/2303] Linking build/examples/socket/ns3-dev-socket-bound-tcp-static-routing-debug
-[2162/2303] Linking build/examples/wireless/ns3-dev-rate-adaptation-distance-debug
-[2163/2303] Linking build/examples/rtt-variations/ns3-dev-large-scale-debug
-[2165/2303] Linking build/examples/routing/ns3-dev-simple-alternate-routing-debug
-[2166/2303] Linking build/examples/tutorial/ns3-dev-seventh-debug
-[2167/2303] Linking build/examples/wireless/ns3-dev-power-adaptation-distance-debug
-[2168/2303] Linking build/examples/wireless/ns3-dev-ht-wifi-network-debug
-[2170/2303] Linking build/examples/tutorial/ns3-dev-fifth-debug
-[2171/2303] Linking build/examples/routing/ns3-dev-mixed-global-routing-debug
-[2172/2303] Linking build/examples/realtime/ns3-dev-realtime-udp-echo-debug
-[2173/2303] Linking build/examples/wireless/ns3-dev-wifi-blockack-debug
-[2174/2303] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-debug
-[2175/2303] Linking build/src/csma/examples/ns3-dev-csma-multicast-debug
-[2177/2303] Linking build/src/traffic-control/examples/ns3-dev-red-vs-ared-debug
-[2178/2303] Linking build/examples/tutorial/ns3-dev-third-debug
-[2179/2303] Linking build/examples/routing/ns3-dev-static-routing-slash32-debug
-[2180/2303] Linking build/examples/tcp/ns3-dev-tcp-star-server-debug
-[2181/2303] Linking build/examples/wireless/ns3-dev-wifi-sleep-debug
-[2182/2303] Linking build/src/traffic-control/examples/ns3-dev-red-tests-debug
-[2185/2303] Linking build/src/csma/examples/ns3-dev-csma-raw-ip-socket-debug
-[2186/2303] Linking build/src/mesh/examples/ns3-dev-mesh-debug
-[2187/2303] Linking build/src/nix-vector-routing/examples/ns3-dev-nix-simple-debug
-[2189/2303] Linking build/examples/wireless/ns3-dev-vht-wifi-network-debug
-[2190/2303] Linking build/examples/routing/ns3-dev-manet-routing-compare-debug
-[2192/2303] Linking build/examples/tcp/ns3-dev-tcp-nsc-lfn-debug
-[2194/2303] Linking build/examples/wireless/ns3-dev-simple-ht-hidden-stations-debug
-[2195/2303] Linking build/src/uan/examples/ns3-dev-uan-cw-example-debug
-[2196/2303] Linking build/src/bridge/examples/ns3-dev-csma-bridge-debug
-[2197/2303] Linking build/src/olsr/examples/ns3-dev-simple-point-to-point-olsr-debug
-[2198/2303] Linking build/src/topology-read/examples/ns3-dev-topology-example-sim-debug
-[2199/2303] Linking build/src/wimax/examples/ns3-dev-wimax-multicast-debug
-[2202/2303] Linking build/examples/wireless/ns3-dev-80211n-mimo-debug
-[2203/2303] Linking build/examples/wireless/ns3-dev-wifi-tcp-debug
-[2204/2303] Linking build/examples/tutorial/ns3-dev-first-debug
-[2205/2303] Linking build/src/wimax/examples/ns3-dev-wimax-ipv4-debug
-[2206/2303] Linking build/src/mpi/examples/ns3-dev-simple-distributed-empty-node-debug
-[2209/2303] Linking build/src/fd-net-device/examples/ns3-dev-realtime-fd2fd-onoff-debug
-[2210/2303] Linking build/src/csma/examples/ns3-dev-csma-ping-debug
-[2211/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-udp-echo-debug
-[2212/2303] Linking build/examples/wireless/ns3-dev-wifi-adhoc-debug
-[2214/2303] Linking build/examples/rtt-variations/ns3-dev-mq-debug
-[2216/2303] Linking build/examples/routing/ns3-dev-global-injection-slash32-debug
-[2217/2303] Linking build/examples/tcp/ns3-dev-tcp-nsc-zoo-debug
-[2221/2303] Linking build/src/mpi/examples/ns3-dev-nms-p2p-nix-distributed-debug
-[2224/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-onoff-debug
-[2225/2303] Linking build/src/csma-layout/examples/ns3-dev-csma-star-debug
-[2226/2303] Linking build/src/congestion-probing/examples/ns3-dev-congestion-probing-example-debug
-[2227/2303] Linking build/src/csma/examples/ns3-dev-csma-one-subnet-debug
-[2228/2303] Linking build/src/uan/examples/ns3-dev-uan-rc-example-debug
-[2229/2303] Linking build/src/bridge/examples/ns3-dev-csma-bridge-one-hop-debug
-[2230/2303] Linking build/src/csma/examples/ns3-dev-csma-broadcast-debug
-[2231/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd2fd-onoff-debug
-[2232/2303] Linking build/examples/udp-client-server/ns3-dev-udp-trace-client-server-debug
-[2233/2303] Linking build/examples/wireless/ns3-dev-power-adaptation-interference-debug
-[2234/2303] Linking build/examples/wireless/ns3-dev-wifi-aggregation-debug
-[2235/2303] Linking build/src/dsr/examples/ns3-dev-dsr-debug
-[2236/2303] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-matrix-propagation-loss-model-debug
-[2237/2303] Linking build/examples/udp-client-server/ns3-dev-udp-client-server-debug
-[2238/2303] Linking build/examples/tutorial/ns3-dev-sixth-debug
-[2239/2303] Linking build/examples/routing/ns3-dev-dynamic-global-routing-debug
-[2240/2303] Linking build/src/internet/examples/ns3-dev-main-simple-debug
-[2241/2303] Linking build/src/traffic-control/examples/ns3-dev-codel-vs-pfifo-basic-test-debug
-[2242/2303] Linking build/examples/wireless/ns3-dev-wifi-wired-bridging-debug
-[2243/2303] Linking build/examples/tutorial/ns3-dev-second-debug
-[2244/2303] Linking build/examples/routing/ns3-dev-simple-global-routing-debug
-[2245/2303] Linking build/examples/udp/ns3-dev-udp-echo-debug
-[2246/2303] Linking build/examples/wireless/ns3-dev-multirate-debug
-[2247/2303] Linking build/src/mpi/examples/ns3-dev-simple-distributed-debug
-[2248/2303] Linking build/src/tap-bridge/examples/ns3-dev-tap-wifi-dumbbell-debug
-[2249/2303] Linking build/examples/tcp/ns3-dev-tcp-large-transfer-debug
-[2250/2303] Linking build/examples/routing/ns3-dev-global-routing-slash32-debug
-[2251/2303] Linking build/examples/tcp/ns3-dev-tcp-bulk-send-debug
-[2252/2303] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-with-microwave-oven-debug
-[2253/2303] Linking build/src/wave/examples/ns3-dev-vanet-routing-compare-debug
-[2254/2303] Linking build/examples/tcp/ns3-dev-tcp-nsc-comparison-debug
-[2255/2303] Linking build/examples/naming/ns3-dev-object-names-debug
-[2256/2303] Linking build/libns3-dev-lte-debug.so
-[2257/2303] Linking build/src/wave/examples/ns3-dev-wave-simple-80211p-debug
-[2258/2303] Linking build/src/wave/examples/ns3-dev-wave-simple-device-debug
-[2259/2303] Linking build/src/wimax/examples/ns3-dev-wimax-simple-debug
-[2261/2303] Linking build/src/lte/examples/ns3-dev-lena-x2-handover-debug
-[2261/2303] Linking build/src/lte/examples/ns3-dev-lena-rlc-traces-debug
-[2262/2303] Linking build/src/lte/examples/ns3-dev-lena-dual-stripe-debug
-[2263/2303] Linking build/src/lte/examples/ns3-dev-lena-distributed-ffr-debug
-[2264/2303] Linking build/src/lte/examples/ns3-dev-lena-intercell-interference-debug
-[2265/2303] Linking build/src/lte/examples/ns3-dev-lena-pathloss-traces-debug
-[2266/2303] Linking build/src/lte/examples/ns3-dev-lena-profiling-debug
-[2267/2303] Linking build/src/lte/examples/ns3-dev-lena-rem-debug
-[2268/2303] Linking build/src/lte/examples/ns3-dev-lena-fading-debug
-[2269/2303] Linking build/src/lte/examples/ns3-dev-lena-simple-epc-debug
-[2270/2303] Linking build/src/lte/examples/ns3-dev-lena-simple-debug
-[2271/2303] Linking build/src/lte/examples/ns3-dev-lena-uplink-power-control-debug
-[2272/2303] Linking build/src/lte/examples/ns3-dev-lena-deactivate-bearer-debug
-[2273/2303] Linking build/src/lte/examples/ns3-dev-lena-cqi-threshold-debug
+[1340/2303] Compiling src/internet/model/tcp-rx-buffer.cc
+[2069/2303] Linking build/libns3-dev-internet-debug.so
+[2073/2303] Linking build/libns3-dev-conga-routing-debug.so
+[2075/2303] Linking build/examples/ipv6/ns3-dev-test-ipv6-debug
+[2076/2303] Linking build/libns3-dev-drb-routing-debug.so
+[2077/2303] Linking build/libns3-dev-link-monitor-debug.so
+[2098/2303] Linking build/examples/socket/ns3-dev-socket-bound-static-routing-debug
+[2100/2303] Linking build/libns3-dev-csma-layout-debug.so
+[2101/2303] Linking build/libns3-dev-dsdv-debug.so
+[2102/2303] Linking build/libns3-dev-letflow-routing-debug.so
+[2103/2303] Linking build/libns3-dev-internet-apps-debug.so
+[2104/2303] Linking build/libns3-dev-xpath-routing-debug.so
+[2105/2303] Linking build/libns3-dev-olsr-debug.so
+[2106/2303] Linking build/libns3-dev-nix-vector-routing-debug.so
+[2107/2303] Linking build/libns3-dev-mesh-debug.so
+[2108/2303] Linking build/libns3-dev-drill-routing-debug.so
+[2109/2303] Linking build/libns3-dev-point-to-point-layout-debug.so
+[2110/2303] Linking build/examples/socket/ns3-dev-socket-options-ipv6-debug
+[2111/2303] Linking build/examples/wireless/ns3-dev-wifi-simple-interference-debug
+[2112/2303] Linking build/libns3-dev-dsr-debug.so
+[2113/2303] Linking build/examples/wireless/ns3-dev-wifi-clear-channel-cmu-debug
+[2114/2303] Linking build/examples/energy/ns3-dev-energy-model-with-harvesting-example-debug
+[2115/2303] Linking build/examples/stats/ns3-dev-wifi-example-sim-debug
+[2116/2303] Linking build/libns3-dev-flow-monitor-debug.so
+[2117/2303] Linking build/examples/socket/ns3-dev-socket-options-ipv4-debug
+[2118/2303] Linking build/examples/energy/ns3-dev-energy-model-example-debug
+[2119/2303] Linking build/examples/wireless/ns3-dev-wifi-simple-adhoc-debug
+[2120/2303] Linking build/libns3-dev-wimax-debug.so
+[2121/2303] Linking build/libns3-dev-applications-debug.so
+[2122/2303] Linking build/libns3-dev-aodv-debug.so
+[2123/2303] Linking build/libns3-dev-sixlowpan-debug.so
+[2124/2303] Linking build/libns3-dev-tap-bridge-debug.so
+[2125/2303] Linking build/examples/wireless/ns3-dev-wifi-simple-infra-debug
+[2126/2303] Linking build/libns3-dev-wave-debug.so
+[2127/2303] Linking build/src/drb-routing/examples/ns3-dev-drb-routing-example-debug
+[2128/2303] Linking build/src/link-monitor/examples/ns3-dev-link-monitor-example-debug
+[2129/2303] Linking build/src/conga-routing/examples/ns3-dev-ipv4-conga-routing-example-debug
+[2130/2303] Linking build/src/letflow-routing/examples/ns3-dev-letflow-routing-example-debug
+[2131/2303] Linking build/src/xpath-routing/examples/ns3-dev-xpath-routing-example-debug
+[2132/2303] Linking build/libns3-dev-tlb-probing-debug.so
+[2133/2303] Linking build/libns3-dev-congestion-probing-debug.so
+[2134/2303] Linking build/examples/ipv6/ns3-dev-loose-routing-ipv6-debug
+[2135/2303] Linking build/src/fd-net-device/examples/ns3-dev-dummy-network-debug
+[2136/2303] Linking build/examples/ipv6/ns3-dev-radvd-two-prefix-debug
+[2137/2303] Linking build/examples/routing/ns3-dev-rip-simple-network-debug
+[2138/2303] Linking build/src/fd-net-device/examples/ns3-dev-realtime-dummy-network-debug
+[2139/2303] Linking build/examples/ipv6/ns3-dev-ping6-debug
+[2140/2303] Linking build/examples/ipv6/ns3-dev-fragmentation-ipv6-debug
+[2141/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd-tap-ping-debug
+[2142/2303] Linking build/examples/ipv6/ns3-dev-radvd-debug
+[2143/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd-tap-ping6-debug
+[2144/2303] Linking build/examples/routing/ns3-dev-simple-routing-ping6-debug
+[2145/2303] Linking build/examples/ipv6/ns3-dev-icmpv6-redirect-debug
+[2146/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-ping-debug
+[2147/2303] Linking build/examples/ipv6/ns3-dev-fragmentation-ipv6-two-MTU-debug
+[2148/2303] Linking build/examples/routing/ns3-dev-ripng-simple-network-debug
+[2149/2303] Linking build/examples/wireless/ns3-dev-wifi-simple-adhoc-grid-debug
+[2150/2303] Linking build/src/olsr/examples/ns3-dev-olsr-hna-debug
+[2151/2303] Linking build/src/drill-routing/examples/ns3-dev-drill-routing-example-debug
+[2152/2303] Linking build/examples/ipv6/ns3-dev-wsn-ping6-debug
+[2153/2303] Linking build/src/sixlowpan/examples/ns3-dev-example-ping-lr-wpan-debug
+[2154/2303] Linking build/src/sixlowpan/examples/ns3-dev-example-sixlowpan-debug
+[2155/2303] Linking build/examples/traffic-control/ns3-dev-traffic-control-debug
+[2156/2303] Linking build/src/fd-net-device/examples/ns3-dev-realtime-fd2fd-onoff-debug
+[2157/2303] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-with-microwave-oven-debug
+[2158/2303] Linking build/examples/wireless/ns3-dev-mixed-bg-network-debug
+[2159/2303] Linking build/src/bridge/examples/ns3-dev-csma-bridge-debug
+[2160/2303] Linking build/examples/tutorial/ns3-dev-sixth-debug
+[2161/2303] Linking build/src/uan/examples/ns3-dev-uan-cw-example-debug
+[2162/2303] Linking build/src/csma-layout/examples/ns3-dev-csma-star-debug
+[2163/2303] Linking build/examples/wireless/ns3-dev-vht-wifi-network-debug
+[2164/2303] Linking build/src/mpi/examples/ns3-dev-simple-distributed-empty-node-debug
+[2165/2303] Linking build/examples/tcp/ns3-dev-tcp-nsc-zoo-debug
+[2166/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-udp-echo-debug
+[2167/2303] Linking build/src/nix-vector-routing/examples/ns3-dev-nix-simple-debug
+[2168/2303] Linking build/src/mpi/examples/ns3-dev-nms-p2p-nix-distributed-debug
+[2169/2303] Linking build/examples/wireless/ns3-dev-rate-adaptation-distance-debug
+[2170/2303] Linking build/src/csma/examples/ns3-dev-csma-one-subnet-debug
+[2171/2303] Linking build/examples/rtt-variations/ns3-dev-queue-track-debug
+[2172/2303] Linking build/examples/tutorial/ns3-dev-first-debug
+[2173/2303] Linking build/examples/routing/ns3-dev-global-routing-multi-switch-plus-router-debug
+[2174/2303] Linking build/examples/wireless/ns3-dev-wifi-tcp-debug
+[2175/2303] Linking build/src/traffic-control/examples/ns3-dev-pfifo-vs-red-debug
+[2176/2303] Linking build/src/bridge/examples/ns3-dev-csma-bridge-one-hop-debug
+[2177/2303] Linking build/src/tap-bridge/examples/ns3-dev-tap-wifi-dumbbell-debug
+[2178/2303] Linking build/examples/wireless/ns3-dev-wifi-hidden-terminal-debug
+[2179/2303] Linking build/src/tap-bridge/examples/ns3-dev-tap-csma-debug
+[2180/2303] Linking build/src/tlb-probing/examples/ns3-dev-tlb-probing-example-debug
+[2181/2303] Linking build/examples/tcp/ns3-dev-tcp-bulk-send-debug
+[2182/2303] Linking build/examples/routing/ns3-dev-drb-routing-debug
+[2183/2303] Linking build/src/mpi/examples/ns3-dev-third-distributed-debug
+[2184/2303] Linking build/src/congestion-probing/examples/ns3-dev-congestion-probing-example-debug
+[2185/2303] Linking build/examples/tutorial/ns3-dev-seventh-debug
+[2186/2303] Linking build/examples/routing/ns3-dev-global-routing-slash32-debug
+[2187/2303] Linking build/examples/routing/ns3-dev-simple-global-routing-debug
+[2188/2303] Linking build/examples/routing/ns3-dev-per-flow-ecmp-routing-debug
+[2189/2303] Linking build/src/mpi/examples/ns3-dev-simple-distributed-debug
+[2190/2303] Linking build/examples/udp/ns3-dev-udp-echo-debug
+[2191/2303] Linking build/examples/wireless/ns3-dev-multirate-debug
+[2192/2303] Linking build/src/topology-read/examples/ns3-dev-topology-example-sim-debug
+[2193/2303] Linking build/examples/wireless/ns3-dev-wifi-timing-attributes-debug
+[2194/2303] Linking build/examples/wireless/ns3-dev-wifi-adhoc-debug
+[2195/2303] Linking build/src/traffic-control/examples/ns3-dev-codel-vs-pfifo-asymmetric-debug
+[2196/2303] Linking build/src/dsdv/examples/ns3-dev-dsdv-manet-debug
+[2197/2303] Linking build/examples/tutorial/ns3-dev-third-debug
+[2198/2303] Linking build/examples/wireless/ns3-dev-wifi-wired-bridging-debug
+[2199/2303] Linking build/src/mesh/examples/ns3-dev-mesh-debug
+[2200/2303] Linking build/src/wave/examples/ns3-dev-vanet-routing-compare-debug
+[2201/2303] Linking build/examples/wireless/ns3-dev-wifi-aggregation-debug
+[2202/2303] Linking build/src/dsr/examples/ns3-dev-dsr-debug
+[2203/2303] Linking build/examples/wireless/ns3-dev-wifi-ap-debug
+[2204/2303] Linking build/src/csma/examples/ns3-dev-csma-ping-debug
+[2205/2303] Linking build/examples/routing/ns3-dev-static-routing-slash32-debug
+[2206/2303] Linking build/src/uan/examples/ns3-dev-uan-rc-example-debug
+[2207/2303] Linking build/examples/tcp/ns3-dev-tcp-nsc-lfn-debug
+[2208/2303] Linking build/src/traffic-control/examples/ns3-dev-red-vs-ared-debug
+[2209/2303] Linking build/examples/tcp/ns3-dev-tcp-pcap-nanosec-example-debug
+[2210/2303] Linking build/src/traffic-control/examples/ns3-dev-red-tests-debug
+[2211/2303] Linking build/examples/wireless/ns3-dev-wifi-blockack-debug
+[2212/2303] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-debug
+[2213/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd-emu-onoff-debug
+[2214/2303] Linking build/examples/wireless/ns3-dev-ht-wifi-network-debug
+[2215/2303] Linking build/src/wave/examples/ns3-dev-wave-simple-80211p-debug
+[2216/2303] Linking build/src/internet/examples/ns3-dev-main-simple-debug
+[2217/2303] Linking build/examples/wireless/ns3-dev-simple-ht-hidden-stations-debug
+[2218/2303] Linking build/examples/routing/ns3-dev-global-injection-slash32-debug
+[2219/2303] Linking build/examples/wireless/ns3-dev-power-adaptation-distance-debug
+[2220/2303] Linking build/src/wimax/examples/ns3-dev-wimax-multicast-debug
+[2221/2303] Linking build/examples/wireless/ns3-dev-wifi-sleep-debug
+[2222/2303] Linking build/examples/naming/ns3-dev-object-names-debug
+[2223/2303] Linking build/src/wimax/examples/ns3-dev-wimax-ipv4-debug
+[2224/2303] Linking build/src/olsr/examples/ns3-dev-simple-point-to-point-olsr-debug
+[2225/2303] Linking build/libns3-dev-lte-debug.so
+[2226/2303] Linking build/src/csma/examples/ns3-dev-csma-broadcast-debug
+[2227/2303] Linking build/examples/error-model/ns3-dev-simple-error-model-debug
+[2228/2303] Linking build/src/csma/examples/ns3-dev-csma-raw-ip-socket-debug
+[2229/2303] Linking build/src/nix-vector-routing/examples/ns3-dev-nms-p2p-nix-debug
+[2230/2303] Linking build/src/tap-bridge/examples/ns3-dev-tap-csma-virtual-machine-debug
+[2231/2303] Linking build/examples/realtime/ns3-dev-realtime-udp-echo-debug
+[2232/2303] Linking build/examples/wireless/ns3-dev-power-adaptation-interference-debug
+[2233/2303] Linking build/examples/tcp/ns3-dev-tcp-variants-comparison-debug
+[2234/2303] Linking build/examples/routing/ns3-dev-simple-alternate-routing-debug
+[2235/2303] Linking build/examples/tcp/ns3-dev-tcp-large-transfer-debug
+[2236/2303] Linking build/src/traffic-control/examples/ns3-dev-codel-vs-pfifo-basic-test-debug
+[2237/2303] Linking build/src/spectrum/examples/ns3-dev-adhoc-aloha-ideal-phy-matrix-propagation-loss-model-debug
+[2238/2303] Linking build/src/virtual-net-device/examples/ns3-dev-virtual-net-device-debug
+[2239/2303] Linking build/src/fd-net-device/examples/ns3-dev-fd2fd-onoff-debug
+[2240/2303] Linking build/examples/udp-client-server/ns3-dev-udp-trace-client-server-debug
+[2241/2303] Linking build/src/wimax/examples/ns3-dev-wimax-simple-debug
+[2242/2303] Linking build/examples/rtt-variations/ns3-dev-large-scale-debug
+[2243/2303] Linking build/src/aodv/examples/ns3-dev-aodv-debug
+[2244/2303] Linking build/examples/socket/ns3-dev-socket-bound-tcp-static-routing-debug
+[2245/2303] Linking build/examples/tcp/ns3-dev-tcp-star-server-debug
+[2246/2303] Linking build/examples/tutorial/ns3-dev-second-debug
+[2247/2303] Linking build/examples/tutorial/ns3-dev-fifth-debug
+[2248/2303] Linking build/examples/udp-client-server/ns3-dev-udp-client-server-debug
+[2249/2303] Linking build/examples/wireless/ns3-dev-80211n-mimo-debug
+[2250/2303] Linking build/examples/routing/ns3-dev-dynamic-global-routing-debug
+[2251/2303] Linking build/examples/routing/ns3-dev-mixed-global-routing-debug
+[2252/2303] Linking build/examples/tcp/ns3-dev-tcp-nsc-comparison-debug
+[2253/2303] Linking build/examples/routing/ns3-dev-manet-routing-compare-debug
+[2254/2303] Linking build/src/csma/examples/ns3-dev-csma-multicast-debug
+[2255/2303] Linking build/src/traffic-control/examples/ns3-dev-adaptive-red-tests-debug
+[2256/2303] Linking build/src/tap-bridge/examples/ns3-dev-tap-wifi-virtual-machine-debug
+[2257/2303] Linking build/examples/rtt-variations/ns3-dev-mq-debug
+[2258/2303] Linking build/src/csma/examples/ns3-dev-csma-packet-socket-debug
+[2259/2303] Linking build/src/wave/examples/ns3-dev-wave-simple-device-debug
+[2260/2303] Linking build/src/lte/examples/ns3-dev-lena-pathloss-traces-debug
+[2261/2303] Linking build/src/lte/examples/ns3-dev-lena-simple-debug
+[2262/2303] Linking build/src/lte/examples/ns3-dev-lena-x2-handover-debug
+[2264/2303] Linking build/src/lte/examples/ns3-dev-lena-dual-stripe-debug
+[2264/2303] Linking build/src/lte/examples/ns3-dev-lena-frequency-reuse-debug
+[2265/2303] Linking build/src/lte/examples/ns3-dev-lena-distributed-ffr-debug
+[2266/2303] Linking build/src/lte/examples/ns3-dev-lena-x2-handover-measures-debug
+[2267/2303] Linking build/src/lte/examples/ns3-dev-lena-uplink-power-control-debug
+[2268/2303] Linking build/src/lte/examples/ns3-dev-lena-deactivate-bearer-debug
+[2269/2303] Linking build/src/lte/examples/ns3-dev-lena-rem-sector-antenna-debug
+[2270/2303] Linking build/src/lte/examples/ns3-dev-lena-rlc-traces-debug
+[2271/2303] Linking build/src/lte/examples/ns3-dev-lena-rem-debug
+[2272/2303] Linking build/src/lte/examples/ns3-dev-lena-cqi-threshold-debug
+[2273/2303] Linking build/libns3-dev-netanim-debug.so
 [2274/2303] Linking build/libns3-dev-test-debug.so
-[2275/2303] Linking build/src/lte/examples/ns3-dev-lena-rem-sector-antenna-debug
-[2276/2303] Linking build/src/lte/examples/ns3-dev-lena-frequency-reuse-debug
-[2277/2303] Linking build/libns3-dev-netanim-debug.so
-[2278/2303] Linking build/src/lte/examples/ns3-dev-lena-x2-handover-measures-debug
-[2279/2303] Linking build/examples/wireless/ns3-dev-mixed-wireless-debug
-[2280/2303] Linking build/src/netanim/examples/ns3-dev-grid-animation-debug
-[2281/2303] Linking build/src/netanim/examples/ns3-dev-uan-animation-debug
-[2282/2303] Linking build/src/netanim/examples/ns3-dev-wireless-animation-debug
-[2283/2303] Linking build/src/netanim/examples/ns3-dev-star-animation-debug
-[2284/2303] Linking build/examples/tcp/ns3-dev-star-debug
-[2285/2303] Linking build/src/netanim/examples/ns3-dev-dumbbell-animation-debug
+[2275/2303] Linking build/src/lte/examples/ns3-dev-lena-fading-debug
+[2276/2303] Linking build/src/lte/examples/ns3-dev-lena-profiling-debug
+[2277/2303] Linking build/src/lte/examples/ns3-dev-lena-simple-epc-debug
+[2278/2303] Linking build/src/lte/examples/ns3-dev-lena-intercell-interference-debug
+[2279/2303] Linking build/src/netanim/examples/ns3-dev-resources-counters-debug
+[2280/2303] Linking build/src/netanim/examples/ns3-dev-colors-link-description-debug
+[2281/2303] Linking build/src/netanim/examples/ns3-dev-wireless-animation-debug
+[2282/2303] Linking build/examples/tcp/ns3-dev-star-debug
+[2283/2303] Linking build/src/netanim/examples/ns3-dev-uan-animation-debug
+[2284/2303] Linking build/examples/matrix-topology/ns3-dev-matrix-topology-debug
+[2285/2303] Linking build/examples/wireless/ns3-dev-mixed-wireless-debug
 [2286/2303] Linking build/utils/ns3-dev-print-introspected-doxygen-debug
-[2287/2303] Linking build/utils/ns3-dev-test-runner-debug
-[2288/2303] Linking build/examples/matrix-topology/ns3-dev-matrix-topology-debug
-[2289/2303] Linking build/src/netanim/examples/ns3-dev-colors-link-description-debug
+[2287/2303] Linking build/src/netanim/examples/ns3-dev-star-animation-debug
+[2288/2303] Linking build/src/netanim/examples/ns3-dev-grid-animation-debug
+[2289/2303] Linking build/scratch/subdir/subdir
 [2290/2303] Linking build/scratch/scratch-simulator
-[2291/2303] Linking build/src/netanim/examples/ns3-dev-resources-counters-debug
-[2292/2303] Linking build/scratch/subdir/subdir
+[2291/2303] Linking build/utils/ns3-dev-test-runner-debug
+[2292/2303] Linking build/src/netanim/examples/ns3-dev-dumbbell-animation-debug
 Waf: Leaving directory `/home/cs141/Desktop/ns3-ecn-sharp/build'
 Build commands will be stored in build/compile_commands.json
-'build' finished successfully (29.809s)
+'build' finished successfully (34.862s)
 Enabling DcTcp
 Config parameters
 Install Internet stacks
@@ -200,49 +265,154 @@ Actual average flow size: 1300
 Enabling flow monitor
 Start simulation
 BulkSendApplication sending packet with uid 14 and size 1300 from 10.1.2.4 to 10.1.3.6 with protocol 6
-	Packet with uid 14 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x1ff58f0
-	Packet with uid 14 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x1fdd340
-	Packet with uid 14 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x1fd87d0
+	Packet with uid 14 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x224b8f0
+	Packet with uid 14 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x2233340
+	Packet with uid 14 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x222e7d0
 BulkSendApplication sending packet with uid 19 and size 1300 from 10.1.2.4 to 10.1.1.6 with protocol 6
-	Packet with uid 19 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x1ff58f0
-	Packet with uid 19 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x1fddac0
-	Packet with uid 19 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x1fd9dc0
+	Packet with uid 19 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x224b8f0
+	Packet with uid 19 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x2233ac0
+	Packet with uid 19 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x222fdc0
 BulkSendApplication sending packet with uid 21 and size 1300 from 10.1.1.6 to 10.1.2.4 with protocol 6
-	Packet with uid 21 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )) at interface 0x1ff4fc0
-	Packet with uid 21 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )) at interface 0x1fdc3c0
-	Packet with uid 21 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )) at interface 0x1fd8670
+	Packet with uid 21 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )) at interface 0x224afc0
+	Packet with uid 21 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )) at interface 0x22323c0
+	Packet with uid 21 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )) at interface 0x222e670
 BulkSendApplication sending packet with uid 24 and size 1300 from 10.1.2.4 to 10.1.3.6 with protocol 6
-	Packet with uid 24 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x1ff58f0
-	Packet with uid 24 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x1fddac0
-	Packet with uid 24 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x1fda540
+	Packet with uid 24 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x224b8f0
+	Packet with uid 24 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x2233ac0
+	Packet with uid 24 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )) at interface 0x2230540
+Calling LocalDeliver on packet with uid 14 and size 1332
+	Packet with uid 14 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+##### 0x1eb70f0 
+ [node 19] About to forward up packet with uid 14 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] §§§§§§§ TcpSocketBase: About to forward up packet with uid 14 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] §§§§§§§ TcpSocketBase: calling DoForwardUp on packet with uid 14
+ [node 19] §§§§§§§ TcpSocketBase/DoForwardUp: About to enter switch(m_state) for packet with uid 14 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] state ESTABLISHED!
+TCP-RX-BUFFER/Add: Packet with uid 14 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:
+TCP-RX-BUFFER/Add: Packet with uid 14 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:
+TCP-RX-BUFFER/Add: Packet with uid 14 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] §§§§§§§ TcpSocketBase/ReceivedData: About to enter NotifyDataRecv for packet with uid 14 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] TCPSOCKETBASE/RecvFrom: Packet with uid 27 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+PACKETSINK: Packet with uid 27 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
 At time 0.000599559s packet sink received 1300 bytes from 10.1.2.4 port 49154 total Rx 1300 bytes
-Packet with uid 27 and size 1300 had IntTag of size 0 and contents: (0, 0, 0, 0, (0.0.0.0, 0.0.0.0, 0, 0,  )).
+Calling LocalDeliver on packet with uid 21 and size 1332
+	Packet with uid 21 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+##### 0x1eac970 
+ [node 14] About to forward up packet with uid 21 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+ [node 14] §§§§§§§ TcpSocketBase: About to forward up packet with uid 21 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+ [node 14] §§§§§§§ TcpSocketBase: calling DoForwardUp on packet with uid 21
+ [node 14] §§§§§§§ TcpSocketBase/DoForwardUp: About to enter switch(m_state) for packet with uid 21 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+ [node 14] state ESTABLISHED!
+TCP-RX-BUFFER/Add: Packet with uid 21 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:
+TCP-RX-BUFFER/Add: Packet with uid 21 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:
+TCP-RX-BUFFER/Add: Packet with uid 21 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+ [node 14] §§§§§§§ TcpSocketBase/ReceivedData: About to enter NotifyDataRecv for packet with uid 21 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+ [node 14] TCPSOCKETBASE/RecvFrom: Packet with uid 31 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
+PACKETSINK: Packet with uid 31 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.1.6, 10.1.2.4, 1, 1, )).
 At time 0.000640705s packet sink received 1300 bytes from 10.1.1.6 port 49153 total Rx 1300 bytes
-Packet with uid 31 and size 1300 had IntTag of size 0 and contents: (0, 0, 0, 0, (0.0.0.0, 0.0.0.0, 0, 0,  )).
+Calling LocalDeliver on packet with uid 19 and size 1332
+	Packet with uid 19 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+##### 0x1ea65a0 
+ [node 11] About to forward up packet with uid 19 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] §§§§§§§ TcpSocketBase: About to forward up packet with uid 19 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] §§§§§§§ TcpSocketBase: calling DoForwardUp on packet with uid 19
+ [node 11] §§§§§§§ TcpSocketBase/DoForwardUp: About to enter switch(m_state) for packet with uid 19 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] state ESTABLISHED!
+TCP-RX-BUFFER/Add: Packet with uid 19 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:
+TCP-RX-BUFFER/Add: Packet with uid 19 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:
+TCP-RX-BUFFER/Add: Packet with uid 19 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] §§§§§§§ TcpSocketBase/ReceivedData: About to enter NotifyDataRecv for packet with uid 19 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] TCPSOCKETBASE/RecvFrom: Packet with uid 37 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+PACKETSINK: Packet with uid 37 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
 At time 0.000681897s packet sink received 1300 bytes from 10.1.2.4 port 49153 total Rx 1300 bytes
-Packet with uid 37 and size 1300 had IntTag of size 0 and contents: (0, 0, 0, 0, (0.0.0.0, 0.0.0.0, 0, 0,  )).
+Calling LocalDeliver on packet with uid 24 and size 1332
+	Packet with uid 24 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+##### 0x1eb70f0 
+ [node 19] About to forward up packet with uid 24 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] §§§§§§§ TcpSocketBase: About to forward up packet with uid 24 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] §§§§§§§ TcpSocketBase: calling DoForwardUp on packet with uid 24
+ [node 19] §§§§§§§ TcpSocketBase/DoForwardUp: About to enter switch(m_state) for packet with uid 24 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] state ESTABLISHED!
+TCP-RX-BUFFER/Add: Packet with uid 24 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:
+TCP-RX-BUFFER/Add: Packet with uid 24 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:
+TCP-RX-BUFFER/Add: Packet with uid 24 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] §§§§§§§ TcpSocketBase/ReceivedData: About to enter NotifyDataRecv for packet with uid 24 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+ [node 19] TCPSOCKETBASE/RecvFrom: Packet with uid 40 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
+PACKETSINK: Packet with uid 40 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.3.6, 1, 1, )).
 At time 0.000681937s packet sink received 1300 bytes from 10.1.2.4 port 49155 total Rx 1300 bytes
-Packet with uid 40 and size 1300 had IntTag of size 0 and contents: (0, 0, 0, 0, (0.0.0.0, 0.0.0.0, 0, 0,  )).
 BulkSendApplication sending packet with uid 46 and size 1300 from 10.1.2.4 to 10.1.1.6 with protocol 6
-	Packet with uid 46 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x1ff58f0
-	Packet with uid 46 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x1fdd700
-	Packet with uid 46 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x1fd8bf0
+	Packet with uid 46 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x224b8f0
+	Packet with uid 46 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x2233700
+	Packet with uid 46 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )) at interface 0x222ebf0
 BulkSendApplication sending packet with uid 49 and size 1300 from 10.1.3.8 to 10.1.4.6 with protocol 6
-	Packet with uid 49 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )) at interface 0x2015190
-	Packet with uid 49 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )) at interface 0x1fdee00
-	Packet with uid 49 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )) at interface 0x1fdbbc0
+	Packet with uid 49 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )) at interface 0x226b190
+	Packet with uid 49 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )) at interface 0x2234e00
+	Packet with uid 49 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )) at interface 0x2231bc0
+Calling LocalDeliver on packet with uid 49 and size 1332
+	Packet with uid 49 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+##### 0x1ebf6f0 
+ [node 23] About to forward up packet with uid 49 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+ [node 23] §§§§§§§ TcpSocketBase: About to forward up packet with uid 49 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+ [node 23] §§§§§§§ TcpSocketBase: calling DoForwardUp on packet with uid 49
+ [node 23] §§§§§§§ TcpSocketBase/DoForwardUp: About to enter switch(m_state) for packet with uid 49 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+ [node 23] state ESTABLISHED!
+TCP-RX-BUFFER/Add: Packet with uid 49 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:
+TCP-RX-BUFFER/Add: Packet with uid 49 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:
+TCP-RX-BUFFER/Add: Packet with uid 49 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+ [node 23] §§§§§§§ TcpSocketBase/ReceivedData: About to enter NotifyDataRecv for packet with uid 49 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+ [node 23] TCPSOCKETBASE/RecvFrom: Packet with uid 57 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
+PACKETSINK: Packet with uid 57 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.4.6, 1, 1, )).
 At time 0.000865296s packet sink received 1300 bytes from 10.1.3.8 port 49154 total Rx 1300 bytes
-Packet with uid 57 and size 1300 had IntTag of size 0 and contents: (0, 0, 0, 0, (0.0.0.0, 0.0.0.0, 0, 0,  )).
 BulkSendApplication sending packet with uid 61 and size 1300 from 10.1.3.4 to 10.1.2.4 with protocol 6
-	Packet with uid 61 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )) at interface 0x1ff6530
-	Packet with uid 61 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )) at interface 0x1fdee00
-	Packet with uid 61 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )) at interface 0x1fdb440
+	Packet with uid 61 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )) at interface 0x224c530
+	Packet with uid 61 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )) at interface 0x2234e00
+	Packet with uid 61 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )) at interface 0x2231440
 BulkSendApplication sending packet with uid 63 and size 1300 from 10.1.3.8 to 10.1.5.4 with protocol 6
-	Packet with uid 63 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.5.4, 1, 1, )) at interface 0x2015190
-	Packet with uid 63 and size 1332 had IntTag of size 1 and contents: (49721, 36086, 0, 0, (10.1.3.8, 10.1.5.4, 1, 1, )) at interface 0x1fde680
-	Packet with uid 63 and size 1332 had IntTag of size 1 and contents: (49721, 36087, 0, 0, (10.1.3.8, 10.1.5.4, 1, 1, )) at interface 0x1fd9a00
+	Packet with uid 63 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.5.4, 1, 1, )) at interface 0x226b190
+	Packet with uid 63 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.5.4, 1, 1, )) at interface 0x2234680
+	Packet with uid 63 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.8, 10.1.5.4, 1, 1, )) at interface 0x222fa00
+Calling LocalDeliver on packet with uid 46 and size 1332
+	Packet with uid 46 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+##### 0x1ea65a0 
+ [node 11] About to forward up packet with uid 46 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] §§§§§§§ TcpSocketBase: About to forward up packet with uid 46 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] §§§§§§§ TcpSocketBase: calling DoForwardUp on packet with uid 46
+ [node 11] §§§§§§§ TcpSocketBase/DoForwardUp: About to enter switch(m_state) for packet with uid 46 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] state ESTABLISHED!
+TCP-RX-BUFFER/Add: Packet with uid 46 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:
+TCP-RX-BUFFER/Add: Packet with uid 46 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:
+TCP-RX-BUFFER/Add: Packet with uid 46 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] §§§§§§§ TcpSocketBase/ReceivedData: About to enter NotifyDataRecv for packet with uid 46 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+ [node 11] TCPSOCKETBASE/RecvFrom: Packet with uid 70 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
+PACKETSINK: Packet with uid 70 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.2.4, 10.1.1.6, 1, 1, )).
 At time 0.000955282s packet sink received 1300 bytes from 10.1.2.4 port 49157 total Rx 1300 bytes
-Packet with uid 70 and size 1300 had IntTag of size 0 and contents: (0, 0, 0, 0, (0.0.0.0, 0.0.0.0, 0, 0,  )).
+Calling LocalDeliver on packet with uid 61 and size 1332
+	Packet with uid 61 and size 1332 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+##### 0x1eac970 
+ [node 14] About to forward up packet with uid 61 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+ [node 14] §§§§§§§ TcpSocketBase: About to forward up packet with uid 61 and size 1332 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+ [node 14] §§§§§§§ TcpSocketBase: calling DoForwardUp on packet with uid 61
+ [node 14] §§§§§§§ TcpSocketBase/DoForwardUp: About to enter switch(m_state) for packet with uid 61 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+ [node 14] state ESTABLISHED!
+TCP-RX-BUFFER/Add: Packet with uid 61 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:
+TCP-RX-BUFFER/Add: Packet with uid 61 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:
+TCP-RX-BUFFER/Add: Packet with uid 61 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+ [node 14] §§§§§§§ TcpSocketBase/ReceivedData: About to enter NotifyDataRecv for packet with uid 61 and size 1300 which had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+ [node 14] TCPSOCKETBASE/RecvFrom: Packet with uid 74 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
+PACKETSINK: Packet with uid 74 and size 1300 had IntTag of size 1 and contents: (49721, 36085, 0, 0, (10.1.3.4, 10.1.2.4, 1, 1, )).
 At time 0.000996428s packet sink received 1300 bytes from 10.1.3.4 port 49153 total Rx 1300 bytes
-Packet with uid 74 and size 1300 had IntTag of size 0 and contents: (0, 0, 0, 0, (0.0.0.0, 0.0.0.0, 0, 0,  )).
 Stop simulation

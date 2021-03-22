@@ -39,6 +39,7 @@
 #include "ipv4-end-point.h"
 #include "ipv6-end-point.h"
 #include <limits>
+#include "IntTag.h"
 
 namespace ns3 {
 
@@ -1014,6 +1015,25 @@ UdpSocketImpl::ForwardUp (Ptr<Packet> packet, Ipv4Header header, uint16_t port,
                           Ptr<Ipv4Interface> incomingInterface)
 {
   NS_LOG_FUNCTION (this << packet << header << port);
+
+  uint32_t uid = packet->GetUid ();
+  uint32_t psize = packet->GetSize();
+  
+  if (psize > 1000) {
+
+    MainIntTag maybeIntTag;
+    NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
+            maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
+    uint32_t tag_size = packet->PeekPacketTag(maybeIntTag);
+    ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
+    //if (tag_found) {
+        NS_LOG_INFO("§§§§§§§ UdpSocketImpl: About to forward up packet with uid " << uid << " and size " << psize << " which had IntTag of size " << tag_size 
+            << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
+            << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
+            << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
+            << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
+            << ")).");
+  }
 
   if (m_shutdownRecv)
     {
