@@ -12,14 +12,6 @@ TypeId MainIntTag::GetTypeId (void) {
   static TypeId tid = TypeId ("ns3::MainIntTag")
     .SetParent<Tag> ()
     .AddConstructor<MainIntTag> ();
-    // .AddAttribute ("mode_", "The mode of the INT header.",
-    //   UintegerValue (0),
-    //   MakeUintegerAccessor (&MainIntTag::mode_),
-    //   MakeUintegerChecker<uint16_t> ())
-    // .AddAttribute ("n_entries_", "The number of entries in the tag.",
-    //   UintegerValue (0),
-    //   MakeUintegerAccessor (&MainIntTag::n_entries_),
-    //   MakeUintegerChecker<uint16_t> ());
   return tid;
 }
 
@@ -103,6 +95,10 @@ bool MainIntTag::FiveTupleUnInitialized(void) const {
           five_tuple_.protocol == 0);
 }
 
+bool MainIntTag::IsModePitcher(void) const {
+  return (mode_ == 49721);
+}
+
 void MainIntTag::SetMode (uint16_t mode) {
   mode_ = mode;
 }
@@ -128,5 +124,260 @@ void MainIntTag::SetCrc1(uint16_t crc1) {
 void MainIntTag::SetCrc2(uint16_t crc2) {
   crc2_ = crc2;
 }
+
+
+
+//##############################################################
+
+
+
+IntTag1::IntTag1 ()
+  : mode_ (0), hop_latency_(0), switch_id_(0) {
+}
+
+TypeId IntTag1::GetTypeId (void) {
+  static TypeId tid = TypeId ("ns3::IntTag1")
+    .SetParent<Tag> ()
+    .AddConstructor<IntTag1> ();
+  return tid;
+}
+
+TypeId IntTag1::GetInstanceTypeId (void) const {
+  return GetTypeId ();
+}
+
+uint32_t IntTag1::GetSerializedSize (void) const {
+  return (16+32+32)/8;
+}
+
+void IntTag1::Serialize (TagBuffer i) const {
+  i.WriteU32 (hop_latency_);
+  i.WriteU32 (switch_id_);
+  i.WriteU16 (mode_);
+}
+
+void IntTag1::Deserialize (TagBuffer i) {
+  hop_latency_ = i.ReadU32 ();
+  switch_id_ = i.ReadU32 ();
+  mode_ = i.ReadU16 (); 
+}
+
+void IntTag1::Print (std::ostream &os) const {
+  os << "Mode: " << mode_ << ", SwitchId: " << switch_id_ << ", HopLatency: " << hop_latency_;
+}
+
+uint16_t IntTag1::GetMode (void) const {
+  return mode_;
+}
+
+uint32_t IntTag1::GetSwitchId (void) const {
+  return switch_id_;
+}
+
+uint32_t IntTag1::GetHopLatency (void) const {
+  return hop_latency_;
+}
+
+bool IntTag1::IsModePitcher(void) const {
+  return (mode_ == 49721);
+}
+
+void IntTag1::SetMode (uint16_t mode) {
+  mode_ = mode;
+}
+
+void IntTag1::SetHopLatency (uint32_t hop_latency) {
+  hop_latency_ = hop_latency;
+}
+
+void IntTag1::SetSwitchId (uint32_t switch_id) {
+  switch_id_ = switch_id;
+}
+
+
+
+//##############################################################
+
+
+
+IntTag2::IntTag2 ()
+  : mode_ (0), hop_latency_(0), switch_id_(0) {
+}
+
+TypeId IntTag2::GetTypeId (void) {
+  static TypeId tid = TypeId ("ns3::IntTag2")
+    .SetParent<Tag> ()
+    .AddConstructor<IntTag2> ();
+  return tid;
+}
+
+TypeId IntTag2::GetInstanceTypeId (void) const {
+  return GetTypeId ();
+}
+
+uint32_t IntTag2::GetSerializedSize (void) const {
+  return (16+32+32)/8;
+}
+
+void IntTag2::Serialize (TagBuffer i) const {
+  i.WriteU32 (hop_latency_);
+  i.WriteU32 (switch_id_);
+  i.WriteU16 (mode_);
+}
+
+void IntTag2::Deserialize (TagBuffer i) {
+  hop_latency_ = i.ReadU32 ();
+  switch_id_ = i.ReadU32 ();
+  mode_ = i.ReadU16 (); 
+}
+
+void IntTag2::Print (std::ostream &os) const {
+  os << "Mode: " << mode_ << ", SwitchId: " << switch_id_ << ", HopLatency: " << hop_latency_;
+}
+
+uint16_t IntTag2::GetMode (void) const {
+  return mode_;
+}
+
+uint32_t IntTag2::GetSwitchId (void) const {
+  return switch_id_;
+}
+
+uint32_t IntTag2::GetHopLatency (void) const {
+  return hop_latency_;
+}
+
+bool IntTag2::IsModePitcher(void) const {
+  return (mode_ == 49721);
+}
+
+void IntTag2::SetMode (uint16_t mode) {
+  mode_ = mode;
+}
+
+void IntTag2::SetHopLatency (uint32_t hop_latency) {
+  hop_latency_ = hop_latency;
+}
+
+void IntTag2::SetSwitchId (uint32_t switch_id) {
+  switch_id_ = switch_id;
+}
+
+
+
+
+
+//##############################################################
+
+
+
+
+IntTag3::IntTag3 ()
+  : mode_ (0), hop_latency_(0), switch_id_(0) {
+}
+
+TypeId IntTag3::GetTypeId (void) {
+  static TypeId tid = TypeId ("ns3::IntTag3")
+    .SetParent<Tag> ()
+    .AddConstructor<IntTag3> ();
+  return tid;
+}
+
+TypeId IntTag3::GetInstanceTypeId (void) const {
+  return GetTypeId ();
+}
+
+uint32_t IntTag3::GetSerializedSize (void) const {
+  return (16+32+32)/8;
+}
+
+void IntTag3::Serialize (TagBuffer i) const {
+  i.WriteU32 (hop_latency_);
+  i.WriteU32 (switch_id_);
+  i.WriteU16 (mode_);
+}
+
+void IntTag3::Deserialize (TagBuffer i) {
+  hop_latency_ = i.ReadU32 ();
+  switch_id_ = i.ReadU32 ();
+  mode_ = i.ReadU16 (); 
+}
+
+void IntTag3::Print (std::ostream &os) const {
+  os << "Mode: " << mode_ << ", SwitchId: " << switch_id_ << ", HopLatency: " << hop_latency_;
+}
+
+uint16_t IntTag3::GetMode (void) const {
+  return mode_;
+}
+
+uint32_t IntTag3::GetSwitchId (void) const {
+  return switch_id_;
+}
+
+uint32_t IntTag3::GetHopLatency (void) const {
+  return hop_latency_;
+}
+
+bool IntTag3::IsModePitcher(void) const {
+  return (mode_ == 49721);
+}
+
+void IntTag3::SetMode (uint16_t mode) {
+  mode_ = mode;
+}
+
+void IntTag3::SetHopLatency (uint32_t hop_latency) {
+  hop_latency_ = hop_latency;
+}
+
+void IntTag3::SetSwitchId (uint32_t switch_id) {
+  switch_id_ = switch_id;
+}
+
+
+
+// #######################################################################
+
+
+
+MainIntTag CloneMainIntTag(MainIntTag old_tag) {
+  MainIntTag new_tag;
+  new_tag.SetMode(old_tag.GetMode());
+  new_tag.SetNEntries(old_tag.GetNEntries());
+  new_tag.SetCrc1(old_tag.GetCrc1());
+  new_tag.SetCrc2(old_tag.GetCrc2());
+
+  ns3::five_tuple_t old_5_tuple = old_tag.GetFiveTuple();
+  new_tag.SetFiveTuple(old_5_tuple.source_ip, old_5_tuple.dest_ip, old_5_tuple.source_port, old_5_tuple.dest_port, old_5_tuple.protocol);
+
+  return new_tag;
+}
+
+
+IntTag1 CloneIntTag1(IntTag1 old_tag) {
+  IntTag1 new_tag;
+  new_tag.SetMode(old_tag.GetMode());
+  new_tag.SetHopLatency(old_tag.GetHopLatency());
+  new_tag.SetSwitchId(old_tag.GetSwitchId());
+  return new_tag;
+}
+
+IntTag2 CloneIntTag2(IntTag2 old_tag) {
+  IntTag2 new_tag;
+  new_tag.SetMode(old_tag.GetMode());
+  new_tag.SetHopLatency(old_tag.GetHopLatency());
+  new_tag.SetSwitchId(old_tag.GetSwitchId());
+  return new_tag;
+}
+IntTag3 CloneIntTag1(IntTag3 old_tag) { 
+  IntTag3 new_tag;
+  new_tag.SetMode(old_tag.GetMode());
+  new_tag.SetHopLatency(old_tag.GetHopLatency());
+  new_tag.SetSwitchId(old_tag.GetSwitchId());
+  return new_tag;
+
+}
+
 
 }

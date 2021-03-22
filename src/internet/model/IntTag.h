@@ -36,7 +36,7 @@ public:
   uint16_t GetCrc2(void) const;
 
   bool FiveTupleUnInitialized(void) const;
-  bool IntInfoEntryUnInitialized(unsigned int index) const;
+  bool IsModePitcher(void) const;
 
   void SetMode(uint16_t mode);
   void SetNEntries (uint16_t n_entries);
@@ -60,110 +60,123 @@ private:
 };
 
 
+// ################################################################
+
+
+class IntTag1 : public Tag
+{
+public:
+  IntTag1 ();
+
+  static TypeId GetTypeId (void);
+  virtual TypeId GetInstanceTypeId (void) const;
+
+  virtual uint32_t GetSerializedSize (void) const;
+  virtual void Serialize (TagBuffer i) const;
+  virtual void Deserialize (TagBuffer i);
+  virtual void Print (std::ostream &os) const;
+
+  uint16_t GetMode (void) const;
+  uint32_t GetHopLatency (void) const;
+  uint32_t GetSwitchId (void) const;
+
+  bool IsModePitcher(void) const;
+
+  void SetMode(uint16_t mode);
+  void SetHopLatency (uint32_t hop_latency);
+  void SetSwitchId (uint32_t switch_id);
+  
+
+private:
+  uint16_t mode_;
+  
+  uint32_t hop_latency_;
+  uint32_t switch_id_;
+};
+
+
+// ################################################################
+
+
+class IntTag2 : public Tag
+{
+public:
+  IntTag2 ();
+
+  static TypeId GetTypeId (void);
+  virtual TypeId GetInstanceTypeId (void) const;
+
+  virtual uint32_t GetSerializedSize (void) const;
+  virtual void Serialize (TagBuffer i) const;
+  virtual void Deserialize (TagBuffer i);
+  virtual void Print (std::ostream &os) const;
+
+  uint16_t GetMode (void) const;
+  uint32_t GetHopLatency (void) const;
+  uint32_t GetSwitchId (void) const;
+
+  bool IsModePitcher(void) const;
+
+  void SetMode(uint16_t mode);
+  void SetHopLatency (uint32_t hop_latency);
+  void SetSwitchId (uint32_t switch_id);
+  
+
+private:
+  uint16_t mode_;
+  
+  uint32_t hop_latency_;
+  uint32_t switch_id_;
+};
+
+
+// ################################################################
+
+
+class IntTag3 : public Tag
+{
+public:
+  IntTag3 ();
+
+  static TypeId GetTypeId (void);
+  virtual TypeId GetInstanceTypeId (void) const;
+
+  virtual uint32_t GetSerializedSize (void) const;
+  virtual void Serialize (TagBuffer i) const;
+  virtual void Deserialize (TagBuffer i);
+  virtual void Print (std::ostream &os) const;
+
+  uint16_t GetMode (void) const;
+  uint32_t GetHopLatency (void) const;
+  uint32_t GetSwitchId (void) const;
+
+  bool IsModePitcher(void) const;
+
+  void SetMode(uint16_t mode);
+  void SetHopLatency (uint32_t hop_latency);
+  void SetSwitchId (uint32_t switch_id);
+  
+
+private:
+  uint16_t mode_;
+  
+  uint32_t hop_latency_;
+  uint32_t switch_id_;
+};
+
+
+
+// ##############################################################
+
+
+MainIntTag CloneMainIntTag(MainIntTag old_tag);
+IntTag1 CloneIntTag1(IntTag1 old_tag);
+IntTag2 CloneIntTag2(IntTag2 old_tag);
+IntTag3 CloneIntTag1(IntTag3 old_tag);
 
 }
 #endif
 
-
-// class IntTag1 : public Tag
-// {
-// public:
-//   IntTag1 ();
-
-//   static TypeId GetTypeId (void);
-//   virtual TypeId GetInstanceTypeId (void) const;
-
-//   virtual uint32_t GetSerializedSize (void) const;
-//   virtual void Serialize (TagBuffer i) const;
-//   virtual void Deserialize (TagBuffer i);
-//   virtual void Print (std::ostream &os) const;
-
-//   uint16_t GetMode (void) const;
-//   uint32_t GetHopLatency (void) const;
-//   uint32_t GetSwitchId (void) const;
-
-
-//   void SetMode(uint16_t mode);
-//   void SetHopLatency (uint32_t hop_latency);
-//   void SetSwitchId (uint32_t switch_id);
-  
-
-// private:
-//   uint16_t mode_;
-  
-//   uint32_t hop_latency_;
-//   uint32_t switch_id_;
-
-// };
-
-// IntTag1::IntTag1 ()
-//   : mode_ (0),
-//     hop_latency_(0),
-//     switch_id_(0)
-//     {}
-
-// TypeId IntTag1::GetTypeId (void) {
-//   static TypeId tid = TypeId ("ns3::IntTag1")
-//     .SetParent<Tag> ()
-//     .AddConstructor<IntTag1> ();
-//     // .AddAttribute ("mode_", "The mode of the INT header.",
-//     //   UintegerValue (0),
-//     //   MakeUintegerAccessor (&IntTag1::mode_),
-//     //   MakeUintegerChecker<uint16_t> ())
-//     // .AddAttribute ("n_entries_", "The number of entries in the tag.",
-//     //   UintegerValue (0),
-//     //   MakeUintegerAccessor (&IntTag1::n_entries_),
-//     //   MakeUintegerChecker<uint16_t> ());
-//   return tid;
-// }
-
-// TypeId IntTag1::GetInstanceTypeId (void) const {
-//   return GetTypeId ();
-// }
-
-// uint32_t IntTag1::GetSerializedSize (void) const {
-//   return (16+32+32)/8;
-// }
-
-// void IntTag1::Serialize (TagBuffer i) const {
-//   i.WriteU32 (hop_latency_);
-//   i.WriteU32 (switch_id_);
-//   i.WriteU16 (mode_);
-// }
-
-// void IntTag1::Deserialize (TagBuffer i) {
-//   hop_latency_ = i.ReadU32 ();
-//   switch_id_ = i.ReadU32 ();
-//   mode_ = i.ReadU16 (); 
-// }
-
-// void IntTag1::Print (std::ostream &os) const {
-//   os << "Mode: " << mode_ << ", SwitchId: " << switch_id_ << ", HopLatency: " << hop_latency_;
-// }
-
-// uint16_t IntTag1::GetMode (void) const {
-//   return mode_;
-// }
-
-// uint32_t IntTag1::GetSwitchId (void) const {
-//   return switch_id_;
-// }
-
-// uint32_t IntTag1::GetHopLatency (void) const {
-//   return hop_latency_;
-// }
-
-// void IntTag1::SetMode (uint16_t mode) {
-//   mode_ = mode;
-// }
-
-// void IntTag1::SetHopLatency (uint32_t hop_latency) {
-//   hop_latency_ = hop_latency;
-// }
-
-// void IntTag1::SetSwitchId (uint32_t switch_id) {
-//   switch_id_ = switch_id;
-// }
 
 // }
 

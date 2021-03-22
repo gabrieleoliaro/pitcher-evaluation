@@ -7,8 +7,11 @@
 #include "ns3/ipv4-queue-disc-item.h"
 #include "ns3/drop-tail-queue.h"
 #include "ns3/internet-module.h"
+#include "../../crc16.c"
 
 #define DEFAULT_TCN_LIMIT 100
+#define HOP_LATENCY_THRESHOLD 0 // divide hop latency values by 2^7=128 ns
+
 
 namespace ns3 {
 
@@ -192,15 +195,13 @@ TCNQueueDisc::DoDequeue (void) {
     MainIntTag maybeIntTag;
     NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
             maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
-
-    //uint32_t tag_size = p->RemovePacketTag(maybeIntTag);
     uint32_t tag_size = p->PeekPacketTag(maybeIntTag);
-    bool tag_found = (maybeIntTag.GetMode() == 49721 && maybeIntTag.GetNEntries() >= 36085);
-
     ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
 
-
-    if (tag_found) {
+    if (maybeIntTag.IsModePitcher()) {
+        
+        tag_size = p->RemovePacketTag(maybeIntTag);
+        
         NS_LOG_INFO("\tPacket with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
             << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
             << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
@@ -208,10 +209,91 @@ TCNQueueDisc::DoDequeue (void) {
             << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
             << ")) at interface " <<  GetInterfaceName());
 
+        // Check that the number of entries is less than 3
+        NS_ASSERT(maybeIntTag.GetNEntries() < 3);
+        IntTag1 maybeIntTag1; IntTag2 maybeIntTag2; IntTag3 maybeIntTag3;
+        IntTag1 new_int_tag1; IntTag2 new_int_tag2; IntTag3 new_int_tag3;
 
-        // Increment nentries
-        //maybeIntTag.SetNEntries(maybeIntTag.GetNEntries()+1);
-        //p->AddPacketTag(maybeIntTag);
+        unsigned char* crc1_buffer = (unsigned char*) malloc(10);
+        unsigned char* crc2_buffer = (unsigned char*) malloc(10);
+        
+        uint16_t old_crc1 = maybeIntTag.GetCrc1();
+        uint16_t old_crc2 = maybeIntTag.GetCrc2();
+        
+        uint32_t swid = (uint32_t) std::strtoul(GetInterfaceName().c_str(), NULL, 16);
+        uint32_t st_threshold1 = (uint32_t) hop_latency >> HOP_LATENCY_THRESHOLD;
+        uint32_t st_threshold2 = ((uint32_t) hop_latency + (HOP_LATENCY_THRESHOLD >> 2)) >> HOP_LATENCY_THRESHOLD;
+        
+        memcpy(crc1_buffer, &old_crc1, 2);
+        memcpy(crc1_buffer + 2, &swid, 4);
+        memcpy(crc1_buffer + 6, &st_threshold1, 4);
+       
+        memcpy(crc1_buffer, &old_crc2, 2);
+        memcpy(crc1_buffer + 2, &swid, 4);
+        memcpy(crc1_buffer + 6, &st_threshold2, 4);
+
+        uint16_t new_crc1 = crc_16(crc1_buffer, 10);
+        uint16_t new_crc2 = crc_16(crc2_buffer, 10);
+
+        maybeIntTag.SetCrc1(new_crc1);
+        maybeIntTag.SetCrc2(new_crc2);
+
+        switch(maybeIntTag.GetNEntries()) {
+            case 0: {
+                // check that neither IntTag1, nor IntTag2, nor IntTag3 are present
+                p->PeekPacketTag(maybeIntTag1);
+                p->PeekPacketTag(maybeIntTag2);
+                p->PeekPacketTag(maybeIntTag3);
+                NS_ASSERT(!maybeIntTag1.IsModePitcher() && !maybeIntTag2.IsModePitcher() && !maybeIntTag3.IsModePitcher());
+                // check that the CRCs are all zero
+                //NS_ASSERT(maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
+                // add IntTag1
+                new_int_tag1.SetMode(49721);
+                new_int_tag1.SetHopLatency((uint32_t) hop_latency);
+                new_int_tag1.SetSwitchId(swid) ;
+                NS_LOG_INFO("\t\tAdding IntTag1 with mode: " << new_int_tag1.GetMode() << ", hop_latency: " << new_int_tag1.GetHopLatency() << ", SwitchId: " << new_int_tag1.GetSwitchId());
+                p->AddPacketTag(new_int_tag1);
+
+                break;
+            }
+            case 1: {
+                // check that IntTag1 is present, but neither IntTag2, nor IntTag3 are present
+                p->PeekPacketTag(maybeIntTag1);
+                p->PeekPacketTag(maybeIntTag2);
+                p->PeekPacketTag(maybeIntTag3);
+                NS_ASSERT(maybeIntTag1.IsModePitcher() && !maybeIntTag2.IsModePitcher() && !maybeIntTag3.IsModePitcher());
+                // add IntTag2
+                new_int_tag2.SetMode(49721);
+                new_int_tag2.SetHopLatency((uint32_t) hop_latency);
+                new_int_tag2.SetSwitchId(swid) ;
+                NS_LOG_INFO("\t\tAdding IntTag2 with mode: " << new_int_tag2.GetMode() << ", hop_latency: " << new_int_tag2.GetHopLatency() << ", SwitchId: " << new_int_tag2.GetSwitchId());
+                p->AddPacketTag(new_int_tag2);
+
+                break;
+            }
+            case 2: {
+                // check that IntTag1 and IntTag2 are present, but IntTag3 is not present
+                p->PeekPacketTag(maybeIntTag1);
+                p->PeekPacketTag(maybeIntTag2);
+                p->PeekPacketTag(maybeIntTag3);
+                NS_ASSERT(maybeIntTag1.IsModePitcher() && maybeIntTag2.IsModePitcher() && !maybeIntTag3.IsModePitcher());
+                // add IntTag2
+                new_int_tag3.SetMode(49721);
+                new_int_tag3.SetHopLatency((uint32_t) hop_latency);
+                new_int_tag3.SetSwitchId(swid);
+                NS_LOG_INFO("\t\tAdding IntTag3 with mode: " << new_int_tag3.GetMode() << ", hop_latency: " << new_int_tag3.GetHopLatency() << ", SwitchId: " << new_int_tag3.GetSwitchId());
+                p->AddPacketTag(new_int_tag3);
+                break;
+            }
+            default: {
+                NS_ASSERT(false);
+                break;
+            }
+        }
+
+        maybeIntTag.SetNEntries(maybeIntTag.GetNEntries()+1);
+        p->AddPacketTag(maybeIntTag);
+        
         
 
     } else {

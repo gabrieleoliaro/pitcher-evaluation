@@ -254,58 +254,35 @@ void BulkSendApplication::SendData (void)
 
       // Node on which the BulkSendApplication is being run
       Ptr<Node> this_node = GetNode();
-      NS_ASSERT(this_node);
+      
 
       NS_LOG_INFO("BulkSendApplication sending packet with uid "<< uid << " and size " << psize 
                   << " from " << Ipv4Address(GetIpSource()) << " to " << Ipv4Address(GetIpDest()) 
                   << " with protocol " << GetFivetupleProt());
-      //NS_LOG_INFO("found " << this_node->GetNDevices() << " devices associated with the node attached to this BulkSendApplication");
+      
       
       // Add the IntTag
       MainIntTag tag;
-      //NS_LOG_INFO("size: " << tag.GetSerializedSize());
       NS_ASSERT(tag.GetMode() == 0 && tag.GetNEntries() == 0 && tag.FiveTupleUnInitialized() && tag.GetCrc1() == 0 && tag.GetCrc2() == 0);
       tag.SetMode(49721);
-      tag.SetNEntries(36085);
       tag.SetFiveTuple(GetIpSource(), GetIpDest(), /*(source port)*/ 1, /*(destination port)*/1, GetFivetupleProt());
-
-      ns3::five_tuple_t five_tuple = tag.GetFiveTuple();
-      NS_ASSERT(tag.GetMode() == 49721 && tag.GetNEntries() == 36085 && five_tuple.source_ip == GetIpSource() && 
-        five_tuple.dest_ip == GetIpDest() && five_tuple.source_port == 1 && five_tuple.dest_port == 1 && five_tuple.protocol == GetFivetupleProt());
-
+      NS_ASSERT(tag.IsModePitcher());
+      //ns3::five_tuple_t five_tuple = tag.GetFiveTuple();
+      //NS_ASSERT(tag.GetMode() == 49721 && tag.GetNEntries() == 36085 && five_tuple.source_ip == GetIpSource() && 
+      //  five_tuple.dest_ip == GetIpDest() && five_tuple.source_port == 1 && five_tuple.dest_port == 1 && five_tuple.protocol == GetFivetupleProt());
       packet->AddPacketTag (tag);
       
       // verification of the tag
-      uint32_t psize1 = packet->GetSize();
-      NS_ASSERT(psize1 == psize);
-      MainIntTag tag_check;
-      NS_ASSERT(tag_check.GetMode() == 0 && tag_check.GetNEntries() == 0 && tag_check.FiveTupleUnInitialized() && 
-                tag_check.GetCrc1() == 0 && tag_check.GetCrc2() == 0);
-      packet->PeekPacketTag(tag_check);
-      ns3::five_tuple_t five_tuple_check = tag_check.GetFiveTuple();
-      NS_ASSERT(tag_check.GetMode() == 49721 && tag_check.GetNEntries() == 36085 && tag_check.GetCrc1() == 0 && tag_check.GetCrc2() == 0 && 
-        five_tuple_check.source_ip == GetIpSource() && five_tuple_check.dest_ip == GetIpDest() && five_tuple_check.source_port == 1 && 
-        five_tuple_check.dest_port == 1 && five_tuple_check.protocol == GetFivetupleProt());
-
-
-
-
-      // // Add the IntHeader, see what happens
-      // IntHeader inthead;
-      // NS_ASSERT(inthead.GetMode() == 0 && inthead.GetNEntries() == 0);
-      // inthead.SetMode(49721);
-      // inthead.SetNEntries(36085);
-      // NS_ASSERT(inthead.GetMode() == 49721 && inthead.GetNEntries() == 36085);
-
-      // packet->AddHeader(inthead);
-      // psize = packet->GetSize();
-      // NS_LOG_INFO("BulkSendApplication added IntHeader to packet with uid "<< uid << " and new size is " << psize << " from ... ");
-
-      // // verification of the header
-      // IntHeader inthead_check;
-      // NS_ASSERT(inthead_check.GetMode() == 0 && inthead_check.GetNEntries() == 0);
-      // packet->PeekHeader(inthead_check);
-      // NS_ASSERT(inthead_check.GetMode() == 49721 && inthead_check.GetNEntries() == 36085);
+      //uint32_t psize1 = packet->GetSize();
+      //NS_ASSERT(psize1 == psize);
+      //MainIntTag tag_check;
+      //NS_ASSERT(tag_check.GetMode() == 0 && tag_check.GetNEntries() == 0 && tag_check.FiveTupleUnInitialized() && 
+      //          tag_check.GetCrc1() == 0 && tag_check.GetCrc2() == 0);
+      //packet->PeekPacketTag(tag_check);
+      //ns3::five_tuple_t five_tuple_check = tag_check.GetFiveTuple();
+      //NS_ASSERT(tag_check.GetMode() == 49721 && tag_check.GetNEntries() == 36085 && tag_check.GetCrc1() == 0 && tag_check.GetCrc2() == 0 && 
+      //  five_tuple_check.source_ip == GetIpSource() && five_tuple_check.dest_ip == GetIpDest() && five_tuple_check.source_port == 1 && 
+      // five_tuple_check.dest_port == 1 && five_tuple_check.protocol == GetFivetupleProt());
 
       
       SocketIpTosTag tosTag;

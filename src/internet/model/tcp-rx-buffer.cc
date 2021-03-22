@@ -251,18 +251,7 @@ TcpRxBuffer::Extract (uint32_t maxSize)
           bool tag_found = (maybeIntTag.GetMode() == 49721);
           
           if (tag_found) {
-            MainIntTag newTag;
-            newTag.SetMode(maybeIntTag.GetMode());
-            newTag.SetNEntries(maybeIntTag.GetNEntries());
-            newTag.SetCrc1(maybeIntTag.GetCrc1());
-            newTag.SetCrc2(maybeIntTag.GetCrc2());
-
-            ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
-            newTag.SetFiveTuple(maybe_five_tuple.source_ip,
-                                maybe_five_tuple.dest_ip,
-                                maybe_five_tuple.source_port,
-                                maybe_five_tuple.dest_port,
-                                maybe_five_tuple.protocol);
+            MainIntTag newTag = ns3::CloneMainIntTag(maybeIntTag);
             outPkt->AddPacketTag(newTag);
 
           }
