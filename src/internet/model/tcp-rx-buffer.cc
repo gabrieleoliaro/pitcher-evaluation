@@ -191,56 +191,7 @@ TcpRxBuffer::Add (Ptr<Packet> p, TcpHeader const& tcph)
     {
       uint32_t start = headSeq - tcph.GetSequenceNumber ();
       uint32_t length = tailSeq - headSeq;
-
-
-      uint32_t uid_before = p->GetUid ();
-      uint32_t psize_before = p->GetSize();
-
-      MainIntTag IntTag_before;
-      NS_ASSERT(IntTag_before.GetMode() == 0 && IntTag_before.GetNEntries() == 0 && IntTag_before.FiveTupleUnInitialized() && 
-              IntTag_before.GetCrc1() == 0 && IntTag_before.GetCrc2() == 0);
-
-      uint32_t tag_size_before = p->PeekPacketTag(IntTag_before);
-      //bool tag_found = (IntTag_before.GetMode() == 49721 && IntTag_before.GetNEntries() >= 36085);
-
-      ns3::five_tuple_t five_tuple_before = IntTag_before.GetFiveTuple();
-
-
-      
-      NS_LOG_INFO("TCP-RX-BUFFER/Add: Packet with uid " << uid_before << " and size " << psize_before << " had IntTag of size " << tag_size_before
-          << " and contents: (" << IntTag_before.GetMode() << ", " <<  IntTag_before.GetNEntries() 
-          << ", " <<  IntTag_before.GetCrc1() << ", " <<  IntTag_before.GetCrc2()
-          << ", (" <<  Ipv4Address(five_tuple_before.source_ip) << ", " <<  Ipv4Address(five_tuple_before.dest_ip)
-          << ", " <<  five_tuple_before.source_port << ", " <<  five_tuple_before.dest_port << ", " <<  five_tuple_before.protocol
-          << ")).");
-      
-
       p = p->CreateFragment (start, length);
-
-      NS_LOG_INFO("TCP-RX-BUFFER/Add: After creating the fragment, new packet is now:");
-
-      uint32_t uid_after = p->GetUid ();
-      uint32_t psize_after = p->GetSize();
-
-      MainIntTag IntTag_after;
-      NS_ASSERT(IntTag_after.GetMode() == 0 && IntTag_after.GetNEntries() == 0 && IntTag_after.FiveTupleUnInitialized() && 
-              IntTag_after.GetCrc1() == 0 && IntTag_after.GetCrc2() == 0);
-
-      uint32_t tag_size_after = p->PeekPacketTag(IntTag_after);
-      //bool tag_found = (IntTag_after.GetMode() == 49721 && IntTag_after.GetNEntries() >= 36085);
-
-      ns3::five_tuple_t five_tuple_after = IntTag_after.GetFiveTuple();
-
-
-      
-      NS_LOG_INFO("TCP-RX-BUFFER/Add: Packet with uid " << uid_after << " and size " << psize_after << " had IntTag of size " << tag_size_after
-          << " and contents: (" << IntTag_after.GetMode() << ", " <<  IntTag_after.GetNEntries() 
-          << ", " <<  IntTag_after.GetCrc1() << ", " <<  IntTag_after.GetCrc2()
-          << ", (" <<  Ipv4Address(five_tuple_after.source_ip) << ", " <<  Ipv4Address(five_tuple_after.dest_ip)
-          << ", " <<  five_tuple_after.source_port << ", " <<  five_tuple_after.dest_port << ", " <<  five_tuple_after.protocol
-          << ")).");
-
-
       NS_ASSERT (length == p->GetSize ());
     }
   // Insert packet into buffer
@@ -267,32 +218,9 @@ TcpRxBuffer::Add (Ptr<Packet> p, TcpHeader const& tcph)
     { // Account for the FIN packet
       ++m_nextRxSeq;
     };
-
-  NS_LOG_INFO("TCP-RX-BUFFER/Add: Right before returning, new packet (m_data[headSeq]) is now:");
-
-  uint32_t uid_after = m_data[headSeq]->GetUid ();
-  uint32_t psize_after = m_data[headSeq]->GetSize();
-
-  MainIntTag IntTag_after2;
-  NS_ASSERT(IntTag_after2.GetMode() == 0 && IntTag_after2.GetNEntries() == 0 && IntTag_after2.FiveTupleUnInitialized() && 
-          IntTag_after2.GetCrc1() == 0 && IntTag_after2.GetCrc2() == 0);
-
-  uint32_t tag_size_after = m_data[headSeq]->PeekPacketTag(IntTag_after2);
-  //bool tag_found = (IntTag_after.GetMode() == 49721 && IntTag_after.GetNEntries() >= 36085);
-
-  ns3::five_tuple_t five_tuple_after2 = IntTag_after2.GetFiveTuple();
-
-
-  
-  NS_LOG_INFO("TCP-RX-BUFFER/Add: Packet with uid " << uid_after << " and size " << psize_after << " had IntTag of size " << tag_size_after
-      << " and contents: (" << IntTag_after2.GetMode() << ", " <<  IntTag_after2.GetNEntries() 
-      << ", " <<  IntTag_after2.GetCrc1() << ", " <<  IntTag_after2.GetCrc2()
-      << ", (" <<  Ipv4Address(five_tuple_after2.source_ip) << ", " <<  Ipv4Address(five_tuple_after2.dest_ip)
-      << ", " <<  five_tuple_after2.source_port << ", " <<  five_tuple_after2.dest_port << ", " <<  five_tuple_after2.protocol
-      << ")).");
-
   return true;
 }
+
 
 Ptr<Packet>
 TcpRxBuffer::Extract (uint32_t maxSize)

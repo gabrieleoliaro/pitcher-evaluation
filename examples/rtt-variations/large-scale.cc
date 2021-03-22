@@ -114,9 +114,6 @@ int main (int argc, char *argv[]) {
   LogComponentEnable ("QueueDisc", LOG_LEVEL_INFO);
   LogComponentEnable ("BulkSendApplication", LOG_LEVEL_INFO);
   LogComponentEnable ("PacketSink", LOG_LEVEL_INFO);
-  LogComponentEnable ("Ipv4L3Protocol", LOG_LEVEL_INFO);
-  LogComponentEnable ("TcpL4Protocol", LOG_LEVEL_INFO);
-  LogComponentEnable ("TcpSocketBase", LOG_LEVEL_INFO);
   LogComponentEnable ("TcpRxBuffer", LOG_LEVEL_INFO);
 #endif
 
