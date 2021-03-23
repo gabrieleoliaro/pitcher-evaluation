@@ -15,6 +15,19 @@ typedef struct {
   uint8_t protocol;
 } five_tuple_t;
 
+typedef struct {
+  uint32_t source_ip;
+  uint32_t dest_ip;
+  uint16_t source_port;
+  uint16_t dest_port;
+  uint8_t protocol;
+  uint16_t crc1;
+  uint16_t crc2;
+} network_event_t;
+
+
+// A method to compare two network_event_t elements
+bool NewEventOccurred(network_event_t old_event, network_event_t new_event);
 
 class MainIntTag : public Tag
 {

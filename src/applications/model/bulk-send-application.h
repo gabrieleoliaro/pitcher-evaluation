@@ -101,6 +101,10 @@ public:
 
   uint32_t GetIpSource (void) const;
   uint32_t GetIpDest (void) const;
+
+  uint16_t GetSourcePort (void) const;
+  uint16_t GetDestPort (void) const;
+
   uint32_t GetFivetupleProt (void) const;
 
 
@@ -133,6 +137,10 @@ private:
 
   uint32_t        ip_source;
   uint32_t        ip_dest;
+
+  uint16_t        source_port;
+  uint16_t        dest_port;
+
   uint8_t         fivetupleprot;
 
   /// Traced Callback: sent packets

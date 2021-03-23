@@ -91,6 +91,16 @@ BulkSendApplication::GetTypeId (void)
                    UintegerValue (0),
                    MakeUintegerAccessor (&BulkSendApplication::ip_dest),
                    MakeUintegerChecker<uint32_t> ())
+    .AddAttribute ("SourcePort",
+                   "The source port to be used",
+                   UintegerValue (1),
+                   MakeUintegerAccessor (&BulkSendApplication::source_port),
+                   MakeUintegerChecker<uint16_t> ())
+    .AddAttribute ("DestPort",
+                   "The port of the destination.",
+                   UintegerValue (1),
+                   MakeUintegerAccessor (&BulkSendApplication::dest_port),
+                   MakeUintegerChecker<uint16_t> ())
     .AddAttribute ("FiveTupleProt",
                    "The protocol (as an unsigned 5 bit value) as used in the 5-tuple.",
                    UintegerValue (0),
@@ -112,6 +122,8 @@ BulkSendApplication::BulkSendApplication ()
     m_accumPackets (0),
     ip_source(0),
     ip_dest(0),
+    source_port(1),
+    dest_port(1),
     fivetupleprot(0)
 {
   NS_LOG_FUNCTION (this);
@@ -148,6 +160,21 @@ BulkSendApplication::GetIpDest (void) const
 {
   NS_LOG_FUNCTION (this);
   return ip_dest;
+}
+
+
+uint16_t
+BulkSendApplication::GetSourcePort (void) const
+{
+  NS_LOG_FUNCTION (this);
+  return source_port;
+}
+
+uint16_t
+BulkSendApplication::GetDestPort (void) const
+{
+  NS_LOG_FUNCTION (this);
+  return dest_port;
 }
 
 uint32_t
@@ -265,7 +292,7 @@ void BulkSendApplication::SendData (void)
       MainIntTag tag;
       NS_ASSERT(tag.GetMode() == 0 && tag.GetNEntries() == 0 && tag.FiveTupleUnInitialized() && tag.GetCrc1() == 0 && tag.GetCrc2() == 0);
       tag.SetMode(49721);
-      tag.SetFiveTuple(GetIpSource(), GetIpDest(), /*(source port)*/ 1, /*(destination port)*/1, GetFivetupleProt());
+      tag.SetFiveTuple(GetIpSource(), GetIpDest(), /*(source port)*/ GetSourcePort(), /*(destination port)*/ GetDestPort(), GetFivetupleProt());
       NS_ASSERT(tag.IsModePitcher());
       //ns3::five_tuple_t five_tuple = tag.GetFiveTuple();
       //NS_ASSERT(tag.GetMode() == 49721 && tag.GetNEntries() == 36085 && five_tuple.source_ip == GetIpSource() && 

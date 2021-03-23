@@ -41,6 +41,7 @@
 #include "ipv4-interface.h"
 #include "ipv4-raw-socket-impl.h"
 #include "ipv4-ecn-tag.h"
+#include<cstdlib>
 
 namespace ns3 {
 
@@ -116,11 +117,24 @@ Ipv4L3Protocol::GetTypeId (void)
 Ipv4L3Protocol::Ipv4L3Protocol()
 {
   NS_LOG_FUNCTION (this);
+  // Read the SINK_CACHE_SIZE value from env
+  char *buff = getenv("SINK_CACHE_SIZE");
+  if (!buff) {
+      NS_LOG_ERROR("SINK_CACHE_SIZE environment variable is not set!");
+      SINK_CACHE_SIZE = 0;
+      NS_ASSERT(!dataplane_cache);
+      return;
+  }
+
+  SINK_CACHE_SIZE = std::strtol(buff, NULL, 10);
+  NS_ASSERT(SINK_CACHE_SIZE >= 0);
+  dataplane_cache = new std::deque<ns3::network_event_t>[SINK_CACHE_SIZE];
 }
 
 Ipv4L3Protocol::~Ipv4L3Protocol ()
 {
   NS_LOG_FUNCTION (this);
+  delete [] dataplane_cache;
 }
 
 void
@@ -908,7 +922,7 @@ Ipv4L3Protocol::SendRealOut (Ptr<Ipv4Route> route,
                              Ipv4Header const &ipHeader)
 {
   NS_LOG_FUNCTION (this << route << packet << &ipHeader);
-  NS_LOG_DEBUG ("Sending Ip header: " << ipHeader);
+  //NS_LOG_DEBUG ("Sending Ip header: " << ipHeader);
   if (route == 0)
     {
       NS_LOG_WARN ("No route to host.  Drop.");
@@ -1049,60 +1063,157 @@ Ipv4L3Protocol::LocalDeliver (Ptr<const Packet> packet, Ipv4Header const&ip, uin
   Ptr<Packet> p = packet->Copy (); // need to pass a non-const packet up
   Ipv4Header ipHeader = ip;
 
-  if ( !ipHeader.IsLastFragment () || ipHeader.GetFragmentOffset () != 0 )
-    {
-      NS_LOG_LOGIC ("Received a fragment, processing " << *p );
-      bool isPacketComplete;
-      isPacketComplete = ProcessFragment (p, ipHeader, iif);
-      if ( isPacketComplete == false)
-        {
-          return;
-        }
-      NS_LOG_LOGIC ("Got last fragment, Packet is complete " << *p );
-      ipHeader.SetFragmentOffset (0);
-      ipHeader.SetPayloadSize (p->GetSize () + ipHeader.GetSerializedSize ());
+  if ( !ipHeader.IsLastFragment () || ipHeader.GetFragmentOffset () != 0 ) {
+    NS_LOG_LOGIC ("Received a fragment, processing " << *p );
+    bool isPacketComplete;
+    isPacketComplete = ProcessFragment (p, ipHeader, iif);
+    if ( isPacketComplete == false) {
+      return;
     }
+    NS_LOG_LOGIC ("Got last fragment, Packet is complete " << *p );
+    ipHeader.SetFragmentOffset (0);
+    ipHeader.SetPayloadSize (p->GetSize () + ipHeader.GetSerializedSize ());
+  }
 
   m_localDeliverTrace (ipHeader, p, iif);
 
   Ptr<IpL4Protocol> protocol = GetProtocol (ipHeader.GetProtocol (), iif);
-  if (protocol != 0)
-    {
-      // we need to make a copy in the unlikely event we hit the
-      // RX_ENDPOINT_UNREACH codepath
-      Ptr<Packet> copy = p->Copy ();
-      enum IpL4Protocol::RxStatus status =
-        protocol->Receive (p, ipHeader, GetInterface (iif));
-      switch (status) {
-        case IpL4Protocol::RX_OK:
-        // fall through
-        case IpL4Protocol::RX_ENDPOINT_CLOSED:
-        // fall through
-        case IpL4Protocol::RX_CSUM_FAILED:
-          break;
-        case IpL4Protocol::RX_ENDPOINT_UNREACH:
-          if (ipHeader.GetDestination ().IsBroadcast () == true ||
-              ipHeader.GetDestination ().IsMulticast () == true)
-            {
-              break; // Do not reply to broadcast or multicast
-            }
-          // Another case to suppress ICMP is a subnet-directed broadcast
-          bool subnetDirected = false;
-          for (uint32_t i = 0; i < GetNAddresses (iif); i++)
-            {
-              Ipv4InterfaceAddress addr = GetAddress (iif, i);
-              if (addr.GetLocal ().CombineMask (addr.GetMask ()) == ipHeader.GetDestination ().CombineMask (addr.GetMask ()) &&
-                  ipHeader.GetDestination ().IsSubnetDirectedBroadcast (addr.GetMask ()))
-                {
-                  subnetDirected = true;
-                }
-            }
-          if (subnetDirected == false)
-            {
-              GetIcmp ()->SendDestUnreachPort (ipHeader, copy);
-            }
+  if (protocol != 0) {
+    // we need to make a copy in the unlikely event we hit the
+    // RX_ENDPOINT_UNREACH codepath
+    Ptr<Packet> copy = p->Copy ();
+    
+
+
+
+
+
+
+    uint32_t uid = p->GetUid ();
+    uint32_t psize = p->GetSize();
+
+    MainIntTag maybeIntTag;
+    NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
+            maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
+
+    uint32_t tag_size = p->PeekPacketTag(maybeIntTag);
+    //bool tag_found = (maybeIntTag.GetMode() == 49721 && maybeIntTag.GetNEntries() >= 36085);
+
+    ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
+
+    IntTag1 maybeIntTag1; IntTag2 maybeIntTag2; IntTag3 maybeIntTag3;
+    if (maybeIntTag.IsModePitcher()) {
+
+      NS_LOG_INFO("SINK [" << m_node << "]: Packet with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
+        << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
+        << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
+        << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
+        << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
+        << ")).");
+
+      p->PeekPacketTag(maybeIntTag1);
+      p->PeekPacketTag(maybeIntTag2);
+      p->PeekPacketTag(maybeIntTag3);
+      NS_ASSERT(maybeIntTag1.IsModePitcher() && maybeIntTag2.IsModePitcher() && maybeIntTag3.IsModePitcher());
+
+      ns3::network_event_t new_event;
+      new_event.source_ip = maybe_five_tuple.source_ip;
+      new_event.dest_ip = maybe_five_tuple.dest_ip;
+      new_event.source_port = maybe_five_tuple.source_port;
+      new_event.dest_port = maybe_five_tuple.dest_port;
+      new_event.protocol = maybe_five_tuple.protocol;
+
+      new_event.crc1 = maybeIntTag.GetCrc1();
+      new_event.crc2 = maybeIntTag.GetCrc2();
+
+
+      bool found_new_event = true;
+      
+      if (SINK_CACHE_SIZE > 0) {
+        // compute index
+        unsigned char* crc_buffer = (unsigned char*) malloc(13);
+        // Copy the first 13bytes = 104 bits of the struct, corresponding to the 5-tuple
+        // Doing each element manually just in case padding gets in the way in some mysterious way
+        memcpy(crc_buffer, &new_event.source_ip, 4);
+        memcpy(crc_buffer + 4, &new_event.dest_ip, 4);
+        memcpy(crc_buffer + 8, &new_event.source_port, 2);
+        memcpy(crc_buffer + 10, &new_event.dest_port, 2);
+        memcpy(crc_buffer + 12, &new_event.protocol, 1);
+        uint16_t index = crc_16(crc_buffer, 13) % SINK_CACHE_SIZE;
+        free(crc_buffer);
+        
+        for (std::deque<ns3::network_event_t>::iterator it = dataplane_cache[index].begin(); it != dataplane_cache[index].end(); ++it) {
+          if (!NewEventOccurred(*it, new_event)) {
+            found_new_event = false;
+            break;
+          }
         }
+
+        dataplane_cache[index].push_front(new_event);
+        if (dataplane_cache[index].size() > 5) {
+          dataplane_cache[index].pop_back();
+        }
+      }
+
+      
+      if (found_new_event) {
+        
+        NS_LOG_INFO("REPORT " <<  Ipv4Address(maybe_five_tuple.source_ip) << " " <<  Ipv4Address(maybe_five_tuple.dest_ip)
+        << " " <<  maybe_five_tuple.source_port << " " <<  maybe_five_tuple.dest_port << " " <<  maybe_five_tuple.protocol
+        << " " << new_event.crc1 << " " << new_event.crc2 
+        << " " << maybeIntTag1.GetSwitchId() << " " << maybeIntTag1.GetHopLatency()
+        << " " << maybeIntTag2.GetSwitchId() << " " << maybeIntTag2.GetHopLatency()
+        << " " << maybeIntTag3.GetSwitchId() << " " << maybeIntTag3.GetHopLatency()); 
+      }
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    enum IpL4Protocol::RxStatus status = protocol->Receive (p, ipHeader, GetInterface (iif));
+    switch (status) {
+      case IpL4Protocol::RX_OK:
+      // fall through
+      case IpL4Protocol::RX_ENDPOINT_CLOSED:
+      // fall through
+      case IpL4Protocol::RX_CSUM_FAILED:
+        break;
+      case IpL4Protocol::RX_ENDPOINT_UNREACH:
+        if (ipHeader.GetDestination ().IsBroadcast () == true ||
+            ipHeader.GetDestination ().IsMulticast () == true)
+          {
+            break; // Do not reply to broadcast or multicast
+          }
+        // Another case to suppress ICMP is a subnet-directed broadcast
+        bool subnetDirected = false;
+        for (uint32_t i = 0; i < GetNAddresses (iif); i++)
+          {
+            Ipv4InterfaceAddress addr = GetAddress (iif, i);
+            if (addr.GetLocal ().CombineMask (addr.GetMask ()) == ipHeader.GetDestination ().CombineMask (addr.GetMask ()) &&
+                ipHeader.GetDestination ().IsSubnetDirectedBroadcast (addr.GetMask ()))
+              {
+                subnetDirected = true;
+              }
+          }
+        if (subnetDirected == false)
+          {
+            GetIcmp ()->SendDestUnreachPort (ipHeader, copy);
+          }
+      }
+  }
 }
 
 bool

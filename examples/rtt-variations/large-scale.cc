@@ -88,6 +88,10 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
 
       source.SetAttribute ("IpSource", UintegerValue(server_ips[fromServerIndex].Get()));
       source.SetAttribute ("IpDest", UintegerValue(server_ips[destServerIndex].Get()));
+
+      source.SetAttribute ("SourcePort", UintegerValue(port));
+      source.SetAttribute ("DestPort", UintegerValue(port));
+
       source.SetAttribute ("FiveTupleProt", UintegerValue(6)); // not sure what value is used for DcTcp, so just using 6 for TCP.
 
       // Install the BulkSendApp responsible for creating a new flow from this server to the chosen receiver.
@@ -110,11 +114,12 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
 int main (int argc, char *argv[]) {
 #if 1
   LogComponentEnable ("LargeScale", LOG_LEVEL_INFO);
-  LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
-  LogComponentEnable ("QueueDisc", LOG_LEVEL_INFO);
-  LogComponentEnable ("BulkSendApplication", LOG_LEVEL_INFO);
-  LogComponentEnable ("PacketSink", LOG_LEVEL_INFO);
-  LogComponentEnable ("TcpRxBuffer", LOG_LEVEL_INFO);
+  //LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
+  //LogComponentEnable ("QueueDisc", LOG_LEVEL_INFO);
+  //LogComponentEnable ("BulkSendApplication", LOG_LEVEL_INFO);
+  LogComponentEnable ("Ipv4L3Protocol", LOG_LEVEL_INFO);
+  //LogComponentEnable ("PacketSink", LOG_LEVEL_INFO);
+  //LogComponentEnable ("TcpRxBuffer", LOG_LEVEL_INFO);
 #endif
 
   // Command line parameters parsing

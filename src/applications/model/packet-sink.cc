@@ -31,7 +31,6 @@
 #include "ns3/trace-source-accessor.h"
 #include "ns3/udp-socket-factory.h"
 #include "packet-sink.h"
-#include "ns3/internet-module.h"
 
 namespace ns3 {
 
@@ -64,11 +63,11 @@ PacketSink::GetTypeId (void)
   return tid;
 }
 
-PacketSink::PacketSink ()
-{
+PacketSink::PacketSink () {
   NS_LOG_FUNCTION (this);
   m_socket = 0;
   m_totalRx = 0;
+  
 }
 
 PacketSink::~PacketSink()
@@ -171,29 +170,6 @@ void PacketSink::HandleRead (Ptr<Socket> socket)
     }
     m_totalRx += packet->GetSize ();
 
-
-    uint32_t uid = packet->GetUid ();
-    uint32_t psize = packet->GetSize();
-
-    MainIntTag maybeIntTag;
-    NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
-            maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
-
-    uint32_t tag_size = packet->PeekPacketTag(maybeIntTag);
-    //bool tag_found = (maybeIntTag.GetMode() == 49721 && maybeIntTag.GetNEntries() >= 36085);
-
-    ns3::five_tuple_t maybe_five_tuple = maybeIntTag.GetFiveTuple();
-
-
-    //if (tag_found) {
-        NS_LOG_INFO("PACKETSINK: Packet with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
-            << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
-            << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
-            << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
-            << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
-            << ")).");
-    //}
-
     if (InetSocketAddress::IsMatchingType (from))
       {
         NS_LOG_INFO ("At time " << Simulator::Now ().GetSeconds ()
@@ -206,7 +182,7 @@ void PacketSink::HandleRead (Ptr<Socket> socket)
       }
     else if (Inet6SocketAddress::IsMatchingType (from))
       {
-        NS_LOG_INFO ("cAt time " << Simulator::Now ().GetSeconds ()
+        NS_LOG_INFO ("At time " << Simulator::Now ().GetSeconds ()
                      << "s packet sink received "
                      <<  packet->GetSize () << " bytes from "
                      << Inet6SocketAddress::ConvertFrom(from).GetIpv6 ()

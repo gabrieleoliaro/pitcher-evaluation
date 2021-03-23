@@ -34,6 +34,9 @@
 #include "ns3/ipv4-routing-protocol.h"
 #include "ns3/nstime.h"
 #include "ns3/simulator.h"
+#include "IntTag.h"
+#include <deque>
+#include "crc16.h"
 
 class Ipv4L3ProtocolTestCase;
 
@@ -492,6 +495,9 @@ private:
 
   SocketList m_sockets; //!< List of IPv4 raw sockets.
 
+  int SINK_CACHE_SIZE;
+  std::deque<ns3::network_event_t> *dataplane_cache;
+  
   /**
    * \class Fragments
    * \brief A Set of Fragment belonging to the same packet (src, dst, identification and proto)

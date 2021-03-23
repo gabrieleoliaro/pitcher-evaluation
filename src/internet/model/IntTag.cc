@@ -2,6 +2,21 @@
 
 namespace ns3 {
 
+
+bool NewEventOccurred(network_event_t old_event, network_event_t new_event) {
+  // first, the five tuple needs to match exactly
+  if (old_event.source_ip != new_event.source_ip ||
+      old_event.dest_ip != new_event.dest_ip ||
+      old_event.source_port != new_event.source_port ||
+      old_event.dest_port != new_event.dest_port ||
+      old_event.protocol != new_event.protocol) {
+    return true;
+  }
+
+  // New event occurred if both CRCs are different
+  return ((old_event.crc1 != new_event.crc1) && (old_event.crc2 != new_event.crc2));
+}
+
 MainIntTag::MainIntTag ()
   : mode_ (0), n_entries_(0),
     crc1_(0), crc2_(0) {

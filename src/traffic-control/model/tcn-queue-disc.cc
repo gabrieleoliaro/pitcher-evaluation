@@ -7,10 +7,9 @@
 #include "ns3/ipv4-queue-disc-item.h"
 #include "ns3/drop-tail-queue.h"
 #include "ns3/internet-module.h"
-#include "../../crc16.c"
 
 #define DEFAULT_TCN_LIMIT 100
-#define HOP_LATENCY_THRESHOLD 0 // divide hop latency values by 2^7=128 ns
+//#define HOP_LATENCY_THRESHOLD 0 // divide hop latency values by 2^7=128 ns
 
 
 namespace ns3 {
@@ -114,6 +113,17 @@ TCNQueueDisc::TCNQueueDisc ()
       m_threshold (0),
       microburst_happening(false) {
     NS_LOG_FUNCTION (this);
+
+    // Read the HOP_LATENCY_THRESHOLD value from env
+    char *buff = getenv("HOP_LATENCY_THRESHOLD");
+    if (!buff) {
+        NS_LOG_ERROR("HOP_LATENCY_THRESHOLD environment variable is not set!");
+        return;
+    }
+
+    HOP_LATENCY_THRESHOLD = std::strtol(buff, NULL, 10);
+    //NS_LOG_INFO("HOP_LATENCY_THRESHOLD=" << HOP_LATENCY_THRESHOLD);
+
 }
 
 TCNQueueDisc::~TCNQueueDisc () {
@@ -179,6 +189,8 @@ TCNQueueDisc::DoDequeue (void) {
         TCNQueueDisc::MarkingECN (item);
     }
 
+    uint32_t swid = (uint32_t) std::strtoul(GetInterfaceName().c_str(), NULL, 16);
+
     uint64_t hop_latency = sojournTime.GetNanoSeconds();
     uint64_t microburst_threshold = 50000; // 50 microseconds = 50,000 ns
     if (hop_latency > microburst_threshold && !microburst_happening) {
@@ -186,7 +198,7 @@ TCNQueueDisc::DoDequeue (void) {
         microburst_start_time = now.GetNanoSeconds();
     } else if (microburst_happening && hop_latency < microburst_threshold) {
         microburst_happening = false;
-        NS_LOG_INFO("CONTROL " << GetInterfaceName() << " " << microburst_start_time << " " << now.GetNanoSeconds());
+        NS_LOG_INFO("CONTROL " << swid << " " << microburst_start_time << " " << now.GetNanoSeconds());
     }
 
     uint32_t uid = p->GetUid ();
@@ -207,7 +219,7 @@ TCNQueueDisc::DoDequeue (void) {
             << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
             << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
             << ", " <<  maybe_five_tuple.source_port << ", " <<  maybe_five_tuple.dest_port << ", " <<  maybe_five_tuple.protocol
-            << ")) at interface " <<  GetInterfaceName());
+            << ")) at interface " <<  swid);
 
         // Check that the number of entries is less than 3
         NS_ASSERT(maybeIntTag.GetNEntries() < 3);
@@ -220,7 +232,7 @@ TCNQueueDisc::DoDequeue (void) {
         uint16_t old_crc1 = maybeIntTag.GetCrc1();
         uint16_t old_crc2 = maybeIntTag.GetCrc2();
         
-        uint32_t swid = (uint32_t) std::strtoul(GetInterfaceName().c_str(), NULL, 16);
+        
         uint32_t st_threshold1 = (uint32_t) hop_latency >> HOP_LATENCY_THRESHOLD;
         uint32_t st_threshold2 = ((uint32_t) hop_latency + (HOP_LATENCY_THRESHOLD >> 2)) >> HOP_LATENCY_THRESHOLD;
         
@@ -234,6 +246,7 @@ TCNQueueDisc::DoDequeue (void) {
 
         uint16_t new_crc1 = crc_16(crc1_buffer, 10);
         uint16_t new_crc2 = crc_16(crc2_buffer, 10);
+        free(crc1_buffer); free(crc2_buffer);
 
         maybeIntTag.SetCrc1(new_crc1);
         maybeIntTag.SetCrc2(new_crc2);

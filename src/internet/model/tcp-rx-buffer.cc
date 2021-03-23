@@ -243,18 +243,35 @@ TcpRxBuffer::Extract (uint32_t maxSize)
         { // Whole packet is extracted
           outPkt->AddAtEnd (i->second);
 
-          MainIntTag maybeIntTag;
-          NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
-                  maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
+          /*MainIntTag maybeIntTag;
+          //NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
+          //        maybeIntTag.GetCrc1() == 0 && maybeIntTag.GetCrc2() == 0);
           i->second->PeekPacketTag(maybeIntTag);
-          
-          bool tag_found = (maybeIntTag.GetMode() == 49721);
-          
-          if (tag_found) {
+          if (maybeIntTag.IsModePitcher()) {
             MainIntTag newTag = ns3::CloneMainIntTag(maybeIntTag);
             outPkt->AddPacketTag(newTag);
-
           }
+
+          IntTag1 maybeIntTag1;
+          i->second->PeekPacketTag(maybeIntTag1);
+          if (maybeIntTag1.IsModePitcher()) {
+            IntTag1 newTag1 = ns3::CloneIntTag1(maybeIntTag1);
+            outPkt->AddPacketTag(newTag1);
+          }
+
+          IntTag2 maybeIntTag2;
+          i->second->PeekPacketTag(maybeIntTag2);
+          if (maybeIntTag2.IsModePitcher()) {
+            IntTag2 newTag2 = ns3::CloneIntTag2(maybeIntTag2);
+            outPkt->AddPacketTag(newTag2);
+          }
+
+          IntTag3 maybeIntTag3;
+          i->second->PeekPacketTag(maybeIntTag3);
+          if (maybeIntTag3.IsModePitcher()) {
+            IntTag3 newTag3 = ns3::CloneIntTag1(maybeIntTag3);
+            outPkt->AddPacketTag(newTag3);
+          }*/
           
           m_data.erase (i);
           m_size -= pktSize;

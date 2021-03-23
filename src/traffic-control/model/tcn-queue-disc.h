@@ -37,6 +37,8 @@ private:
 
     bool microburst_happening;              // Set to true if a microburst is currently happening
     uint64_t microburst_start_time;         // Save the time here when a microburst begins.
+
+    int HOP_LATENCY_THRESHOLD;
 };
 
 }
