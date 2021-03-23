@@ -118,11 +118,12 @@ TCNQueueDisc::TCNQueueDisc ()
     char *buff = getenv("HOP_LATENCY_THRESHOLD");
     if (!buff) {
         NS_LOG_ERROR("HOP_LATENCY_THRESHOLD environment variable is not set!");
+        HOP_LATENCY_THRESHOLD = 0;
         return;
     }
 
     HOP_LATENCY_THRESHOLD = std::strtol(buff, NULL, 10);
-    //NS_LOG_INFO("HOP_LATENCY_THRESHOLD=" << HOP_LATENCY_THRESHOLD);
+    NS_LOG_LOGIC("HOP_LATENCY_THRESHOLD=" << HOP_LATENCY_THRESHOLD);
 
 }
 
@@ -202,7 +203,7 @@ TCNQueueDisc::DoDequeue (void) {
     }
 
     uint32_t uid = p->GetUid ();
-    uint32_t psize = p->GetSize();
+   uint32_t psize = p->GetSize();
 
     MainIntTag maybeIntTag;
     NS_ASSERT(maybeIntTag.GetMode() == 0 && maybeIntTag.GetNEntries() == 0 && maybeIntTag.FiveTupleUnInitialized() && 
@@ -214,7 +215,7 @@ TCNQueueDisc::DoDequeue (void) {
         
         tag_size = p->RemovePacketTag(maybeIntTag);
         
-        NS_LOG_INFO("\tPacket with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
+        NS_LOG_LOGIC("\tPacket with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
             << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
             << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
             << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
@@ -264,7 +265,7 @@ TCNQueueDisc::DoDequeue (void) {
                 new_int_tag1.SetMode(49721);
                 new_int_tag1.SetHopLatency((uint32_t) hop_latency);
                 new_int_tag1.SetSwitchId(swid) ;
-                NS_LOG_INFO("\t\tAdding IntTag1 with mode: " << new_int_tag1.GetMode() << ", hop_latency: " << new_int_tag1.GetHopLatency() << ", SwitchId: " << new_int_tag1.GetSwitchId());
+                NS_LOG_LOGIC("\t\tAdding IntTag1 with mode: " << new_int_tag1.GetMode() << ", hop_latency: " << new_int_tag1.GetHopLatency() << ", SwitchId: " << new_int_tag1.GetSwitchId());
                 p->AddPacketTag(new_int_tag1);
 
                 break;
@@ -279,7 +280,7 @@ TCNQueueDisc::DoDequeue (void) {
                 new_int_tag2.SetMode(49721);
                 new_int_tag2.SetHopLatency((uint32_t) hop_latency);
                 new_int_tag2.SetSwitchId(swid) ;
-                NS_LOG_INFO("\t\tAdding IntTag2 with mode: " << new_int_tag2.GetMode() << ", hop_latency: " << new_int_tag2.GetHopLatency() << ", SwitchId: " << new_int_tag2.GetSwitchId());
+                NS_LOG_LOGIC("\t\tAdding IntTag2 with mode: " << new_int_tag2.GetMode() << ", hop_latency: " << new_int_tag2.GetHopLatency() << ", SwitchId: " << new_int_tag2.GetSwitchId());
                 p->AddPacketTag(new_int_tag2);
 
                 break;
@@ -294,7 +295,7 @@ TCNQueueDisc::DoDequeue (void) {
                 new_int_tag3.SetMode(49721);
                 new_int_tag3.SetHopLatency((uint32_t) hop_latency);
                 new_int_tag3.SetSwitchId(swid);
-                NS_LOG_INFO("\t\tAdding IntTag3 with mode: " << new_int_tag3.GetMode() << ", hop_latency: " << new_int_tag3.GetHopLatency() << ", SwitchId: " << new_int_tag3.GetSwitchId());
+                NS_LOG_LOGIC("\t\tAdding IntTag3 with mode: " << new_int_tag3.GetMode() << ", hop_latency: " << new_int_tag3.GetHopLatency() << ", SwitchId: " << new_int_tag3.GetSwitchId());
                 p->AddPacketTag(new_int_tag3);
                 break;
             }

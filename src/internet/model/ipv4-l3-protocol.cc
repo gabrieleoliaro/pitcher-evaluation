@@ -1104,7 +1104,7 @@ Ipv4L3Protocol::LocalDeliver (Ptr<const Packet> packet, Ipv4Header const&ip, uin
     IntTag1 maybeIntTag1; IntTag2 maybeIntTag2; IntTag3 maybeIntTag3;
     if (maybeIntTag.IsModePitcher()) {
 
-      NS_LOG_INFO("SINK [" << m_node << "]: Packet with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
+      NS_LOG_LOGIC("SINK [" << m_node << "]: Packet with uid " << uid << " and size " << psize << " had IntTag of size " << tag_size 
         << " and contents: (" << maybeIntTag.GetMode() << ", " <<  maybeIntTag.GetNEntries() 
         << ", " <<  maybeIntTag.GetCrc1() << ", " <<  maybeIntTag.GetCrc2()
         << ", (" <<  Ipv4Address(maybe_five_tuple.source_ip) << ", " <<  Ipv4Address(maybe_five_tuple.dest_ip)
@@ -1157,8 +1157,15 @@ Ipv4L3Protocol::LocalDeliver (Ptr<const Packet> packet, Ipv4Header const&ip, uin
 
       
       if (found_new_event) {
-        
-        NS_LOG_INFO("REPORT " <<  Ipv4Address(maybe_five_tuple.source_ip) << " " <<  Ipv4Address(maybe_five_tuple.dest_ip)
+        //NS_ASSERT(psize > 1000);
+        NS_LOG_INFO("REPORT " << Simulator::Now().GetNanoSeconds() << " " << Ipv4Address(maybe_five_tuple.source_ip) << " " <<  Ipv4Address(maybe_five_tuple.dest_ip)
+        << " " <<  maybe_five_tuple.source_port << " " <<  maybe_five_tuple.dest_port << " " <<  maybe_five_tuple.protocol
+        << " " << new_event.crc1 << " " << new_event.crc2 
+        << " " << maybeIntTag1.GetSwitchId() << " " << maybeIntTag1.GetHopLatency()
+        << " " << maybeIntTag2.GetSwitchId() << " " << maybeIntTag2.GetHopLatency()
+        << " " << maybeIntTag3.GetSwitchId() << " " << maybeIntTag3.GetHopLatency()); 
+      } else if (psize > 1000) {
+        NS_LOG_INFO("INT_REPORT " << Simulator::Now().GetNanoSeconds() << " " <<  Ipv4Address(maybe_five_tuple.source_ip) << " " <<  Ipv4Address(maybe_five_tuple.dest_ip)
         << " " <<  maybe_five_tuple.source_port << " " <<  maybe_five_tuple.dest_port << " " <<  maybe_five_tuple.protocol
         << " " << new_event.crc1 << " " << new_event.crc2 
         << " " << maybeIntTag1.GetSwitchId() << " " << maybeIntTag1.GetHopLatency()

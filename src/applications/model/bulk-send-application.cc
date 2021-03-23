@@ -283,7 +283,7 @@ void BulkSendApplication::SendData (void)
       Ptr<Node> this_node = GetNode();
       
 
-      NS_LOG_INFO("BulkSendApplication sending packet with uid "<< uid << " and size " << psize 
+      NS_LOG_LOGIC("BulkSendApplication sending packet with uid "<< uid << " and size " << psize 
                   << " from " << Ipv4Address(GetIpSource()) << " to " << Ipv4Address(GetIpDest()) 
                   << " with protocol " << GetFivetupleProt());
       

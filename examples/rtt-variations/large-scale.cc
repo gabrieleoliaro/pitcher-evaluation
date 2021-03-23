@@ -25,7 +25,7 @@ extern "C"
 
 static uint16_t PORT = 1000;
 
-#define PACKET_SIZE 1300
+#define PACKET_SIZE 1400
 
 using namespace ns3;
 
@@ -76,7 +76,7 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
       uint32_t flowSize = gen_random_cdf (cdfTable);
 
       // forcing the flowsize to PACKET_SIZE so that each flow only sends one packet (i.e. easier to track)
-      flowSize = PACKET_SIZE;
+      //flowSize = PACKET_SIZE;
 
       uint32_t tos = rand() % 5;
 
@@ -114,7 +114,7 @@ void install_applications (int fromLeafId, NodeContainer servers, double request
 int main (int argc, char *argv[]) {
 #if 1
   LogComponentEnable ("LargeScale", LOG_LEVEL_INFO);
-  //LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
+  LogComponentEnable ("TCNQueueDisc", LOG_LEVEL_INFO);
   //LogComponentEnable ("QueueDisc", LOG_LEVEL_INFO);
   //LogComponentEnable ("BulkSendApplication", LOG_LEVEL_INFO);
   LogComponentEnable ("Ipv4L3Protocol", LOG_LEVEL_INFO);
