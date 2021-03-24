@@ -191,6 +191,7 @@ TCNQueueDisc::DoDequeue (void) {
     }
 
     uint32_t swid = (uint32_t) std::strtoul(GetInterfaceName().c_str(), NULL, 16);
+    //NS_LOG_INFO(GetInterfaceName().c_str() << "=" << swid);
 
     uint64_t hop_latency = sojournTime.GetNanoSeconds();
     uint64_t microburst_threshold = 50000; // 50 microseconds = 50,000 ns
@@ -227,33 +228,37 @@ TCNQueueDisc::DoDequeue (void) {
         IntTag1 maybeIntTag1; IntTag2 maybeIntTag2; IntTag3 maybeIntTag3;
         IntTag1 new_int_tag1; IntTag2 new_int_tag2; IntTag3 new_int_tag3;
 
-        unsigned char* crc1_buffer = (unsigned char*) malloc(10);
-        unsigned char* crc2_buffer = (unsigned char*) malloc(10);
+
+        unsigned char crc1_buffer[10];
+        unsigned char crc2_buffer[10];
         
         uint16_t old_crc1 = maybeIntTag.GetCrc1();
         uint16_t old_crc2 = maybeIntTag.GetCrc2();
         
         
         uint32_t st_threshold1 = (uint32_t) hop_latency >> HOP_LATENCY_THRESHOLD;
-        uint32_t st_threshold2 = ((uint32_t) hop_latency + (HOP_LATENCY_THRESHOLD >> 2)) >> HOP_LATENCY_THRESHOLD;
+        uint32_t st_threshold2 = ((uint32_t) hop_latency + (1 << (HOP_LATENCY_THRESHOLD - 1))) >> HOP_LATENCY_THRESHOLD;
+
+        //NS_LOG_INFO(HOP_LATENCY_THRESHOLD << " " << (HOP_LATENCY_THRESHOLD >> 1) << " " << st_threshold1 << " " << st_threshold2);
         
         memcpy(crc1_buffer, &old_crc1, 2);
         memcpy(crc1_buffer + 2, &swid, 4);
         memcpy(crc1_buffer + 6, &st_threshold1, 4);
        
-        memcpy(crc1_buffer, &old_crc2, 2);
-        memcpy(crc1_buffer + 2, &swid, 4);
-        memcpy(crc1_buffer + 6, &st_threshold2, 4);
+        memcpy(crc2_buffer, &old_crc2, 2);
+        memcpy(crc2_buffer + 2, &swid, 4);
+        memcpy(crc2_buffer + 6, &st_threshold2, 4);
 
         uint16_t new_crc1 = crc_16(crc1_buffer, 10);
         uint16_t new_crc2 = crc_16(crc2_buffer, 10);
-        free(crc1_buffer); free(crc2_buffer);
+        
 
         maybeIntTag.SetCrc1(new_crc1);
         maybeIntTag.SetCrc2(new_crc2);
 
         switch(maybeIntTag.GetNEntries()) {
             case 0: {
+                NS_ASSERT(old_crc1 == 0 && old_crc2 == 0);
                 // check that neither IntTag1, nor IntTag2, nor IntTag3 are present
                 p->PeekPacketTag(maybeIntTag1);
                 p->PeekPacketTag(maybeIntTag2);

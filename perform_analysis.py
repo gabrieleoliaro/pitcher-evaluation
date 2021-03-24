@@ -119,6 +119,8 @@ if __name__ == "__main__":
 					index += 1
 				# If we ran out of reports, just add the microburst to the list of undetected ones
 				if (index == len(detection_times) or detection_times[index] > microbursts[swid][microburst_start_time]):
+					if (swid not in undetected_microbursts):
+						undetected_microbursts[swid] = {}
 					undetected_microbursts[swid][microburst_start_time] = microbursts[swid][microburst_start_time]
 				else:
 					n_microbusts_detected_by_pitcher += 1
